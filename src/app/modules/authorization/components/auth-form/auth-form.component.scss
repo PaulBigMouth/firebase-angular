@@ -1,0 +1,18 @@
+@import "~src/assets/scss/_variables.scss";
+.auth__form {
+    & div {
+        margin: 30px 0;
+    }
+    &__btn {
+        margin-top: 40px;
+        width: 100%;
+        padding: 15px 0;
+        color: #fff;
+        background-color: $main-color;
+        font-size: 1.1rem;
+        transition: background-color .2s ease-in-out;
+        &:hover{
+            background-color: rgb(73, 72, 72);
+        }
+    }
+}

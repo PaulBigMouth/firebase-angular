@@ -1,0 +1,10 @@
+<div class="input">
+    <input [type]="type" (blur)="setTouched()" (input)="changeValue($event)" [ngClass]="{'invalid': !valid && isTouched, 'valid': valid}">
+    <label class="input__label">{{placeholder}}</label>
+    <span class="input__bar"></span>
+</div>
+<span class="helper-text" *ngIf="!valid && isTouched">
+    <span *ngIf="errors['required']">This field must not be empty</span>
+    <span *ngIf="errors['email']">Enter a valid email</span>
+    <span *ngIf="errors['minLength']">Password is too short</span>
+</span>
