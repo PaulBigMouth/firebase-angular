@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-authorization-layout',
@@ -6,12 +8,23 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./authorization-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthorizationLayoutComponent implements OnInit {
-
-  constructor() { }
+export class AuthorizationLayoutComponent implements OnInit, OnDestroy {
+  sub: Subscription
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    
+    this.sub = this.route.queryParams.subscribe((params: Params) => {
+      if(params['accessDenied']) {
+        alert('You need to sign in')
+      } else if(params['sessionFailed']) {
+        alert('The token has expired')
+      }
+    })
+  }
+  ngOnDestroy(): void {
+    if(this.sub) {
+      this.sub.unsubscribe()
+    }
   }
 
 }

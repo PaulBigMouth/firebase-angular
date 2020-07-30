@@ -24,18 +24,17 @@ export class InputComponent implements ControlValueAccessor {
   @Input() public placeholder: string;
   @Input() public type: string;
   @Input() public valid: string;
-  @Input() public errors?: Object;
-  @Input() public password?: string;
+  @Input() public errors?: Object | null | undefined;
+  @Input() public maxLength: string
 
   isTouched: boolean = false;
   onChange: (_: any) => void = () => {};
   onTouched: () => void = () => {};
   isDisabled: boolean = false;
-  value: string | number
 
   constructor(private cd: ChangeDetectorRef) {}
 
-  changeValue($event: any): void {
+  changeValue($event: any): void {    
     this.writeValue($event.target.value);
   }
 
@@ -45,7 +44,6 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   writeValue(value: any): void {
-    this.value = value
     this.onChange(value);
   }
   registerOnChange(fn: any): void {

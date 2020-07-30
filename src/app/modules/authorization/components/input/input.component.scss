@@ -3,6 +3,7 @@ $label-transfrom: scale(0.8) translateY(-15px);
 .input {
   position: relative;
   & input {
+    position: relative;
     width: 100%;
     border: none;
     outline: none;
@@ -35,7 +36,7 @@ $label-transfrom: scale(0.8) translateY(-15px);
     color: $grey-color;
     left: 0;
     bottom: 10px;
-    z-index: 2;
+    z-index: 1;
     transition: all 0.2s ease-in-out;
   }
   &__bar {

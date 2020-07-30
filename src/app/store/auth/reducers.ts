@@ -1,16 +1,29 @@
-import { createReducer, on, Action } from "@ngrx/store"
-import { signin } from "./actions"
-import { AuthState } from "../../modules/interfaces"
+import { Action } from '@ngrx/store';
+import { AuthUnion, AuthActions } from "./actions"
 
 
+export const initialState = null;
 
-export const initialState = null
+export interface AuthState {
+    idUser: string;
+    refreshToken: string,
+    emailVerified: boolean
+}
 
 
-const _authReducer = createReducer(initialState,
-    on(signin, (state, { token }) => ({...state, token})))
-
-
-export function reducer(state: AuthState, action: Action) {
-    return _authReducer(state, action)
+export function authReducer(state: AuthState = initialState, action: AuthUnion) {
+    switch(action.type) {
+        case AuthActions.SignUpSuccess:
+            return {
+                ...state,
+                ...action.payload
+            }
+        case AuthActions.SignOut:
+            return null
+        case AuthActions.SignInSuccess:
+            return {
+                ...state,
+                ...action.payload
+            }
+    }
 }

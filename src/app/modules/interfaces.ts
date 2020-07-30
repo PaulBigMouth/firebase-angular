@@ -1,7 +1,9 @@
-export interface Token {
-    token: string
+
+export interface User {
+    name?: string;
+    email: string;
+    phone?: string;
+    password: string;
 }
 
-export interface AuthState {
-    token: string;
-}
+export type Message = string

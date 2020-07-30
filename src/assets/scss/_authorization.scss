@@ -1,0 +1,31 @@
+.auth__section {
+    display: grid;
+    max-height: 100%;
+    min-height: 100%;
+    background-color: #fff;
+    border-radius: 2px;
+    grid-template-columns: 40% 60%;
+    @media screen and (max-width: 900px) {
+        
+    }
+    &__left {
+        padding: 100px 125px;
+        & h1 {
+            font-size: 2.5rem;
+            margin: 35px 0 15px;
+        }
+        & p {
+            margin-bottom: 40px;
+        }
+        
+    }
+    &__right {
+        height: 100%;
+        overflow: hidden;
+        & img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+}

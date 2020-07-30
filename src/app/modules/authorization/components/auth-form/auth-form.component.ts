@@ -1,4 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { SignIn, SignUp } from './../../../../store/auth/actions';
+import { Store } from '@ngrx/store';
+import { AuthActions } from '../../../../store/auth/actions';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -8,21 +17,49 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthFormComponent implements OnInit {
+  @Input() sign: string;
   form: FormGroup;
 
-  constructor() {}
+  constructor(private cd: ChangeDetectorRef, private store: Store) {}
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phone: new FormControl('', [Validators.required, Validators.pattern('')]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
-    });
-    
+    if (this.sign === 'up') {
+      this.form = new FormGroup({
+        name: new FormControl(null, Validators.required),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        phone: new FormControl('', [
+          Validators.required,
+          Validators.pattern(
+            /[()][0-9][0-9][0-9][)]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/g
+          ),
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
+      });
+    } else {
+      this.form = new FormGroup({
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
+      });
+      this.cd.detectChanges();
+    }
   }
-  
+  onSubmit() {
+    this.form.disable();
+
+    if (this.sign === 'up') {
+      this.store.dispatch(new SignUp(this.form.value));
+    } else {
+      console.log(this.sign);
+      
+      this.store.dispatch(new SignIn(this.form.value));
+    }
+    // this.cd.detectChanges();
+    this.form.enable();
+  }
 }

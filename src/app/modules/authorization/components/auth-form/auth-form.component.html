@@ -1,48 +1,62 @@
 <form class="auth__form" [formGroup]="form">
-  <div>
-    <app-input
-      placeholder="Your name"
-      type="text"
-      formControlName="name"
-      [valid]="form.get('name').valid"
-      [errors]="form.get('name').errors"
-    ></app-input>
+  <div *ngIf="sign === 'up'; else signIn">
+    <div>
+      <app-input
+        placeholder="Your name"
+        type="text"
+        formControlName="name"
+        [valid]="form.get('name').valid"
+        [errors]="form.get('name').errors"
+      ></app-input>
+    </div>
+    <div>
+      <app-input
+        placeholder="Your email"
+        type="email"
+        formControlName="email"
+        [valid]="form.get('email').valid"
+        [errors]="form.get('email').errors"
+      ></app-input>
+    </div>
+    <div>
+      <app-input
+        placeholder="Phone number"
+        type="text"
+        formControlName="phone"
+        [valid]="form.get('phone').valid"
+        [errors]="form.get('phone').errors"
+        maxLength="14"
+      ></app-input>
+    </div>
+    <div>
+      <app-input
+        placeholder="Password"
+        type="password"
+        formControlName="password"
+        [valid]="form.get('password').valid"
+        [errors]="form.get('password').errors"
+      ></app-input>
+    </div>
   </div>
-  <div>
-    <app-input
-      placeholder="Your email"
-      type="email"
-      formControlName="email"
-      [valid]="form.get('email').valid"
-      [errors]="form.get('email').errors"
-    ></app-input>
-  </div>
-  <div>
-    <app-input
-      placeholder="Phone number"
-      type="text"
-      formControlName="phone"
-      [valid]="form.get('phone').valid"
-      [errors]="form.get('phone').errors"
-    ></app-input>
-  </div>
-  <div>
-    <app-input
-      placeholder="Password"
-      type="password"
-      formControlName="password"
-      [valid]="form.get('password').valid"
-      [errors]="form.get('password').errors"
-    ></app-input>
-  </div>
-  <div>
-    <!-- <app-input
-      placeholder="Password confirmation"
-      type="password"
-      formControlName="confirmPassword"
-      [valid]="form.get('confirmPassword').valid"
-      [errors]="form.get('confirmPassword').errors"
-    ></app-input> -->
-  </div>
-  <button class="auth__form__btn fw-700">Sign Up</button>
+  <ng-template #signIn>
+    <div>
+      <app-input
+        placeholder="Your email"
+        type="email"
+        formControlName="email"
+        [valid]="form.get('email').valid"
+        [errors]="form.get('email').errors"
+      ></app-input>
+    </div>
+    <div>
+      <app-input
+        placeholder="Password"
+        type="password"
+        formControlName="password"
+        [valid]="form.get('password').valid"
+        [errors]="form.get('password').errors"
+      ></app-input>
+    </div>
+  </ng-template>
+  <button class="auth__form__btn fw-700" (click)="onSubmit()" [disabled]="form.disabled || form.invalid">Sign {{ (sign === 'up') ? 'Up' :  'In' }}</button>
 </form>
