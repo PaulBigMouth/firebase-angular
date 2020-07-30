@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "fir-auth-70ef2": {
+      "hosting": {
+        "firebase-auth": [
+          "fir-auth-70ef2"
+        ]
+      }
+    }
+  }
+}
