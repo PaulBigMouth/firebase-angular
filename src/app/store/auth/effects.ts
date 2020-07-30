@@ -1,5 +1,4 @@
-import { Action } from '@ngrx/store';
-import { SignInSuccess } from './actions';
+import { SignInSuccess, SignInError, SignUpError } from './actions';
 import { AuthService } from '../../shared/services/auth.service';
 import {
   AuthActions,
@@ -21,15 +20,16 @@ export class AuthEffects {
       return this.authService.createUser(payload).pipe(
         map((user: firebase.auth.UserCredential | undefined) => {
           if (user) {
-            // this.authService
-            //   .verifyUserEmail()
-            //   .pipe(tap(() => this.router.navigate(['/'])));
-            // new SignUpSuccess({
-            //   idUser: user.user.uid,
-            //   refreshToken: user.user.refreshToken,
-            //   emailVerified: user.user.emailVerified,
-            // });
+            this.authService
+              .verifyUserEmail()
+              .pipe(tap(() => this.router.navigate(['/'])));
+            return new SignUpSuccess({
+              idUser: user.user.uid,
+              refreshToken: user.user.refreshToken,
+              emailVerified: user.user.emailVerified,
+            });
           }
+          return new SignUpError('Error SignUP')
         })
       );
     })
@@ -50,24 +50,21 @@ export class AuthEffects {
   signIn$ = this.actions$.pipe(
     ofType(AuthActions.SignIn),
     switchMap(({ payload }) => {
-      console.log(payload);
       return this.authService.signIn(payload).pipe(
         map((user: firebase.auth.UserCredential | undefined) => {
-          console.log(user);
           if (user) {
             if (!user.user?.emailVerified) {
               this.authService
                 .verifyUserEmail()
                 .pipe(tap(() => this.router.navigate(['/'])));
             }
-            console.log(12);
-            
-            new SignInSuccess({
+            return new SignInSuccess({
               idUser: user.user.uid,
               refreshToken: user.user.refreshToken,
               emailVerified: user.user.emailVerified,
             });
           }
+          return new SignInError('Error SignIn')
         })
       );
     })

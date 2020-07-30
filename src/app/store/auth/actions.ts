@@ -10,7 +10,9 @@ export enum AuthActions {
   SignOut = '[AUTH] SIGN_OUT',
   SignUpSuccess = '[AUTH] SIGN_UP_SUCCESS',
   SignOutSuccess = '[AUTH] SIGN_OUT_SUCCESS',
-  SignInSuccess = '[AUTH] SIGN_IN_SUCCESS'
+  SignInSuccess = '[AUTH] SIGN_IN_SUCCESS',
+  SignInError = '[AUTH] SIGN_IN_ERROR',
+  SignUpError = '[AUTH] SIGN_UP_ERROR'
 }
 
 export type AuthUnion = SignIn | SignOut | SignUp | SignUpSuccess | SignOutSuccess | SignInSuccess;
@@ -27,10 +29,23 @@ export class SignIn implements Action {
   constructor(public payload: User) {}
 }
 
+
+export class SignInError implements Action {
+    readonly type = AuthActions.SignInError
+    
+    constructor(public payload: Message) {}
+}
+
 export class SignUpSuccess implements Action {
   readonly type = AuthActions.SignUpSuccess;
 
   constructor(public payload: AuthState) {}
+}
+
+export class SignUpError implements Action {
+    readonly type = AuthActions.SignUpError
+
+    constructor(public payload: Message) {}
 }
 
 export class SignUp implements Action {
