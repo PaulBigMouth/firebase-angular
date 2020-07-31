@@ -1,11 +1,21 @@
 @import "~src/assets/scss/_variables.scss";
 
-$auth-bg-color: #E5DFD3;
+$auth-bg-color: #e5dfd3;
 
-.auth{
-    background-color: $auth-bg-color;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    padding: 70px 75px;
+.auth {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+@media screen and (min-width: 1300px) {
+	.auth {
+		background-color: $auth-bg-color;
+		padding: 30px 45px;
+	}
+}
+@media screen and (min-width: 1500px) {
+	.auth {
+		padding: 45px 75px;
+	}
 }

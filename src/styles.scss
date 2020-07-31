@@ -1,58 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~src/assets/scss/_variables.scss";
 @import "~src/assets/scss/_fonts.scss";
+@import "~src/assets/scss/_utils.scss";
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    color: $main-color;
-    font-family: $montserrat;
+body {
+	margin: 0;
+	padding: 0;
+	color: $main-color;
+	font-family: $montserrat;
+	font-size: $main-font-size;
 }
 
 .container {
-    width: 90%;
-    margin: 0 auto;
+	width: 90%;
+	margin: 0 auto;
 }
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 li {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 a {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 button {
-    cursor: pointer;
-    border-radius: 0;
-    border: none;
-
+	cursor: pointer;
+	border-radius: 0;
+	border: none;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    margin: 0;
-    padding: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
 }
 .text-underline {
-    text-decoration: underline;
-    color: $main-color;
-
+	text-decoration: underline;
+	color: $main-color;
 }
 .helper-text {
-    display: block;
-    margin-top: 10px;
-    color: $red-color;
-    font-size: .9rem;
-    
+	display: block;
+	margin-top: 4px;
+	color: $red-color;
+	font-size: rem(13);
 }
 button:disabled {
-    opacity: .6;
+	opacity: .6;
 }

@@ -15,22 +15,21 @@ import { AppComponent } from './app.component';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
 import { HomeModule } from './modules/home/home.module';
 import { authReducer } from './store/auth/reducers';
+import { ToastComponent } from './shared/components/toast/toast.component';
+import { EmailVerifiedComponent } from './shared/components/email-verified/email-verified.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AuthorizationModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    StoreModule.forRoot(authReducer),
-    EffectsModule.forRoot([AuthEffects]),
-    HomeModule,
-  ],
-  providers: [
-    AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
+	declarations: [ AppComponent, ToastComponent, EmailVerifiedComponent ],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		AuthorizationModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		StoreModule.forRoot(authReducer),
+		EffectsModule.forRoot([ AuthEffects ]),
+		HomeModule,
+	],
+	providers: [ AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true } ],
+	bootstrap: [ AppComponent ],
 })
 export class AppModule {}
