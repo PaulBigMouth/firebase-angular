@@ -4,7 +4,9 @@ import { NgModule } from '@angular/core';
 
 
 const routes: Routes = [
-    {path: '', component: MainLayoutComponent}
+    {path: '', component: MainLayoutComponent, children: [
+        {path: 'heroes', loadChildren: () => import('./modules/heroes/heroes.module').then(m => m.HeroesModule)}
+    ]}
 ]
 
 @NgModule({

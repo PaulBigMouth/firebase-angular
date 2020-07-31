@@ -1,0 +1,17 @@
+.header {
+    padding: 35px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        margin-right: 200px;
+        &__item {
+            margin: 0 30px;
+            // &:hover {
+            //     color: ;
+            // }
+        }
+    }
+}

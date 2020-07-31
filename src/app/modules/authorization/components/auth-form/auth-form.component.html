@@ -20,16 +20,6 @@
     </div>
     <div>
       <app-input
-        placeholder="Phone number"
-        type="text"
-        formControlName="phone"
-        [valid]="form.get('phone').valid"
-        [errors]="form.get('phone').errors"
-        maxLength="14"
-      ></app-input>
-    </div>
-    <div>
-      <app-input
         placeholder="Password"
         type="password"
         formControlName="password"
@@ -58,5 +48,5 @@
       ></app-input>
     </div>
   </ng-template>
-  <button class="auth__form__btn fw-700" (click)="onSubmit()" [disabled]="form.disabled || form.invalid">Sign {{ (sign === 'up') ? 'Up' :  'In' }}</button>
+  <button class="auth__form__btn fw-700" (click)="onSubmit()" [disabled]="signProgress || form.invalid">Sign {{ (sign === 'up') ? 'Up' :  'In' }}</button>
 </form>

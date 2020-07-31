@@ -1,0 +1,12 @@
+<p>heroes-layout works!</p>
+<button (click)="logHeroes()">log</button>
+
+
+
+
+<div *ngIf="heroes.length">
+    <div *ngFor="let hero of heroes">{{hero.name}}</div>
+</div>
+
+
+<h1></h1>
