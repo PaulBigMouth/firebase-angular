@@ -1,0 +1,19 @@
+<section class="profile">
+    <div class="profile__left">
+        <div class="profile__left__img">
+            <img src="https://emanong-ph.com/api/people/avatar/0" alt="">
+            <button class="profile__left__img__btn fw-600">Change photo</button>
+        </div>
+    </div>
+    <div class="profile__right">
+        <header class="profile__right__header">
+            <nav class="profile__right__header__nav">
+                <a class="profile__right__header__nav__item" *ngFor="let link of links" [routerLink]="link.url" routerLinkActive="active">{{ link.name }}</a>
+                <a (click)="logOut()">LogOut</a>
+            </nav>
+        </header>
+        <main class="profile__right__main">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</section>

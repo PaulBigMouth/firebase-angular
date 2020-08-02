@@ -1,0 +1,26 @@
+<article class="heroCard" [routerLink]="hero.id">
+  <img [src]="hero.image" />
+  <div class="heroCard__info">
+    <h2 class="heroCard__info__name">{{ hero.name }}</h2>
+    <div class="heroCard__info__statusAndSpecies">
+      <span class="heroCard__info__statusAndSpecies__status fw-600">
+        <span class="circle" [ngClass]="{'alive': hero.status === 'Alive', 'dead': hero.status === 'Dead'}"></span>
+        <span>{{hero.status}}</span>
+      </span>
+      <span>-</span>
+      <span class="heroCard__info__statusAndSpecies__species fw-600">{{ hero.species }}</span>
+    </div>
+    <!-- <p class="heroCard__info__location">
+      <p>Last know location:</p>
+      <p>{{hero.origin.name}}</p>
+    </p> -->
+    <div class="heroCard__info__location">
+      <span>
+        Last know location :
+      </span>
+      <span class="heroCard__info__location__name fw-600">
+        {{hero.origin.name}}
+      </span>
+    </div>
+  </div>
+</article>

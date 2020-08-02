@@ -1,12 +1,28 @@
-<p>heroes-layout works!</p>
-<button (click)="logHeroes()">log</button>
+<section class="heroes__banner">
+  <div class="heroes__banner__left">
+    <img src="../../../../../../../assets/images/heroesBanner_left.png" alt="">
+  </div>
+  <div class="heroes__banner__center">
+    <h1>FAN HUB</h1>
+    <div class="heroes__banner__center__logo">
+      <img src="../../../../../../../assets/images/logo.png">
+    </div>
+    <p class="heroes__banner__center__info">
+      Add characters and chat with people
+    </p>
+  </div>
+  <div class="heroes__banner__right">
+    <img src="../../../../../../../assets/images/image 5.png" alt="">
+  </div>
+</section>
+<section class="heroesSection container">
+  <div class="heroesSection__content" *ngIf="heroes$ | async as heroes; else preloader">
+    <div *ngFor="let hero of heroes">
+      <app-hero-card [hero]="hero"></app-hero-card>
+    </div>
+  </div>
 
-
-
-
-<div *ngIf="heroes.length">
-    <div *ngFor="let hero of heroes">{{hero.name}}</div>
-</div>
-
-
-<h1></h1>
+  <ng-template #preloader>
+    <app-preloader></app-preloader>
+  </ng-template>
+</section>

@@ -1,17 +1,83 @@
-.header {
-    padding: 35px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &__nav {
-        display: flex;
-        justify-content: space-between;
-        margin-right: 200px;
-        &__item {
-            margin: 0 30px;
-            // &:hover {
-            //     color: ;
-            // }
-        }
-    }
+@import "~src/assets/scss/_variables.scss";
+
+.main {
+	color: #fff;
+	background-color: $main-bg-color;
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 30px 20px;
+		&__logo {
+			width: 20%;
+			& img {
+				width: 100%;
+				display: block;
+			}
+		}
+		&__nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			&__item {
+				margin: 0 30px;
+				color: #fff;
+				transition: color 0.2s ease-in;
+				&:hover {
+					color: $transition-color;
+				}
+				&.active {
+					color: $transition-color;
+				}
+			}
+		}
+	}
+}
+
+.footer {
+	margin-top: 150px;
+	padding: 20px 0;
+	display: flex;
+	flex-direction: column;
+	&__links {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 20px;
+		&__item {
+			color: #fff;
+			transition: color .2s ease-in;
+			&:hover {
+				color: $transition-color;
+			}
+			&.active {
+				color: $transition-color;
+			}
+		}
+	}
+	&__year {
+		text-align: center;
+	}
+}
+
+@media screen and (min-width: 0) {
+	.footer {
+		&__links {
+			flex-direction: column;
+			&__item {
+				margin: 10px 0;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 500px) {
+	.footer {
+		&__links {
+			flex-direction: row;
+			&__item {
+				margin: 0 20px;
+			}
+		}
+	}
 }

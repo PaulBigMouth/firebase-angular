@@ -4,6 +4,11 @@ $grey-color: #afafaf;
 $green-color: #255d50;
 $red-color: #c54139;
 
+$main-bg-color: #20232a;
+$transition-color: rgb(124, 124, 124);
+$hero-card-bg-color: #3d3e43;
+$heroes-banner-bg-color: #c7fcec;
+
 // --------- SIZES
 $main-font-size: 17px;
 
@@ -30,7 +35,7 @@ $main-font-size: 17px;
 }
 
 // ------------ FONTS#
-$montserrat: 'Montserrat', sans-serif;
+$montserrat: "Montserrat", sans-serif;
 
 // ------ selectors
 .main-color {

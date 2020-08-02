@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { EmailVerifiedComponent } from './shared/components/email-verified/email-verified.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,7 @@ const routes: Routes = [
 		canActivate: [ AuthGuard ],
 	},
 	{ path: 'emailVerified', component: EmailVerifiedComponent },
+	{ path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

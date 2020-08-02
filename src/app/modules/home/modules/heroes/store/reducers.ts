@@ -1,33 +1,29 @@
 import { HeroesActions, HeroesUnion } from './actions';
 import { HeroResponseResult } from '../../../../interfaces';
 
-
 const initialState = {
-  heroes: {},
+	heroes: {},
 };
 
 export interface HeroesState {
-  heroes?: Object;
+	heroes?: Object;
 }
 
-export function heroesReducer(
-  state: HeroesState = initialState,
-  action: HeroesUnion
-) {
-  switch (action.type) {
-    case HeroesActions.HeroesLoadSuccess:
-      console.log(action.payload);
-      
-      return {
-        ...state,
-        heroes: {
-          ...state.heroes,
-          ...action.payload.reduce((previous, current) => {
-            return { ...previous, [current.id]: current }
-         }, {})
-        }
-      };
-  }
+export function heroesReducer(state: HeroesState = initialState, action: HeroesUnion) {
+	switch (action.type) {
+		case HeroesActions.HeroesLoadSuccess:
+			console.log(action.payload);
 
-  return state;
+			return {
+				...state,
+				heroes: {
+					...state.heroes,
+					...action.payload.reduce((previous, current) => {
+						return { ...previous, [current.id]: current };
+					}, {}),
+				},
+			};
+	}
+
+	return state;
 }

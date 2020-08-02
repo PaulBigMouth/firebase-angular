@@ -1,0 +1,74 @@
+@import "~src/assets/scss/_utils.scss";
+@import "~src/assets/scss/_variables.scss";
+.heroCard {
+	cursor: pointer;
+	width: 100%;
+	background-color: $hero-card-bg-color;
+	border-radius: 10px;
+	display: grid;
+	grid-template-columns: 35% 65%;
+	transition: box-shadow .2s ease-in-out;
+	&:hover {
+		box-shadow: 0px 0px 21px -1px rgba(252, 252, 252, 0.75);
+	}
+	& img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	&__info {
+		padding: 20px 15px;
+		&__name {
+			margin-bottom: 20px;
+		}
+		&__statusAndSpecies {
+			display: flex;
+			align-items: center;
+			&__status {
+				display: flex;
+				align-items: center;
+				margin-right: 5px;
+			}
+			&__species {
+				margin-left: 5px;
+			}
+		}
+		&__location {
+			margin-top: 30px;
+			display: flex;
+			flex-direction: column;
+			&__name {
+				margin-top: 5px;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 0px) {
+	.heroCard {
+		max-width: 320px;
+		grid-template-columns: 100%;
+
+		& img {
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+		}
+	}
+}
+
+@media screen and (min-width: 640px) {
+	.heroCard {
+		max-width: 100%;
+		grid-template-columns: 40% 60%;
+		& img {
+			border-top-right-radius: 0;
+			border-bottom-left-radius: 10px;
+		}
+	}
+}
+
+// @media screen and (min-width: 960px) {
+//   .heroCard {
+
+//   }
+// }

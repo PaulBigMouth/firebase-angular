@@ -48,5 +48,11 @@
       ></app-input>
     </div>
   </ng-template>
-  <button class="auth__form__btn fw-700" (click)="onSubmit()" [disabled]="signProgress || form.invalid">Sign {{ (sign === 'up') ? 'Up' :  'In' }}</button>
+  <button
+    class="auth__form__btn fw-700"
+    (click)="onSubmit()"
+    [disabled]="form.invalid || signProgress"
+  >
+    Sign {{ sign === "up" ? "Up" : "In" }}
+  </button>
 </form>
