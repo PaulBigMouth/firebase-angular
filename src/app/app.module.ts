@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { TokenInterceptor } from './classes/token.interceptor';
 import { AuthService } from './shared/services/auth.service';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,10 +28,12 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 		AngularFireModule.initializeApp(environment.firebase),
 		HomeModule,
 		StoreModule.forRoot({}),
-		EffectsModule.forRoot([]),
+		EffectsModule.forRoot(),
 		StoreDevtoolsModule.instrument({
 			maxAge: 5,
 		}),
+		SharedModule
+
 	],
 	providers: [ AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true } ],
 	bootstrap: [ AppComponent ],

@@ -1,12 +1,16 @@
-import { AppStore } from './../../../store/reducers';
+import { AppState } from './../../../store/reducers';
 import { AuthState } from './reducers';
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 
-const _selectSignProgress = (state: AppStore) => state.auth;
+const selectAuthState = (state: AppState) => state.auth;
+
+export const selectSignProgress = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.isSignProgress
+);
 
 
-const authState = (state: AuthState) => state
-
-
-export const selectSignProgress = createSelector(authState, (state) => state.isSignProgress)
-
+export const selectUserId = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.idUser
+)

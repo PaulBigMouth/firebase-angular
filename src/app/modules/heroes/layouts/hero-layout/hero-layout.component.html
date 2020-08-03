@@ -1,0 +1,34 @@
+<section class="heroLayout">
+    <div *ngIf="hero$ | async as hero; else preloader"> 
+            <article class="heroLayout__article">
+                <div class="heroLayout__article__img">
+                    <img [src]="hero.image" alt="">
+                </div>
+                <div class="heroLayout__article__info">
+                    <h2 class="heroLayout__article__info__name">{{hero.name}}</h2>
+                    <div class="heroLayout__article__info__statusAndSpecies">
+                        <span class="circle" [ngClass]="{'alive': hero.status === 'Alive', 'dead': hero.status === 'Dead'}"></span>
+                        <span class="heroLayout__article__info__statusAndSpecies__status__text fw-600">{{hero.status}}</span>
+                        <span>-</span>
+                        <span class="heroLayout__article__info__statusAndSpecies__species fw-600">{{hero.species}}</span>
+                    </div>
+                    <div class="heroLayout__article__info__gender">
+                        <span>Gender: </span>
+                        <span class="fw-600">{{hero.gender}}</span>
+                    </div>
+                    <div class="heroLayout__article__info__location">
+                        <span>Location: </span>
+                        <span class="fw-600">{{hero.location.name}}</span>
+                    </div>
+                    <div class="heroLayout__article__info__origin">
+                        <span>Origin: </span>
+                        <span class="fw-600">{{hero.origin.name}}</span>
+                    </div>
+                </div>
+            </article>
+            <button class="btn__light">{{(isFavorite$ | async) ? 'REMOVE FROM FAVORITES' : 'ADD TO FAVORITES' }}</button>
+    </div>
+    <ng-template #preloader>
+        <app-prelaoder></app-prelaoder>
+    </ng-template>
+</section>

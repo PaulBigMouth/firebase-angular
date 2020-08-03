@@ -1,6 +1,6 @@
 import { User, Message } from '../../interfaces';
 import { AuthState } from './reducers';
-import { Action } from '@ngrx/store';
+import { Action, createAction, props, union } from '@ngrx/store';
 
 export enum AuthActions {
   SignIn = '[AUTH] SIGN_IN',
@@ -15,68 +15,59 @@ export enum AuthActions {
   InitError = '[AUTH] INIT_ERROR',
 }
 
-export type AuthUnion =
-  | SignUpSuccess
-  | SignOutSuccess
-  | SignInSuccess
-  | InitSucces
-  | SignIn
-  | SignUp
-  | SignError
+export const signInAction = createAction(
+  AuthActions.SignIn,
+  props<{ payload: User }>()
+);
 
-export class SignInSuccess implements Action {
-  readonly type = AuthActions.SignInSuccess;
+export const signInSuccessAction = createAction(
+  AuthActions.SignInSuccess,
+  props<{ payload: AuthState }>()
+);
 
-  constructor(public payload: AuthState) {}
-}
+export const signUpAction = createAction(
+  AuthActions.SignUp,
+  props<{ payload: User }>()
+);
 
-export class SignIn implements Action {
-  readonly type = AuthActions.SignIn;
+export const signUpSuccessAction = createAction(
+  AuthActions.SignUpSuccess,
+  props<{ payload: AuthState }>()
+);
 
-  constructor(public payload: User) {}
-}
+export const signOutAction = createAction(AuthActions.SignOut);
 
+export const signOutSuccessAction = createAction(
+  AuthActions.SignOutSuccess,
+  props<{ payload: Message }>()
+);
 
-export class SignUpSuccess implements Action {
-  readonly type = AuthActions.SignUpSuccess;
+export const authStateInitAction = createAction(AuthActions.Init);
 
-  constructor(public payload: AuthState) {}
-}
+export const authStateInitSuccessAction = createAction(
+  AuthActions.InitSuccess,
+  props<{ payload: AuthState }>()
+);
 
-export class SignError implements Action {
-  readonly type = AuthActions.SignError;
+export const authStateInitErrorAction = createAction(
+  AuthActions.InitError,
+  props<{ payload: Message }>()
+);
 
-  constructor(public payload: Message) {}
-}
+export const signErrorAction = createAction(
+  AuthActions.SignError,
+  props<{ payload: Message }>()
+);
 
-export class SignUp implements Action {
-  readonly type = AuthActions.SignUp;
+const all = union({
+  signInAction,
+  signInSuccessAction,
+  signUpAction,
+  signUpSuccessAction,
+  signErrorAction,
+  authStateInitAction,
+  authStateInitSuccessAction,
+  authStateInitErrorAction,
+});
 
-  constructor(public payload: User) {}
-}
-
-export class SignOut implements Action {
-  readonly type = AuthActions.SignOut;
-}
-
-export class SignOutSuccess implements Action {
-  readonly type = AuthActions.SignOutSuccess;
-
-  constructor(public payload: Message) {}
-}
-
-export class Init implements Action {
-  readonly type = AuthActions.Init;
-}
-
-export class InitSucces implements Action {
-  readonly type = AuthActions.InitSuccess;
-
-  constructor(public payload: { idUser: string; refreshToken: string }) {}
-}
-
-export class InitError implements Action {
-  readonly type = AuthActions.InitError;
-
-  constructor(public payload: Message = 'Error_Init') {}
-}
+export type AuthActionsUnion = typeof all
