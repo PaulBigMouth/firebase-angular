@@ -7,12 +7,19 @@
 	box-sizing: border-box;
 }
 
+html {
+	overflow-x: hidden;
+}
+
 body {
 	margin: 0;
 	padding: 0;
 	color: $main-color;
 	font-family: $montserrat;
 	font-size: $main-font-size;
+	min-height: 100vh;
+	width: 100vw;
+	overflow-x: hidden;
 }
 
 .container {
@@ -61,5 +68,20 @@ h6 {
 	font-size: rem(13);
 }
 button:disabled {
-	opacity: .6;
+	opacity: 0.6;
+}
+
+.circle {
+	margin-right: 5px;
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: $grey-color;
+	&.alive {
+		background-color: #54cd44;
+	}
+	&.dead {
+		background-color: $red-color;
+	}
 }

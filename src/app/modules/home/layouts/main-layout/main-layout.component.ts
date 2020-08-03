@@ -1,3 +1,5 @@
+import { SignOut } from '../../../../modules/authorization/store/actions';
+import { Store } from '@ngrx/store';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -7,10 +9,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainLayoutComponent implements OnInit {
-	links = [{name: 'Heroes', url: '/heroes'}, {name: "Community", url: '/community'}]
-	constructor() {}
+	links = [
+		{ name: 'Heroes', url: '/heroes' },
+		{ name: 'Community', url: '/community' },
+		{ name: 'Profile', url: '/profile' },
+	];
+	constructor(private store: Store) {}
 
 	ngOnInit(): void {}
 
-	
+	logOut() {
+		this.store.dispatch(new SignOut());
+	}
 }

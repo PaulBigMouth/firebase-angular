@@ -15,10 +15,11 @@ import { AuthorizationModule } from './modules/authorization/authorization.modul
 import { HomeModule } from './modules/home/home.module';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { EmailVerifiedComponent } from './shared/components/email-verified/email-verified.component';
-import { PreloaderComponent } from './shared/components/preloader/preloader.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 @NgModule({
-	declarations: [ AppComponent, ToastComponent, EmailVerifiedComponent, PreloaderComponent ],
+	declarations: [ AppComponent, ToastComponent, EmailVerifiedComponent, NotFoundComponent ],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -26,7 +27,10 @@ import { PreloaderComponent } from './shared/components/preloader/preloader.comp
 		AngularFireModule.initializeApp(environment.firebase),
 		HomeModule,
 		StoreModule.forRoot({}),
-		EffectsModule.forRoot([])
+		EffectsModule.forRoot([]),
+		StoreDevtoolsModule.instrument({
+			maxAge: 5,
+		}),
 	],
 	providers: [ AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true } ],
 	bootstrap: [ AppComponent ],

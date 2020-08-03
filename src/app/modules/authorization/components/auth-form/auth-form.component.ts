@@ -46,15 +46,12 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     }
     this.sub = this.store.select(selectSignProgress).subscribe((progress) => {
       this.signProgress = progress;
-      console.log(progress);
-      
-      console.log(this.signProgress);
-      this.cd.detectChanges()
+      this.cd.detectChanges();
     });
   }
   ngOnDestroy(): void {
-    if(this.sub) {
-      this.sub.unsubscribe()
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
   }
 
