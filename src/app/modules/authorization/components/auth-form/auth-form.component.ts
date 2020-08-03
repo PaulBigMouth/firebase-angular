@@ -6,6 +6,7 @@ import {
   ChangeDetectionStrategy,
   Input,
   OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -22,7 +23,7 @@ export class AuthFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   sub: Subscription;
   signProgress: boolean;
-  constructor(private store: Store) {}
+  constructor(private store: Store, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     if (this.sign === 'up') {
@@ -45,7 +46,10 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     }
     this.sub = this.store.select(selectSignProgress).subscribe((progress) => {
       this.signProgress = progress;
+      console.log(progress);
+      
       console.log(this.signProgress);
+      this.cd.detectChanges()
     });
   }
   ngOnDestroy(): void {

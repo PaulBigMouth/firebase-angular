@@ -3,8 +3,8 @@ import { createSelector } from '@ngrx/store';
 
 
 
-const _selectSignProgress = (state: AuthState) => state.isSignProgress
+const authState = (state: AuthState) => state
 
 
-export const selectSignProgress = createSelector(_selectSignProgress, (progress) => progress)
+export const selectSignProgress = createSelector(authState, (state) => state.isSignProgress)
 
