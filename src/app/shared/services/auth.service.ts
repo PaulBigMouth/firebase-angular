@@ -1,19 +1,20 @@
-import { map } from 'rxjs/operators';
+import { map, switchMap, mergeMap } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { User } from 'src/app/modules/interfaces';
 
 @Injectable()
 export class AuthService {
+  private user: firebase.User;
   constructor(private auth: AngularFireAuth, private db: AngularFireDatabase) {}
 
   public createUser({
     email,
     password,
   }: User): Observable<firebase.auth.UserCredential> {
-    console.log(email, password)
+    console.log(email, password);
     return from(this.auth.createUserWithEmailAndPassword(email, password));
   }
 
@@ -25,16 +26,9 @@ export class AuthService {
     return from(this.auth.signOut());
   }
 
-  // public get isAuth(): Observable<boolean> {
-  // return from(this.auth.currentUser).pipe(map(user => !!user))
-  // }
-
-  // public get isVerify(): Observable<boolean> {
-  // return from(this.auth.currentUser).pipe(map(user => !!user.emailVerified))
-  // }
-
   public getUser(): Observable<firebase.User> {
-    return from(this.auth.currentUser);
+    // this.auth.onAuthStateChanged((user) => console.log(user));
+    return from(this.auth.user.pipe(map((user) => user)));
   }
 
   public verifyUserEmail(): Observable<firebase.Unsubscribe> {
@@ -47,7 +41,7 @@ export class AuthService {
 
   public createDBOfUser(user: User, idUser: string): Observable<any> {
     const { email, name } = user;
-    console.log(email, name)
+    console.log(email, name);
     return from(
       this.db.object(`/users/${idUser}`).set({
         email,

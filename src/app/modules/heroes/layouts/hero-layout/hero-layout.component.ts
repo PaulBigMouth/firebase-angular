@@ -1,6 +1,10 @@
 import { selectIsFavorite } from './../../store/selectors';
 import { HeroResponseResult } from '../../store/reducers';
-import { getHeroLoadDetailsAction, checkHeroAction } from './../../store/actions';
+import {
+  getHeroLoadDetailsAction,
+  checkHeroAction,
+  postHeroToFavoriteAction,
+} from './../../store/actions';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import {
@@ -22,7 +26,8 @@ import { selectHeroDetails } from '../../store/selectors';
 export class HeroLayoutComponent implements OnInit, OnDestroy {
   public hero$: Observable<HeroResponseResult>;
   public sub: Subscription;
-  public isFavorite$: Observable<boolean>
+  public isFavorite$: Observable<boolean>;
+  public heroId: string;
   constructor(
     private store: Store,
     private route: ActivatedRoute,
@@ -31,14 +36,13 @@ export class HeroLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params: Params) => {
-      this.store.dispatch(checkHeroAction({payload: params['id']}))
+      this.heroId = params['id'];
+      this.store.dispatch(checkHeroAction({ payload: params['id'] }));
       this.store.dispatch(getHeroLoadDetailsAction({ id: params['id'] }));
       this.hero$ = this.store.pipe(
         select(selectHeroDetails, { id: params['id'] })
       );
-      this.isFavorite$ = this.store.pipe(
-        select(selectIsFavorite)
-      )
+      this.isFavorite$ = this.store.pipe(select(selectIsFavorite));
     });
   }
   ngOnDestroy(): void {
@@ -48,6 +52,6 @@ export class HeroLayoutComponent implements OnInit, OnDestroy {
   }
 
   public pushToFavorite(): void {
-    
+    this.store.dispatch(postHeroToFavoriteAction({ id: this.heroId }));
   }
 }
