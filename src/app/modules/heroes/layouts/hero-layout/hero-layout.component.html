@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </article>
-            <button class="btn__light fw-600">{{(isFavorite$ | async) ? 'REMOVE FROM FAVORITES' : 'ADD TO FAVORITES' }}</button>
+            <button class="btn__light fw-600" (click)="pushToFavorite(hero.id)">{{isFavorite ? 'REMOVE FROM FAVORITES' : 'ADD TO FAVORITES' }}</button>
     </div>
     <ng-template #preloader>
         <app-prelaoder></app-prelaoder>

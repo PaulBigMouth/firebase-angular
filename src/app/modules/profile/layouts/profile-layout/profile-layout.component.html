@@ -2,7 +2,8 @@
     <div class="profile__left">
         <div class="profile__left__img">
             <img src="https://emanong-ph.com/api/people/avatar/0" alt="">
-            <button class="profile__left__img__btn btn__light fw-600">Change photo</button>
+            <input type="file" #fileInput class="profile__left__img__input" (change)="onFileUpload($event)">
+            <button (click)="triggerClick()" class="profile__left__img__btn btn__light fw-600">Change photo</button>
         </div>
     </div>
     <div class="profile__right">

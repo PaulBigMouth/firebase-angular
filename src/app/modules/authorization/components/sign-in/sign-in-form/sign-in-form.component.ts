@@ -2,14 +2,15 @@ import { Store } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { selectSignProgress } from '../../../store/selectors';
-import { signInAction } from '../../../store/actions';
+import { signInAction } from 'src/app/shared/actions/auth.actions';
+import { selectSignProgress } from 'src/app/shared/selectors/auth.selectors';
+
 
 @Component({
   selector: 'app-sign-in-form',
   templateUrl: './sign-in-form.component.html',
   styleUrls: ['./sign-in-form.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignInFormComponent implements OnInit, OnDestroy {
 

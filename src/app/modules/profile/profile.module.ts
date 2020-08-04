@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,7 @@ import { ProfileMainComponent } from './components/profile-main/profile-main.com
 import { ProfileHeroesComponent } from './components/profile-heroes/profile-heroes.component';
 
 @NgModule({
-	imports: [ ProfileRoutingModule, CommonModule ],
+	imports: [ ProfileRoutingModule, CommonModule, SharedModule ],
 	exports: [],
 	declarations: [ ProfileLayoutComponent, ProfileMainComponent, ProfileHeroesComponent ],
 	providers: [],

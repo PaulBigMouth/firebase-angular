@@ -1,10 +1,10 @@
-import { selectIsFavorite } from './../../store/selectors';
-import { HeroResponseResult } from '../../store/reducers';
+import { postHeroToFavoriteAction } from '../../../../shared/actions/profile.actions';
+import { selectHeroFavoriteState } from './../../../../shared/selectors/heroes.selectors';
+import { selectHeroDetails } from '../../../../shared/selectors/heroes.selectors'
+import { HeroResponseResult } from '../../../../shared/interfaces/heroes.interface';
 import {
   getHeroLoadDetailsAction,
-  checkHeroAction,
-  postHeroToFavoriteAction,
-} from './../../store/actions';
+} from '../../../../shared/actions/heroes.actions';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import {
@@ -15,19 +15,19 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { of, Subscription, Observable } from 'rxjs';
-import { selectHeroDetails } from '../../store/selectors';
+
 
 @Component({
   selector: 'app-hero-layout',
   templateUrl: './hero-layout.component.html',
   styleUrls: ['./hero-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroLayoutComponent implements OnInit, OnDestroy {
   public hero$: Observable<HeroResponseResult>;
   public sub: Subscription;
-  public isFavorite$: Observable<boolean>;
-  public heroId: string;
+  public isFavoriteSub: Subscription
+  public isFavorite: boolean;
   constructor(
     private store: Store,
     private route: ActivatedRoute,
@@ -36,22 +36,30 @@ export class HeroLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params: Params) => {
-      this.heroId = params['id'];
-      this.store.dispatch(checkHeroAction({ payload: params['id'] }));
       this.store.dispatch(getHeroLoadDetailsAction({ id: params['id'] }));
       this.hero$ = this.store.pipe(
         select(selectHeroDetails, { id: params['id'] })
       );
-      this.isFavorite$ = this.store.pipe(select(selectIsFavorite));
+      
+      this.isFavoriteSub = this.store.pipe(select(selectHeroFavoriteState(params['id']))).subscribe(flag => {
+        this.isFavorite = flag
+      })
+      console.log(this.isFavorite)
+      this.cd.detectChanges()
     });
   }
   ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+    if(this.isFavoriteSub) {
+      this.isFavoriteSub.unsubscribe()
+    }
   }
 
-  public pushToFavorite(): void {
-    this.store.dispatch(postHeroToFavoriteAction({ id: this.heroId }));
+  public pushToFavorite(idHero: string): void {
+    if(!this.isFavorite) {
+      this.store.dispatch(postHeroToFavoriteAction({idHero}))
+    }
   }
 }

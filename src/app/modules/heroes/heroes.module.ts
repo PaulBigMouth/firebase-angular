@@ -1,13 +1,9 @@
+import { SharedModule } from './../../shared/shared.module';
 import { HeroesComponent } from './heroes.component';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { HeroesService } from './services/heroes.service';
 import { CommonModule } from '@angular/common';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { NgModule } from '@angular/core';
 import { HeroesLayoutComponent } from './layouts/heroes-layout/heroes-layout.component';
-import { reducer } from './store/reducers';
-import { HeroesEffects } from './store/effects';
 import { HeroCardComponent } from './components/hero-card/hero-card.component';
 import { HeroesFiltersComponent } from './components/heroes-filters/heroes-filters.component';
 import { HeroLayoutComponent } from './layouts/hero-layout/hero-layout.component';
@@ -16,8 +12,7 @@ import { HeroLayoutComponent } from './layouts/hero-layout/hero-layout.component
 	imports: [
 		HeroesRoutingModule,
 		CommonModule,
-		StoreModule.forFeature('heroes', reducer),
-		EffectsModule.forFeature([ HeroesEffects ]),
+		SharedModule,
 	],
 	exports: [ HeroesRoutingModule ],
 	declarations: [
@@ -27,7 +22,7 @@ import { HeroLayoutComponent } from './layouts/hero-layout/hero-layout.component
 		HeroLayoutComponent,
 		HeroesComponent,
 	],
-	providers: [ HeroesService ],
+	providers: [ ],
 	bootstrap: [ HeroesComponent ],
 })
 export class HeroesModule {}

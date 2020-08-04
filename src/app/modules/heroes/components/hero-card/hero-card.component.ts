@@ -1,4 +1,4 @@
-import { HeroResponseResult } from '../../store/reducers';
+import { HeroResponseResult } from '../../../../shared/interfaces/heroes.interface';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

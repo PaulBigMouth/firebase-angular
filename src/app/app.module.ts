@@ -1,3 +1,6 @@
+import { ProfileEffects } from './shared/effects/profile.effects';
+import { AuthEffects } from './shared/effects/auth.effects';
+import { HeroesEffects } from './shared/effects/heroes.effects';
 import { SharedModule } from './shared/shared.module';
 import { TokenInterceptor } from './classes/token.interceptor';
 import { AuthService } from './shared/services/auth.service';
@@ -18,6 +21,9 @@ import { ToastComponent } from './shared/components/toast/toast.component';
 import { EmailVerifiedComponent } from './shared/components/email-verified/email-verified.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { heroesReducer } from './shared/reducers/heroes.reducers';
+import { authReducer } from './shared/reducers/auth.reducers';
+import { profileReducer } from './shared/reducers/profile.reducers';
 
 @NgModule({
 	declarations: [ AppComponent, ToastComponent, EmailVerifiedComponent, NotFoundComponent ],
@@ -27,15 +33,15 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 		AuthorizationModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		HomeModule,
-		StoreModule.forRoot({}),
-		EffectsModule.forRoot(),
+		StoreModule.forRoot({heroes: heroesReducer, auth: authReducer, profile: profileReducer}),
+		EffectsModule.forRoot([HeroesEffects, AuthEffects, ProfileEffects]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 5,
 		}),
 		SharedModule
 
 	],
-	providers: [ AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true } ],
+	providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true } ],
 	bootstrap: [ AppComponent ],
 })
 export class AppModule {}

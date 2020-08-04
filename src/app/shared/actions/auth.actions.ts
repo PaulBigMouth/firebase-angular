@@ -1,6 +1,7 @@
-import { User, Message } from '../../interfaces';
-import { AuthState } from './reducers';
-import { Action, createAction, props, union } from '@ngrx/store';
+import { props, createAction, union } from "@ngrx/store";
+import { AuthState } from "../reducers/auth.reducers";
+import { User } from "../interfaces/users.interface";
+
 
 export enum AuthActions {
   SignIn = '[AUTH] SIGN_IN',
@@ -39,10 +40,10 @@ export const signOutAction = createAction(AuthActions.SignOut);
 
 export const signOutSuccessAction = createAction(
   AuthActions.SignOutSuccess,
-  props<{ payload: Message }>()
+  props<{ payload: string }>()
 );
 
-export const authStateInitAction = createAction(AuthActions.Init);
+export const authStateInitAction = createAction(AuthActions.Init, props<{user: AuthState}>());
 
 export const authStateInitSuccessAction = createAction(
   AuthActions.InitSuccess,
@@ -51,13 +52,15 @@ export const authStateInitSuccessAction = createAction(
 
 export const authStateInitErrorAction = createAction(
   AuthActions.InitError,
-  props<{ payload: Message }>()
+  props<{ payload: string }>()
 );
 
 export const signErrorAction = createAction(
   AuthActions.SignError,
-  props<{ payload: Message }>()
+  props<{ payload: string }>()
 );
+
+
 
 const all = union({
   signInAction,

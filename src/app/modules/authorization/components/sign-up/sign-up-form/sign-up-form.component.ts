@@ -1,9 +1,9 @@
-import { signUpAction } from './../../../store/actions';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { selectSignProgress } from '../../../store/selectors';
+import { signUpAction } from 'src/app/shared/actions/auth.actions';
+import { selectSignProgress } from 'src/app/shared/selectors/auth.selectors';
 
 @Component({
   selector: 'app-sign-up-form',

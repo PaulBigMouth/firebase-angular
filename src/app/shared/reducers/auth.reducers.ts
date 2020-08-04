@@ -1,4 +1,4 @@
-import { AuthActionsUnion, AuthActions, signInAction, signInSuccessAction, signUpAction, signUpSuccessAction, signOutAction, signOutSuccessAction, authStateInitSuccessAction, signErrorAction } from './actions';
+import { AuthActionsUnion, AuthActions, signInAction, signInSuccessAction, signUpAction, signUpSuccessAction, signOutAction, signOutSuccessAction, authStateInitSuccessAction, signErrorAction } from '../actions/auth.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 
 const initialState: AuthState = {
@@ -13,7 +13,7 @@ export interface AuthState {
 	isSignProgress: boolean;
 }
 
-const authReducer = createReducer(
+const reducer = createReducer(
 	initialState,
 	on(signInAction, (state) => ({
 		...state,
@@ -46,6 +46,6 @@ const authReducer = createReducer(
 	}))
 )
 
-export function reducer(state: AuthState, action: Action): AuthState {
-	return authReducer(state, action)
+export function authReducer(state: AuthState, action: Action): AuthState {
+	return reducer(state, action)
 }

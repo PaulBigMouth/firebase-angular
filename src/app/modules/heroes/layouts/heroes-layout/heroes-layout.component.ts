@@ -1,7 +1,5 @@
-import { getHeroesLoadAction } from './../../store/actions';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectHeroes } from '../../store/selectors';
 import {
   Component,
   OnInit,
@@ -10,7 +8,9 @@ import {
   OnDestroy,
   HostListener,
 } from '@angular/core';
-import { HeroResponseResult } from '../../store/reducers';
+import { HeroResponseResult } from '../../../../shared/interfaces/heroes.interface';
+import { getHeroesLoadAction } from 'src/app/shared/actions/heroes.actions';
+import { selectHeroes } from 'src/app/shared/selectors/heroes.selectors';
 
 @Component({
   selector: 'app-heroes-layout',
@@ -36,7 +36,6 @@ export class HeroesLayoutComponent implements OnInit, OnDestroy {
   public onScroll(): void {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 6) {
       this.page++;
-      console.log('12');
       this.store.dispatch(
         getHeroesLoadAction({ payload: { page: this.page.toString() } })
       );

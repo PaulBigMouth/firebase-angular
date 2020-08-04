@@ -2,19 +2,25 @@ import { map, switchMap, mergeMap } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
-import { User } from 'src/app/modules/interfaces';
+import { Observable, of, Subscription, from } from 'rxjs';
+import { User } from '../interfaces/users.interface';
+import { AngularFireStorage } from '@angular/fire/storage';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  private user: firebase.User;
-  constructor(private auth: AngularFireAuth, private db: AngularFireDatabase) {}
+  // private user: firebase.User;
+  constructor(
+    private auth: AngularFireAuth,
+    private db: AngularFireDatabase,
+    private storage: AngularFireStorage
+  ) {}
 
   public createUser({
     email,
     password,
   }: User): Observable<firebase.auth.UserCredential> {
-    console.log(email, password);
     return from(this.auth.createUserWithEmailAndPassword(email, password));
   }
 
@@ -24,6 +30,10 @@ export class AuthService {
 
   public signOut(): Observable<void> {
     return from(this.auth.signOut());
+  }
+
+  public initUser(): Observable<firebase.User> {
+    return this.auth.user;
   }
 
   public getUser(): Observable<firebase.User> {
