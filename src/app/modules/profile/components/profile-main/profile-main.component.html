@@ -1,3 +1,14 @@
-<form class="profileMain">
-    
+<form class="profileMain" [formGroup]="form">
+   <div class="profileMain__edit">
+        <button [ngClass]="{'open' : editFlag}" (click)="changeEditFlag()">
+            <i class="fas fa-user-edit"></i>
+        </button>
+   </div>
+    <div class="profileMain__inner">
+        <app-input placeholder="Name" type="text" [valid]="form.get('name').valid" [errors]="form.get('name').errors">
+        </app-input>
+    </div>
+    <div class="profileMain__save" *ngIf="editFlag">
+        <button class="btn__light">Save</button>
+    </div>
 </form>

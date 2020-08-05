@@ -1,4 +1,7 @@
-import { postHeroToFavoriteSuccessAction } from './../actions/profile.actions';
+import {
+  postHeroToFavoriteSuccessAction,
+  uploadUserImageSuccessAction,
+} from './../actions/profile.actions';
 import { ProfileService } from './../services/profile.service';
 import {
   ProfileActions,
@@ -14,16 +17,19 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ProfileEffects {
-
-  public initProfileState$: Observable<Action> = createEffect(() => this.actions$.pipe(
+  public initProfileState$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
       ofType(ProfileActions.InitProfileStateAction),
-      switchMap(({userId}) => this.profileService.getUserProfile(userId).pipe(
-          map(profileState => {
-              console.log(profileState)
-              return initProfileStateSuccessAction({state: profileState})
+      switchMap(({ userId }) =>
+        this.profileService.getUserProfile(userId).pipe(
+          map((profileState) => {
+            console.log(profileState);
+            return initProfileStateSuccessAction({ state: profileState });
           })
-      ))
-  ))
+        )
+      )
+    )
+  );
 
   public loadFavoritesHeroes$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
@@ -44,22 +50,45 @@ export class ProfileEffects {
       )
     )
   );
-  public pushHeroToFavorite$: Observable<Action> = createEffect(() => this.actions$.pipe(
+  public pushHeroToFavorite$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
       ofType(ProfileActions.PostHeroToFavoriteAction),
-      switchMap(({idHero}) => this.profileService.pushHeroToFavorite(idHero).pipe(
-          map(value => {
-              console.log(value)
-              return value
+      switchMap(({ idHero }) =>
+        this.profileService.pushHeroToFavorite(idHero).pipe(
+          map((value) => {
+            console.log(value);
+            return value;
           }),
-          map(() => postHeroToFavoriteSuccessAction({payload: 'hello'}))
-      ))
-  ))
+          map(() => postHeroToFavoriteSuccessAction({ payload: idHero }))
+        )
+      )
+    )
+  );
   // public removeHeroFromFavorite$: Observable<Action> = createEffect(() => this.actions$.pipe(
   //     ofType(HeroesActions.RemoveHeroFromFavoriteAction),
   //     switchMap(({id}) => this.heroesService.removeHeroFromFavorite(id).pipe(
   //       map(() => removeHeroFromFavoriteSuccessAction({payload: id}))
   //     ))
   //   ))
+
+  public uploadUserImage$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.UploadUserImageAction),
+      switchMap(({ file }) =>
+        this.profileService.uploadUserImage(file).pipe(
+          map((url) =>
+            this.profileService.setUserImage(url).pipe(
+              map(() => {
+                console.log(url);
+                return url;
+              })
+            )
+          ),
+          map((url) => uploadUserImageSuccessAction({ payload: 'hello' }))
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions<ProfileActionsUnion>,

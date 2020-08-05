@@ -10,7 +10,7 @@
         <header class="profile__right__header">
             <nav class="profile__right__header__nav">
                 <a class="profile__right__header__nav__item" *ngFor="let link of links" [routerLink]="link.url" routerLinkActive="active">{{ link.name }}</a>
-                <a (click)="logOut()">LogOut</a>
+                <a class="profile__right__header__nav__item" (click)="signOut()">Sign Out</a>
             </nav>
         </header>
         <main class="profile__right__main">

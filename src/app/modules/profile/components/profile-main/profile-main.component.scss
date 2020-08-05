@@ -1,0 +1,30 @@
+@import "~src/assets/scss/_variables.scss";
+.profileMain {
+	padding: 30px 0;
+	&__edit {
+		width: 90%;
+		display: flex;
+		justify-content: flex-end;
+		& > button {
+			padding: 7px 10px;
+			background-color: $hero-card-bg-color;
+			color: #fff;
+			transition: background-color .2s ease-in-out;
+			&:hover {
+				background-color: $transition-color;
+			}
+			&.open {
+				background-color: $red-color;
+			}
+		}
+	}
+	&__inner {
+		margin: 30px 0;
+		width: 50%;
+	}
+	&__save {
+		width: 90%;
+		display: flex;
+		justify-content: flex-end;
+	}
+}

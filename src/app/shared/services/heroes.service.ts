@@ -4,17 +4,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HeroesResponse } from '../interfaces/heroes.interface';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HeroesService {
   private apiUrl: string = 'https://rickandmortyapi.com/api';
   private character: string = 'character';
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   public getHeroes(
     params: any = {}
@@ -26,7 +23,7 @@ export class HeroesService {
     });
   }
 
-  public getHeroById(id: string): Observable<any> {
+  public getHeroById(id: string | number[]): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${this.character}/${id}`);
   }
 }

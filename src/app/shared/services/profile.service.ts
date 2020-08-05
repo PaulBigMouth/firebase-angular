@@ -54,8 +54,14 @@ export class ProfileService {
       })
     );
   }
-  public setUserImage(url: string, image) {
-    this.storage.ref(``);
+  public setUserImage(url: string): Observable<Promise<void>> {
+    console.log(url);
+    return this.store.select(selectUserId).pipe(
+      map((userId) => {
+        console.log(userId);
+        return this.db.database.ref(`users/${userId}/avatarImageUrl`).set(url);
+      })
+    );
   }
 
   public getFavoritesHeroes(userId: string): Observable<Array<string>> {
@@ -79,20 +85,17 @@ export class ProfileService {
     );
   }
 
-  // public removeHeroFromFavorite(idHero: string): Observable<any> {
-  //   return this.store.select(selectUserId).pipe(
-  //     switchMap((userId) =>
-  //       this.store.select(selectFavoritesHeroes).pipe(
-  //         map((favoritesHeroes) => {
-  //           const newFavoritesHeroes = favoritesHeroes.filter(
-  //             (hero) => hero !== idHero
-  //           );
-  //           return this.db.database
-  //             .ref(`users/${userId}/heroes`)
-  //             .set(newFavoritesHeroes);
-  //         })
-  //       )
-  //     )
-  //   );
-  // }
+  public removeHeroFromFavorite(idHero: string): Observable<Promise<void>> {
+    return this.store.select(selectUserId).pipe(
+      withLatestFrom(this.store.select(selectFavoritesHeroes)),
+      map(([userId, favoritesHeroes]) => {
+        const newFavoritesHeroes = favoritesHeroes.filter(
+          (heroId) => heroId !== +idHero
+        );
+        return this.db.database
+          .ref(`users/${userId}/heroes`)
+          .update(newFavoritesHeroes);
+      })
+    );
+  }
 }

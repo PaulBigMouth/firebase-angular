@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
@@ -7,10 +8,20 @@ import { ProfileMainComponent } from './components/profile-main/profile-main.com
 import { ProfileHeroesComponent } from './components/profile-heroes/profile-heroes.component';
 
 @NgModule({
-	imports: [ ProfileRoutingModule, CommonModule, SharedModule ],
-	exports: [],
-	declarations: [ ProfileLayoutComponent, ProfileMainComponent, ProfileHeroesComponent ],
-	providers: [],
-	bootstrap: [ ProfileLayoutComponent ],
+  imports: [
+    ProfileRoutingModule,
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  exports: [],
+  declarations: [
+    ProfileLayoutComponent,
+    ProfileMainComponent,
+    ProfileHeroesComponent,
+  ],
+  providers: [],
+  bootstrap: [ProfileLayoutComponent],
 })
 export class ProfileModule {}

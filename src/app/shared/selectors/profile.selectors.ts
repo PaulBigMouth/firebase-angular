@@ -8,3 +8,8 @@ export const selectFavoritesHeroes = createSelector(
   selectProfileState,
   (profileState: ProfileState) => profileState.heroes
 );
+
+export const selectUserName = createSelector(
+  selectProfileState,
+  (profileState: ProfileState) => profileState.name
+);
