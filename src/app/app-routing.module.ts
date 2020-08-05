@@ -16,9 +16,8 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomeModule),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
-  { path: 'emailVerified', component: EmailVerifiedComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

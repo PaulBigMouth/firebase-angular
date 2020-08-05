@@ -1,3 +1,4 @@
+import { CommunityEffects } from './shared/effects/community.effects';
 import { ProfileEffects } from './shared/effects/profile.effects';
 import { AuthEffects } from './shared/effects/auth.effects';
 import { HeroesEffects } from './shared/effects/heroes.effects';
@@ -24,17 +25,18 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { heroesReducer } from './shared/reducers/heroes.reducers';
 import { authReducer } from './shared/reducers/auth.reducers';
 import { profileReducer } from './shared/reducers/profile.reducers';
+import { communityReducer } from "./shared/reducers/community.reducers"
 
 @NgModule({
-	declarations: [ AppComponent, ToastComponent, EmailVerifiedComponent, NotFoundComponent ],
+	declarations: [ AppComponent ],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		AuthorizationModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		HomeModule,
-		StoreModule.forRoot({heroes: heroesReducer, auth: authReducer, profile: profileReducer}),
-		EffectsModule.forRoot([HeroesEffects, AuthEffects, ProfileEffects]),
+		StoreModule.forRoot({heroes: heroesReducer, auth: authReducer, profile: profileReducer, community: communityReducer}),
+		EffectsModule.forRoot([HeroesEffects, AuthEffects, ProfileEffects, CommunityEffects]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 5,
 		}),

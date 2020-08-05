@@ -1,5 +1,5 @@
-<div class="input">
-    <input [disabled]="isDisabled" [maxLength]="maxLength ? maxLength : 100" [type]="type" (blur)="setTouched()" (input)="changeValue($event)" [ngClass]="{'invalid': !valid && isTouched && !isDisabled, 'valid': valid || isDisabled}">
+<div class="input" [ngClass]="{'profile': styleType === 'profile'}">
+    <input [disabled]="isDisabled" [value]="value ? value : ''" [maxLength]="maxLength ? maxLength : 100" [type]="type" (blur)="setTouched()" (input)="changeValue($event)" [ngClass]="{'invalid': !valid && isTouched && !isDisabled, 'valid': valid || isDisabled}">
     <label class="input__label">{{placeholder}}</label>
     <span class="input__bar"></span>
 </div>

@@ -37,7 +37,6 @@ export class AuthService {
   }
 
   public getUser(): Observable<firebase.User> {
-    // this.auth.onAuthStateChanged((user) => console.log(user));
     return from(this.auth.user.pipe(map((user) => user)));
   }
 
@@ -56,6 +55,7 @@ export class AuthService {
       this.db.object(`/users/${idUser}`).set({
         email,
         name,
+        uid: idUser
       })
     );
   }

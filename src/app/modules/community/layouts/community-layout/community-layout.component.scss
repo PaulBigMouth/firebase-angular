@@ -1,0 +1,26 @@
+.community__banner {
+    width: 100%;
+    & img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+.community__content {
+    padding: 50px 20px;
+
+    &__asyncContainer {
+        width: 100%;
+    }
+    &__lengthContainer {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+    &__userItem {
+        margin: 20px;
+    }
+}
+.text-center {
+    text-align: center;
+}

@@ -1,8 +1,9 @@
+import { selectAvatarUrl } from './../../../../shared/selectors/profile.selectors';
 import { uploadUserImageAction } from './../../../../shared/actions/profile.actions';
 
 import { AuthService } from './../../../../shared/services/auth.service';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import {
   Component,
   OnInit,
@@ -11,6 +12,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { signOutAction } from 'src/app/shared/actions/auth.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-layout',
@@ -20,13 +22,16 @@ import { signOutAction } from 'src/app/shared/actions/auth.actions';
 })
 export class ProfileLayoutComponent implements OnInit {
   @ViewChild('fileInput') public inputRef: ElementRef;
-  links = [
+  public avatarUrl$: Observable<string>
+  public links = [
     { name: 'Main', url: '/profile/main' },
     { name: 'Characters ', url: '/profile/characters' },
   ];
-  constructor(private store: Store, private authService: AuthService) {}
+  constructor(private store: Store) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.avatarUrl$ = this.store.pipe(select(selectAvatarUrl))
+  }
 
   public signOut(): void {
     this.store.dispatch(signOutAction());

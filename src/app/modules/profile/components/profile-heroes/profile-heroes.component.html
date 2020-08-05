@@ -1,1 +1,5 @@
-<p>profile-heroes works!</p>
+<div *ngIf="favoritesHeroes$ | async as heroes">
+    <p *ngFor="let hero of heroes">{{hero.name}}</p>
+</div>
+
+<button (click)="log()">log</button>

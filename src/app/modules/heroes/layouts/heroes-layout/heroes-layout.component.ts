@@ -9,7 +9,7 @@ import {
   HostListener,
 } from '@angular/core';
 import { HeroResponseResult } from '../../../../shared/interfaces/heroes.interface';
-import { getHeroesLoadAction } from 'src/app/shared/actions/heroes.actions';
+import { getHeroesAction } from 'src/app/shared/actions/heroes.actions';
 import { selectHeroes } from 'src/app/shared/selectors/heroes.selectors';
 
 @Component({
@@ -25,7 +25,7 @@ export class HeroesLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(
-      getHeroesLoadAction({ payload: { page: this.page.toString() } })
+      getHeroesAction({ payload: { page: this.page.toString() } })
     );
     this.heroes$ = this.store.pipe(select(selectHeroes));
   }
@@ -37,7 +37,7 @@ export class HeroesLayoutComponent implements OnInit, OnDestroy {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 6) {
       this.page++;
       this.store.dispatch(
-        getHeroesLoadAction({ payload: { page: this.page.toString() } })
+        getHeroesAction({ payload: { page: this.page.toString() } })
       );
       this.cd.detectChanges();
     }

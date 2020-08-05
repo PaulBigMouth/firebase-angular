@@ -26,6 +26,8 @@ export class InputComponent implements ControlValueAccessor {
   @Input() public valid: string;
   @Input() public errors?: Object | null | undefined;
   @Input() public maxLength: string;
+  @Input() public value: string | number
+  @Input() public styleType: string;
 
   isTouched: boolean = false;
   onChange: (_: any) => void = () => {};

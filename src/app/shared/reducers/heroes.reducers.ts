@@ -1,8 +1,9 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { HeroResponseResult } from '../interfaces/heroes.interface';
 import {
-  getHeroesLoadSuccessAction,
-  getHeroLoadDetailsSuccessAction,
+  getHeroesSuccessAction,
+  getHeroDetailsSuccessAction,
+  getFavoritesHeroesByIdSuccessAction
 } from '../actions/heroes.actions';
 
 const initialState = {
@@ -17,7 +18,7 @@ export interface HeroesState {
 
 const reducer = createReducer(
   initialState,
-  on(getHeroesLoadSuccessAction, (state, action) => ({
+  on(getHeroesSuccessAction, (state, action) => ({
     ...state,
     heroes: {
       ...state.heroes,
@@ -26,13 +27,22 @@ const reducer = createReducer(
       }, {}),
     },
   })),
-  on(getHeroLoadDetailsSuccessAction, (state, action) => ({
+  on(getHeroDetailsSuccessAction, (state, action) => ({
     ...state,
     heroes: {
       ...state.heroes,
       [action.payload.id]: { ...action.payload },
     },
   })),
+  on(getFavoritesHeroesByIdSuccessAction, (state, action) => ({
+    ...state,
+    heroes: {
+      ...state.heroes,
+      ...action.payload.reduce((prev, curr) => {
+        return {...prev, [curr.id]: curr}
+      }, {})
+    }
+  }))
 );
 
 export function heroesReducer(state: HeroesState, action: Action): HeroesState {

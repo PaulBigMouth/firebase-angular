@@ -1,0 +1,9 @@
+<article class="userCard">
+    <div class="userCard__avatar">
+        <img [src]="user.avatarImageUrl || 'https://emanong-ph.com/api/people/avatar/0'" alt="">
+    </div>
+    <div class="userCard__text">
+        <h2 class="userCard__text__name">{{user.name}}</h2>
+        <button class="userCard__text__sendBtn btn__light fw-600">Send message</button>
+    </div>
+</article>

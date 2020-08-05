@@ -1,0 +1,18 @@
+.userCard {
+    &__avatar {
+        width: 100%;
+        & img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+        max-height: 300px;
+        overflow: hidden;
+    }
+    &__text {
+        padding: 20px 0;
+        &__name {
+            text-align: center;
+        }
+    }
+}

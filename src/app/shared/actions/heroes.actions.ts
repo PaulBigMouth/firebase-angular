@@ -5,46 +5,72 @@ import {
 import { createAction, props, union } from '@ngrx/store';
 
 export enum HeroesActions {
-  GetHeroesLoad = '[HEROES] HEROES_LOAD',
-  GetHeroesLoadSuccess = '[HEROES] HEROES_LOAD_SUCCESS',
-  GetHeroesLoadError = '[HEROES] HEROES_LOAD_ERROR',
-  GetHeroLoadDetails = '[HEROES] HERO_LOAD_DETAILS',
-  GetHeroLoadDetailsSuccess = '[HEROES] HERO_LOAD_DETAILS_SUCCESS',
+  GetHeroesAction = '[HEROES] HEROES_LOAD',
+  GetHeroesSuccessAction = '[HEROES] HEROES_LOAD_SUCCESS',
+  GetHeroesErrorAction = '[HEROES] HEROES_LOAD_ERROR',
+  GetHeroDetailsAction = '[HEROES] HERO_LOAD_DETAILS',
+  GetHeroDetailsSuccessAction = '[HEROES] HERO_LOAD_DETAILS_SUCCESS',
+  GetHeroDetailsErrorAction = '[HEROES] HERO_LOAD_DETAILS_ERROR',
+  GetFavoritesHeroesByIdAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID',
+  GetFavoritesHeroesByIdSuccessAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID_SUCCESS',
+  GetFavoritesHeroesByIdErrorAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID_ERROR'
 }
 
-export const getHeroesLoadAction = createAction(
-  HeroesActions.GetHeroesLoad,
+export const getHeroesAction = createAction(
+  HeroesActions.GetHeroesAction,
   props<{ payload: ParamsForLoadHeroes }>()
 );
 
-export const getHeroesLoadSuccessAction = createAction(
-  HeroesActions.GetHeroesLoadSuccess,
+export const getHeroesSuccessAction = createAction(
+  HeroesActions.GetHeroesSuccessAction,
   props<{ payload: HeroResponseResult[] }>()
 );
 
-export const getHeroesLoadErrorAction = createAction(
-  HeroesActions.GetHeroesLoadError,
-  props<{ payload: string }>()
+export const getHeroesErrorAction = createAction(
+  HeroesActions.GetHeroesErrorAction,
+  props<{ message: string }>()
 );
 
-export const getHeroLoadDetailsAction = createAction(
-  HeroesActions.GetHeroLoadDetails,
-  props<{ id: string }>()
+export const getHeroDetailsAction = createAction(
+  HeroesActions.GetHeroDetailsAction,
+  props<{ id: number }>()
 );
 
-export const getHeroLoadDetailsSuccessAction = createAction(
-  HeroesActions.GetHeroLoadDetailsSuccess,
+export const getHeroDetailsSuccessAction = createAction(
+  HeroesActions.GetHeroDetailsSuccessAction,
   props<{ payload: HeroResponseResult }>()
 );
 
+export const getHeroDetailsErrorAction = createAction(
+  HeroesActions.GetHeroDetailsErrorAction,
+  props<{message: string}>()
+)
 
+export const getFavoritesHeroesByIdAction = createAction(
+  HeroesActions.GetFavoritesHeroesByIdAction,
+  props<{id: number[]}>()
+)
+
+export const getFavoritesHeroesByIdSuccessAction = createAction(
+  HeroesActions.GetFavoritesHeroesByIdSuccessAction,
+  props<{ payload: any }>()
+)
+
+export const getFavoritesHeroesByIdErrorAction = createAction(
+  HeroesActions.GetFavoritesHeroesByIdErrorAction,
+  props<{ message: string }>()
+)
 
 const all = union({
-  getHeroesLoadAction,
-  getHeroesLoadSuccessAction,
-  getHeroesLoadErrorAction,
-  getHeroLoadDetailsAction,
-  getHeroLoadDetailsSuccessAction,
+  getHeroesAction,
+  getHeroesSuccessAction,
+  getHeroesErrorAction,
+  getHeroDetailsAction,
+  getHeroDetailsSuccessAction,
+  getHeroDetailsErrorAction,
+  getFavoritesHeroesByIdAction,
+  getFavoritesHeroesByIdSuccessAction,
+  getFavoritesHeroesByIdErrorAction
 });
 
 export type HeroesActionsUnion = typeof all;

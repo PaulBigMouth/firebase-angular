@@ -5,41 +5,40 @@ import { createEffect, ofType, Actions } from "@ngrx/effects";
 import { switchMap, map } from "rxjs/operators";
 import { HeroesResponse, HeroResponseResult } from "../interfaces/heroes.interface";
 import { HeroesService } from "../services/heroes.service";
-import { HeroesActions, getHeroesLoadSuccessAction, getHeroLoadDetailsSuccessAction, HeroesActionsUnion, } from "../actions/heroes.actions";
+import { HeroesActions, HeroesActionsUnion, getHeroesSuccessAction, getHeroDetailsSuccessAction, getFavoritesHeroesByIdSuccessAction, } from "../actions/heroes.actions";
 
 @Injectable()
 export class HeroesEffects {
+
   public loadHeroes$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(HeroesActions.GetHeroesLoad),
+      ofType(HeroesActions.GetHeroesAction),
       switchMap(({ payload }) =>
         this.heroesService.getHeroes(payload).pipe(
           map((response: HeroesResponse) => response.results),
           map((heroes: HeroResponseResult[]) =>
-            getHeroesLoadSuccessAction({ payload: heroes })
+            getHeroesSuccessAction({ payload: heroes })
           )
-          // catchError(error => getHeroesLoadErrorAction({payload: 'error load heroes'}))
         )
       )
     )
   );
+
   public loadHeroDetails$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-		ofType(HeroesActions.GetHeroLoadDetails),
+		ofType(HeroesActions.GetHeroDetailsAction),
 		switchMap(({ id }) => this.heroesService.getHeroById(id).pipe(
-			map((hero: any) => getHeroLoadDetailsSuccessAction({ payload: hero }))
+			map((hero: HeroResponseResult) => getHeroDetailsSuccessAction({ payload: hero }))
 		))
 	)
   );
 
-
-
-  // public removeHeroFromFavorite$: Observable<Action> = createEffect(() => this.actions$.pipe(
-  //   ofType(HeroesActions.RemoveHeroFromFavoriteAction),
-  //   switchMap(({id}) => this.heroesService.removeHeroFromFavorite(id).pipe(
-
-  //   ))
-  // ))
+  public loadHeroesById$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(HeroesActions.GetFavoritesHeroesByIdAction),
+    switchMap(({ id }) => this.heroesService.getHeroById(id).pipe(
+      map(heroes => getFavoritesHeroesByIdSuccessAction({payload: heroes}))
+    ))
+  ))
 
   constructor(
     private actions$: Actions<HeroesActionsUnion>,

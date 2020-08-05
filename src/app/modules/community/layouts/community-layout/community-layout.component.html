@@ -1,1 +1,20 @@
-<p>community-layout works!</p>
+<section class="community__banner">
+  <img src="../../../../../assets/images/community_banner.jpg" alt="" />
+</section>
+<div class="container">
+  <section class="community__content">
+    <div class="community__content__asyncContainer" *ngIf="users$ | async as users; else preloader">
+      <div class="community__content__lengthContainer" *ngIf="users.length; else empty">
+        <div class="community__content__userItem" *ngFor="let user of users">
+          <app-user-card [user]="user"></app-user-card>
+        </div>
+      </div>
+      <ng-template #empty>
+        <p class="text-center">You don't see any other users yet. Add characters to your favorites</p>
+      </ng-template>
+    </div>
+    <ng-template #preloader>
+      <app-preloader></app-preloader>
+    </ng-template>
+  </section>
+</div>

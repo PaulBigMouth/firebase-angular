@@ -17,6 +17,9 @@ export enum ProfileActions {
   UploadUserImageAction = '[PROFILE] UPLOAD_USER_IMAGE',
   UploadUserImageSuccessAction = '[PROFILE] UPLOAD_USER_IMAGE_SUCCESS',
   UploadUserImageErrorAction = '[PROFILE] UPLOAD_USER_IMAGE_ERROR',
+  UpdateUserNameAction = '[PROFILE] UPDATE_USER_NAME',
+  UpdateUserNameSuccessAction = '[PROFILE] UPDATE_USER_NAME_SUCCESS',
+  UpdateUserNameErrorAction = '[PROFILE] UPDATE_USER_NAME_ERROR'
 }
 
 export const initProfileStateAction = createAction(
@@ -41,7 +44,7 @@ export const getFavoritesHeroesAction = createAction(
 
 export const getFavoritesHeroesSuccessAction = createAction(
   ProfileActions.GetFavoritesHeroesSuccessAction,
-  props<{ payload: string[] }>()
+  props<{ payload: number[] }>()
 );
 
 export const getFavoritesHeroesErrorAction = createAction(
@@ -51,12 +54,12 @@ export const getFavoritesHeroesErrorAction = createAction(
 
 export const postHeroToFavoriteAction = createAction(
   ProfileActions.PostHeroToFavoriteAction,
-  props<{ idHero: string }>()
+  props<{ idHero: number }>()
 );
 
 export const postHeroToFavoriteSuccessAction = createAction(
   ProfileActions.PostHeroToFavoriteSuccessAction,
-  props<{ payload: string }>()
+  props<{ payload: number }>()
 );
 
 export const postHeroToFavoriteErrorAction = createAction(
@@ -66,12 +69,12 @@ export const postHeroToFavoriteErrorAction = createAction(
 
 export const removeHeroFromFavoriteAction = createAction(
   ProfileActions.RemoveHeroFromFavoriteAction,
-  props<{ idHero: string }>()
+  props<{ idHero: number }>()
 );
 
 export const removeHeroFromFavoriteSuccessAction = createAction(
   ProfileActions.RemoveHeroFromFavoriteSuccessAction,
-  props<{ payload: string[] }>()
+  props<{ payload: number[] }>()
 );
 
 export const removeHeroFromFavoriteErrorAction = createAction(
@@ -94,6 +97,21 @@ export const uploadUserImageErrorAction = createAction(
   props<{ message: string }>()
 );
 
+export const updateUserNameAction = createAction(
+  ProfileActions.UpdateUserNameAction,
+  props<{ name: string }>()
+)
+
+export const updateUserNameSuccessAction = createAction(
+  ProfileActions.UpdateUserNameSuccessAction,
+  props<{ payload: string }>()
+)
+
+export const updateUserNameErrorAction = createAction(
+  ProfileActions.UpdateUserNameErrorAction,
+  props<{ message: string }>()
+)
+
 const all = union({
   initProfileStateAction,
   initProfileStateSuccessAction,
@@ -110,6 +128,9 @@ const all = union({
   uploadUserImageAction,
   uploadUserImageSuccessAction,
   uploadUserImageErrorAction,
+  updateUserNameAction,
+  updateUserNameSuccessAction,
+  updateUserNameErrorAction
 });
 
 export type ProfileActionsUnion = typeof all;

@@ -31,6 +31,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       map((user) => {
         if (user) {
           if (user.emailVerified) {
+            
             this.store.dispatch(
               authStateInitAction({
                 user: {
@@ -41,10 +42,10 @@ export class AuthGuard implements CanActivate, CanActivateChild {
               })
             );
             this.store.dispatch(initProfileStateAction({userId: user.uid}))
-            // this.store.dispatch(getFavoritesHeroesAction({userId: user.uid}))
             return true;
           }
-          this.router.navigate(['/emailVerified']);
+
+          this.router.navigate(['/login/emailVerified']);
           return false;
         }
         this.ngZone.run(() => {

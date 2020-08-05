@@ -1,8 +1,11 @@
-import { postHeroToFavoriteAction } from '../../../../shared/actions/profile.actions';
+import {
+  postHeroToFavoriteAction,
+  removeHeroFromFavoriteAction,
+} from '../../../../shared/actions/profile.actions';
 import { selectHeroFavoriteState } from './../../../../shared/selectors/heroes.selectors';
 import { selectHeroDetails } from '../../../../shared/selectors/heroes.selectors';
 import { HeroResponseResult } from '../../../../shared/interfaces/heroes.interface';
-import { getHeroLoadDetailsAction } from '../../../../shared/actions/heroes.actions';
+import { getHeroDetailsAction } from '../../../../shared/actions/heroes.actions';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import {
@@ -33,18 +36,16 @@ export class HeroLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params: Params) => {
-      this.store.dispatch(getHeroLoadDetailsAction({ id: params['id'] }));
+      this.store.dispatch(getHeroDetailsAction({ id: params['id'] }));
       this.isFavoriteSub = this.store
         .pipe(select(selectHeroFavoriteState(+params['id'])))
         .subscribe((flag) => {
           this.isFavorite = flag;
-          console.log(flag);
           this.cd.detectChanges();
         });
       this.hero$ = this.store.pipe(
         select(selectHeroDetails, { id: params['id'] })
       );
-      // console.log(this.isFavorite);
       this.cd.detectChanges();
     });
   }
@@ -57,11 +58,11 @@ export class HeroLayoutComponent implements OnInit, OnDestroy {
     }
   }
 
-  public pushToFavorite(idHero: string): void {
+  public pushToFavorite(idHero: number): void {
     if (!this.isFavorite) {
       this.store.dispatch(postHeroToFavoriteAction({ idHero }));
     } else {
-      // this.store.dispatch(removeHeroFromFavoriteACtion);
+      this.store.dispatch(removeHeroFromFavoriteAction({ idHero }));
     }
   }
 }

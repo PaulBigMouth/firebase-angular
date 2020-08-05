@@ -1,7 +1,7 @@
+import { ToastComponent } from './components/toast/toast.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { EmailVerifiedComponent } from './components/email-verified/email-verified.component';
 import { InputComponent } from './components/input/input.component';
-import { HeroesService } from './services/heroes.service';
-import { AuthService } from './services/auth.service';
-import { ProfileService } from './services/profile.service';
 import { CommonModule } from '@angular/common';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 
@@ -9,9 +9,9 @@ import { NgModule } from '@angular/core';
 
 
 @NgModule({
-    declarations: [PreloaderComponent, InputComponent],
+    declarations: [PreloaderComponent, InputComponent, EmailVerifiedComponent, NotFoundComponent, ToastComponent],
     imports: [CommonModule],
-    exports: [PreloaderComponent, InputComponent]
+    exports: [PreloaderComponent, InputComponent, EmailVerifiedComponent, NotFoundComponent, ToastComponent]
 })
 export class SharedModule {
 

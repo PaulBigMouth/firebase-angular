@@ -4,6 +4,8 @@ import {
   initProfileStateSuccessAction,
   postHeroToFavoriteSuccessAction,
   removeHeroFromFavoriteSuccessAction,
+  updateUserNameSuccessAction,
+  uploadUserImageSuccessAction
 } from './../actions/profile.actions';
 import { createReducer, on } from '@ngrx/store';
 
@@ -11,6 +13,7 @@ const initialState: ProfileState = {
   avatarImageUrl: '',
   name: '',
   email: '',
+  uid: '',
   heroes: [],
 };
 
@@ -18,6 +21,7 @@ export interface ProfileState {
   avatarImageUrl: string;
   name: string;
   email: string;
+  uid: string;
   heroes: number[];
 }
 
@@ -38,6 +42,14 @@ const reducer = createReducer(
   on(removeHeroFromFavoriteSuccessAction, (state, action) => ({
     ...state,
     heroes: [...action.payload],
+  })),
+  on(updateUserNameSuccessAction, (state, action) => ({
+    ...state,
+    name: action.payload
+  })),
+  on(uploadUserImageSuccessAction, (state, action) => ({
+    ...state,
+    avatarImageUrl: action.payload
   }))
 );
 

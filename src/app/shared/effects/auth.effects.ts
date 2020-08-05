@@ -23,6 +23,7 @@ export class AuthEffects {
       mergeMap(({ payload }) =>
         of(payload).pipe(
           map((payload) => {
+            console.log(payload)
             return payload;
           }),
           switchMap((payload) => this.authService.createUser(payload)),
@@ -35,7 +36,7 @@ export class AuthEffects {
           ),
           map((user) => {
             this.router.navigate(['/']);
-            // this.authService.verifyUserEmail().pipe(map(u => console.log(u)));
+            this.authService.verifyUserEmail()
             return signUpSuccessAction({
               payload: {
                 idUser: user.uid,
@@ -56,10 +57,12 @@ export class AuthEffects {
       mergeMap(({ payload }) =>
         this.authService.signIn(payload).pipe(
           map(({ user }) => {
-            if (!user.emailVerified) {
-              // this.authService.verifyUserEmail();
-            }
             this.router.navigate(['/']);
+            if (!user.emailVerified) {
+              this.authService.verifyUserEmail();
+            }
+            console.log(user)
+            
             return signInSuccessAction({
               payload: {
                 idUser: user.uid,

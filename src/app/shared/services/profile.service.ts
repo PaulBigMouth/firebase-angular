@@ -1,12 +1,11 @@
 import { ProfileState } from './../reducers/profile.reducers';
 import { Store } from '@ngrx/store';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { switchMap, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { selectUserId } from '../selectors/auth.selectors';
-import { selectFavoritesHeroes } from '../selectors/profile.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +23,6 @@ export class ProfileService {
         .ref(`users/${idUser}`)
         .once('value')
         .then((snapshot) => {
-          console.log(snapshot.val());
           return snapshot.val();
         })
     );
@@ -47,55 +45,28 @@ export class ProfileService {
       switchMap(() => {
         return ref.getDownloadURL().pipe(
           map((url) => {
-            console.log(url);
             return url;
           })
         );
       })
     );
   }
-  public setUserImage(url: string): Observable<Promise<void>> {
-    console.log(url);
+
+  public setUserImage(url: string): Observable<any> {
     return this.store.select(selectUserId).pipe(
       map((userId) => {
-        console.log(userId);
         return this.db.database.ref(`users/${userId}/avatarImageUrl`).set(url);
       })
     );
   }
 
-  public getFavoritesHeroes(userId: string): Observable<Array<string>> {
-    return from(
-      this.db.database
-        .ref('/users')
-        .child(userId)
-        .child('heroes')
-        .once('value')
-        .then((snapshot) => snapshot.val())
-    );
-  }
-  public pushHeroToFavorite(idHero: string): Observable<Promise<void>> {
-    return this.store.select(selectUserId).pipe(
-      withLatestFrom(this.store.select(selectFavoritesHeroes)),
-      map(([userId, favoritesHeroes]) =>
-        this.db.database
-          .ref(`users/${userId}/heroes`)
-          .set([...favoritesHeroes, idHero])
-      )
-    );
-  }
-
-  public removeHeroFromFavorite(idHero: string): Observable<Promise<void>> {
-    return this.store.select(selectUserId).pipe(
-      withLatestFrom(this.store.select(selectFavoritesHeroes)),
-      map(([userId, favoritesHeroes]) => {
-        const newFavoritesHeroes = favoritesHeroes.filter(
-          (heroId) => heroId !== +idHero
-        );
-        return this.db.database
-          .ref(`users/${userId}/heroes`)
-          .update(newFavoritesHeroes);
-      })
-    );
+  public changeName(name: string): Observable<any> {
+    return this.store
+      .select(selectUserId)
+      .pipe(
+        switchMap((userId) =>
+          this.db.database.ref(`users/${userId}/name`).set(name)
+        )
+      );
   }
 }

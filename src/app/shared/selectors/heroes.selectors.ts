@@ -1,14 +1,16 @@
+import { HeroesState } from './../reducers/heroes.reducers';
 import { ProfileState } from './../reducers/profile.reducers';
 import { selectProfileState } from './profile.selectors';
 import { AppState } from './../../store/reducers';
-import { HeroesState } from '../reducers/heroes.reducers';
 import { createSelector } from '@ngrx/store';
 
 const selectHeroesState = (state: AppState) => state.heroes;
 
 export const selectHeroes = createSelector(
   selectHeroesState,
-  (heroesState: HeroesState) => Object.values(heroesState.heroes)
+  (heroesState: HeroesState) => {
+    return Object.values(heroesState.heroes)
+  }
 );
 
 export const selectHeroDetails = createSelector(
@@ -19,6 +21,12 @@ export const selectHeroDetails = createSelector(
 
 export const selectHeroFavoriteState = (id: number) =>
   createSelector(selectProfileState, (profileState: ProfileState) => {
-    console.log(typeof id, typeof profileState.heroes[0]);
     return (profileState.heroes || []).includes(id);
   });
+
+export const selectFavoritesHeroes = createSelector(
+  ([selectHeroesState, selectProfileState]),
+  (heroesState, profileState) => profileState.heroes.reduce((prev, curr) => {
+    return [...prev, heroesState[curr]]
+  }, [])
+)
