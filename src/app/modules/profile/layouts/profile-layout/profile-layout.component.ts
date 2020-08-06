@@ -22,15 +22,16 @@ import { Observable } from 'rxjs';
 })
 export class ProfileLayoutComponent implements OnInit {
   @ViewChild('fileInput') public inputRef: ElementRef;
-  public avatarUrl$: Observable<string>
+  public avatarUrl$: Observable<string>;
   public links = [
     { name: 'Main', url: '/profile/main' },
     { name: 'Characters ', url: '/profile/characters' },
+    { name: 'Messages', url: '/profile/messages' },
   ];
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.avatarUrl$ = this.store.pipe(select(selectAvatarUrl))
+    this.avatarUrl$ = this.store.pipe(select(selectAvatarUrl));
   }
 
   public signOut(): void {
