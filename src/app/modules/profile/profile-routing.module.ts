@@ -1,4 +1,3 @@
-import { ProfileChatComponent } from './components/profile-chat/profile-chat.component';
 import { ProfileHeroesComponent } from './components/profile-heroes/profile-heroes.component';
 import { ProfileMainComponent } from './components/profile-main/profile-main.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
@@ -13,7 +12,11 @@ const routes: Routes = [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       { path: 'main', component: ProfileMainComponent },
       { path: 'characters', component: ProfileHeroesComponent },
-      { path: 'messages', component: ProfileChatComponent },
+      {
+        path: 'messages',
+        loadChildren: () =>
+          import('../chat/chat.module').then((m) => m.ChatModule),
+      },
     ],
   },
 ];

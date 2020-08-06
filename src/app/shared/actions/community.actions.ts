@@ -14,7 +14,7 @@ export const getVisibleUsersAction = createAction(
 
 export const getVisibleUsersSuccessAction = createAction(
     CommunityActions.GetVisibleUsersSuccessAction,
-    props<{ payload: ProfileState[] }>()
+    props<{ payload: ProfileState[] | null }>()
 )
 
 export const getVisibleUsersErrorAction = createAction(

@@ -35,8 +35,13 @@ export class HeroesEffects {
 
   public loadHeroesById$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(HeroesActions.GetFavoritesHeroesByIdAction),
-    switchMap(({ id }) => this.heroesService.getHeroById(id).pipe(
-      map(heroes => getFavoritesHeroesByIdSuccessAction({payload: heroes}))
+    switchMap(({ id }) => this.heroesService.getHeroesById(id).pipe(
+      map(heroes => {
+        if(Array.isArray(heroes)) {
+          return getFavoritesHeroesByIdSuccessAction({payload: heroes})
+        }
+        return getFavoritesHeroesByIdSuccessAction({payload: [heroes]})
+      })
     ))
   ))
 

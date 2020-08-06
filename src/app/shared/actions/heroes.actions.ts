@@ -53,7 +53,7 @@ export const getFavoritesHeroesByIdAction = createAction(
 
 export const getFavoritesHeroesByIdSuccessAction = createAction(
   HeroesActions.GetFavoritesHeroesByIdSuccessAction,
-  props<{ payload: any }>()
+  props<{ payload: HeroResponseResult[] }>()
 )
 
 export const getFavoritesHeroesByIdErrorAction = createAction(

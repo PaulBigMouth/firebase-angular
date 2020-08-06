@@ -1,8 +1,8 @@
-import { selectAvatarUrl } from './../../../../shared/selectors/profile.selectors';
+import {
+  selectAvatarUrl,
+  selectProfileLoader,
+} from './../../../../shared/selectors/profile.selectors';
 import { uploadUserImageAction } from './../../../../shared/actions/profile.actions';
-
-import { AuthService } from './../../../../shared/services/auth.service';
-
 import { Store, select } from '@ngrx/store';
 import {
   Component,
@@ -23,6 +23,7 @@ import { Observable } from 'rxjs';
 export class ProfileLayoutComponent implements OnInit {
   @ViewChild('fileInput') public inputRef: ElementRef;
   public avatarUrl$: Observable<string>;
+  public loader$: Observable<boolean>;
   public links = [
     { name: 'Main', url: '/profile/main' },
     { name: 'Characters ', url: '/profile/characters' },
@@ -32,6 +33,7 @@ export class ProfileLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.avatarUrl$ = this.store.pipe(select(selectAvatarUrl));
+    this.loader$ = this.store.pipe(select(selectProfileLoader));
   }
 
   public signOut(): void {

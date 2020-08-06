@@ -1,4 +1,4 @@
-<section class="profile">
+<section class="profile" *ngIf="!(loader$ | async); else loader">
     <div class="profile__left">
         <div class="profile__left__img">
             <img [src]="(avatarUrl$ | async) || 'https://im0-tub-by.yandex.net/i?id=427256461c987dbaa1b899a06afc4806&n=13'" alt="">
@@ -18,3 +18,7 @@
         </main>
     </div>
 </section>
+
+<ng-template #loader>
+    <app-preloader></app-preloader>
+</ng-template>

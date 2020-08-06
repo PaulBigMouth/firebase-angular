@@ -1,0 +1,9 @@
+@import "~src/assets/scss/_variables.scss";
+.chat {
+	padding: 40px 0;
+	display: grid;
+	grid-template-columns: 70% 30%;
+	&__right {
+		padding: 10px 40px;
+	}
+}

@@ -27,6 +27,11 @@ export const selectHeroFavoriteState = (id: number) =>
 export const selectFavoritesHeroes = createSelector(
   ([selectHeroesState, selectProfileState]),
   (heroesState, profileState) => profileState.heroes.reduce((prev, curr) => {
-    return [...prev, heroesState[curr]]
+    return [...prev, heroesState.heroes[curr]]
   }, [])
+)
+
+export const selectHeroesLoader = createSelector(
+  selectHeroesState,
+  (heroesState: HeroesState) => heroesState.loader
 )

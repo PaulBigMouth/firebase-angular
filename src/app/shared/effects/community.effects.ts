@@ -23,9 +23,9 @@ export class CommunityEffects {
           map((data: ProfileState[] | null) => {
             if (data) {
               const newData = data.filter((user) => user.uid !== idUser);
-              console.log(newData, idUser, data);
               return getVisibleUsersSuccessAction({ payload: newData });
             }
+            // return getVisibleUsersSuccessAction({ payload: [] });
             return getVisibleUsersErrorAction({message: 'error_load_visible_users'})
           })
         )

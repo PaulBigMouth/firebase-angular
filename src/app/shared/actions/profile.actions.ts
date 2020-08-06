@@ -19,7 +19,10 @@ export enum ProfileActions {
   UploadUserImageErrorAction = '[PROFILE] UPLOAD_USER_IMAGE_ERROR',
   UpdateUserNameAction = '[PROFILE] UPDATE_USER_NAME',
   UpdateUserNameSuccessAction = '[PROFILE] UPDATE_USER_NAME_SUCCESS',
-  UpdateUserNameErrorAction = '[PROFILE] UPDATE_USER_NAME_ERROR'
+  UpdateUserNameErrorAction = '[PROFILE] UPDATE_USER_NAME_ERROR',
+  CreateChatChannelAction = '[CHAT] CREATE_CHAT_CHANNEL',
+  CreateChatChannelSuccessAction = '[CHAT] CREATE_CHAT_CHANNEL_SUCCESS',
+  CreateChatChannelErrorAction = '[CHAT] CREATE_CHAT_CHANNEL_ERROR',
 }
 
 export const initProfileStateAction = createAction(
@@ -112,6 +115,21 @@ export const updateUserNameErrorAction = createAction(
   props<{ message: string }>()
 )
 
+export const createChatChannelAction = createAction(
+  ProfileActions.CreateChatChannelAction,
+  props<{ penFriendId: string, channels: string[] }>()
+)
+
+export const createChatChannelSuccessAction = createAction(
+  ProfileActions.CreateChatChannelSuccessAction,
+  props<{ channelId: string }>()
+)
+
+export const createChatChannelErrorAction = createAction(
+  ProfileActions.CreateChatChannelErrorAction,
+  props<{ message: string }>()
+)
+
 const all = union({
   initProfileStateAction,
   initProfileStateSuccessAction,
@@ -130,7 +148,10 @@ const all = union({
   uploadUserImageErrorAction,
   updateUserNameAction,
   updateUserNameSuccessAction,
-  updateUserNameErrorAction
+  updateUserNameErrorAction,
+  createChatChannelAction,
+  createChatChannelSuccessAction,
+  createChatChannelErrorAction
 });
 
 export type ProfileActionsUnion = typeof all;

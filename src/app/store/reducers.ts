@@ -1,3 +1,4 @@
+import { ChatState } from './../shared/reducers/chat.reducers';
 import { CommunityState } from './../shared/reducers/community.reducers';
 import { ProfileState } from './../shared/reducers/profile.reducers';
 import { AuthState } from '../shared/reducers/auth.reducers';
@@ -7,5 +8,6 @@ export interface AppState {
   auth: AuthState;
   heroes: HeroesState;
   profile: ProfileState
-  community: CommunityState
+  community: CommunityState,
+  chat: ChatState
 }

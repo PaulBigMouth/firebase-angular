@@ -1,9 +1,14 @@
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { ChatService } from './../services/chat.service';
 import { HeroesService } from './../services/heroes.service';
 import {
   postHeroToFavoriteSuccessAction,
   uploadUserImageSuccessAction,
   updateUserNameSuccessAction,
   removeHeroFromFavoriteSuccessAction,
+  createChatChannelSuccessAction,
+  createChatChannelErrorAction
 } from './../actions/profile.actions';
 import { ProfileService } from './../services/profile.service';
 import {
@@ -39,10 +44,6 @@ export class ProfileEffects {
       switchMap(({ userId }) =>
         this.heroesService.getFavoritesHeroes(userId).pipe(
           map((data) => {
-            console.log(data);
-            return data;
-          }),
-          map((data) => {
             if (data) {
               return getFavoritesHeroesSuccessAction({ payload: data });
             }
@@ -57,10 +58,6 @@ export class ProfileEffects {
       ofType(ProfileActions.PostHeroToFavoriteAction),
       switchMap(({ idHero }) =>
         this.heroesService.pushHeroToFavorite(idHero).pipe(
-          map((value) => {
-            console.log(value);
-            return value;
-          }),
           map(() => postHeroToFavoriteSuccessAction({ payload: idHero }))
         )
       )
@@ -97,9 +94,23 @@ export class ProfileEffects {
     )
   );
 
+  public createChatChannel$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(ProfileActions.CreateChatChannelAction),
+    switchMap(({penFriendId, channels}) => this.chatService.createChatChannel(penFriendId, channels).pipe(
+      map((channelId) => {
+        console.log(channelId)
+        this.router.navigate([`/profile/messages/${channelId}`])
+        return createChatChannelSuccessAction({channelId: 'hello'})
+      }),
+      // catchError((error) => of(createChatChannelErrorAction({message: error.message})))
+    ))
+  ))
+
   constructor(
     private actions$: Actions<ProfileActionsUnion>,
     private profileService: ProfileService,
-    private heroesService: HeroesService
+    private heroesService: HeroesService,
+    private chatService: ChatService,
+    private router: Router
   ) {}
 }

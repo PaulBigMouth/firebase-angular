@@ -1,0 +1,57 @@
+@import "~src/assets/scss/_variables.scss";
+@import "~src/assets/scss/_utils.scss";
+.chat {
+    &__messages {
+		min-height: 350px;
+		display: flex;
+		flex-direction: column;
+		padding: 20px 0;
+	}
+	&__message {
+		display: flex;
+		margin: 10px 0;
+		color: #000;
+		& > div {
+			width: 30%;
+			border-radius: 7px;
+			padding: 5px 10px;
+		}
+		&.right {
+			justify-content: flex-end;
+			& > div {
+				background-color: #6aaa98;
+			}
+		}
+		&.left {
+			justify-content: flex-start;
+			& > div {
+				background-color: $heroes-banner-bg-color;
+			}
+		}
+	}
+	&__form {
+		display: grid;
+		grid-template-columns: 80% 20%;
+		&__input {
+            border: none;
+            background-color:transparent;
+            outline: none;
+            border: 2px solid #292f3f;
+            border-radius: 7px;
+            border-right: none;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            color: #fff;
+            padding: 7px 10px;
+            font-size: rem(17);
+        }
+        &__btn {
+            background-color: #292f3f;
+            color: #fff;
+            transition: background-color .2s ease-in-out;
+            &:hover {
+                background-color: #353d52;
+            }
+        }
+	}
+}

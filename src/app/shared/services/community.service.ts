@@ -28,8 +28,8 @@ export class CommunityService {
       }),
       switchMap((data) => {
         if (data) {
-          return data.then((usersId) =>
-            Promise.all(
+          return data.then((usersId) => {
+            return Promise.all(
               usersId.map(
                 async (userId) =>
                   await this.db.database
@@ -40,6 +40,8 @@ export class CommunityService {
                     })
               )
             )
+          }
+            
           );
         }
         return of(null);

@@ -1,0 +1,13 @@
+<section class="chat" *ngIf="!(loader$ | async); else loader">
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+    <div class="chat__right">
+        <div class="chat__right__user">
+            <span>Pavel</span>
+        </div>
+    </div>
+</section>
+<ng-template #loader>
+    <app-preloader></app-preloader>
+</ng-template>

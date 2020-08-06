@@ -16,7 +16,7 @@ import { selectHeroes } from 'src/app/shared/selectors/heroes.selectors';
   selector: 'app-heroes-layout',
   templateUrl: './heroes-layout.component.html',
   styleUrls: ['./heroes-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroesLayoutComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private cd: ChangeDetectorRef) {}

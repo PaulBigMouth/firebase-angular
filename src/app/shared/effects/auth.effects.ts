@@ -23,7 +23,6 @@ export class AuthEffects {
       mergeMap(({ payload }) =>
         of(payload).pipe(
           map((payload) => {
-            console.log(payload)
             return payload;
           }),
           switchMap((payload) => this.authService.createUser(payload)),
@@ -60,9 +59,7 @@ export class AuthEffects {
             this.router.navigate(['/']);
             if (!user.emailVerified) {
               this.authService.verifyUserEmail();
-            }
-            console.log(user)
-            
+            } 
             return signInSuccessAction({
               payload: {
                 idUser: user.uid,
@@ -103,18 +100,6 @@ export class AuthEffects {
       })
     )
   );
-
-  // public uploadUserImage$: Observable<Action> = createEffect(() => this.actions$.pipe(
-  //   ofType(AuthActions.UploadUserImageAction),
-  //   mergeMap(({image}) => of().pipe(
-  //     switchMap((payload) => this.authService.uploadUserImage(payload)),
-  //     switchMap((url) => this.authService.setUserImage(url).pipe(
-  //       map(() => url)
-  //     )),
-  //     switchMap((url) => uploadUserImageSuccessAction({payload: url}))
-  //   )
-  //   ))
-  // ))
   constructor(
     private actions$: Actions<AuthActionsUnion>,
     private authService: AuthService,

@@ -1,3 +1,4 @@
+import { ChatEffects } from './shared/effects/chat.effects';
 import { CommunityEffects } from './shared/effects/community.effects';
 import { ProfileEffects } from './shared/effects/profile.effects';
 import { AuthEffects } from './shared/effects/auth.effects';
@@ -25,25 +26,39 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { heroesReducer } from './shared/reducers/heroes.reducers';
 import { authReducer } from './shared/reducers/auth.reducers';
 import { profileReducer } from './shared/reducers/profile.reducers';
-import { communityReducer } from "./shared/reducers/community.reducers"
+import { communityReducer } from './shared/reducers/community.reducers';
+import { chatReducer } from './shared/reducers/chat.reducers';
 
 @NgModule({
-	declarations: [ AppComponent ],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		AuthorizationModule,
-		AngularFireModule.initializeApp(environment.firebase),
-		HomeModule,
-		StoreModule.forRoot({heroes: heroesReducer, auth: authReducer, profile: profileReducer, community: communityReducer}),
-		EffectsModule.forRoot([HeroesEffects, AuthEffects, ProfileEffects, CommunityEffects]),
-		StoreDevtoolsModule.instrument({
-			maxAge: 5,
-		}),
-		SharedModule
-
-	],
-	providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true } ],
-	bootstrap: [ AppComponent ],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AuthorizationModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    HomeModule,
+    StoreModule.forRoot({
+      heroes: heroesReducer,
+      auth: authReducer,
+      profile: profileReducer,
+	  community: communityReducer,
+	  chat: chatReducer
+    }),
+    EffectsModule.forRoot([
+      HeroesEffects,
+      AuthEffects,
+      ProfileEffects,
+	  CommunityEffects,
+	  ChatEffects
+    ]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 15,
+    }),
+    SharedModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

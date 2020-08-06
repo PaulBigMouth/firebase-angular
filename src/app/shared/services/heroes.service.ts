@@ -34,9 +34,13 @@ export class HeroesService {
     });
   }
 
-  public getHeroById(id: number | number[]): Observable<HeroResponseResult | HeroesResponse> {
+  public getHeroById(id: number): Observable<HeroResponseResult> {
+    return this.http.get<HeroResponseResult>(`${this.apiUrl}/${this.character}/${id}`);
+  }
+
+  public getHeroesById(id: number[]): Observable<HeroResponseResult[]> {
     console.log(id)
-    return this.http.get<HeroResponseResult | HeroesResponse>(`${this.apiUrl}/${this.character}/${id}`);
+    return this.http.get<HeroResponseResult[]>(`${this.apiUrl}/${this.character}/${id}`)
   }
 
   public getFavoritesHeroes(userId: string): Observable<Array<number>> {
