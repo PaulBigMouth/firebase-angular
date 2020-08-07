@@ -8,12 +8,16 @@ export enum HeroesActions {
   GetHeroesAction = '[HEROES] HEROES_LOAD',
   GetHeroesSuccessAction = '[HEROES] HEROES_LOAD_SUCCESS',
   GetHeroesErrorAction = '[HEROES] HEROES_LOAD_ERROR',
+
   GetHeroDetailsAction = '[HEROES] HERO_LOAD_DETAILS',
   GetHeroDetailsSuccessAction = '[HEROES] HERO_LOAD_DETAILS_SUCCESS',
   GetHeroDetailsErrorAction = '[HEROES] HERO_LOAD_DETAILS_ERROR',
+
   GetFavoritesHeroesByIdAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID',
   GetFavoritesHeroesByIdSuccessAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID_SUCCESS',
-  GetFavoritesHeroesByIdErrorAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID_ERROR'
+  GetFavoritesHeroesByIdErrorAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID_ERROR',
+
+  UnsetHeroesStateAction = '[HEROES] UNSET_HEROES_STATE'
 }
 
 export const getHeroesAction = createAction(
@@ -61,6 +65,10 @@ export const getFavoritesHeroesByIdErrorAction = createAction(
   props<{ message: string }>()
 )
 
+export const unsetHeroesStateAction = createAction(
+  HeroesActions.UnsetHeroesStateAction
+)
+
 const all = union({
   getHeroesAction,
   getHeroesSuccessAction,
@@ -70,7 +78,8 @@ const all = union({
   getHeroDetailsErrorAction,
   getFavoritesHeroesByIdAction,
   getFavoritesHeroesByIdSuccessAction,
-  getFavoritesHeroesByIdErrorAction
+  getFavoritesHeroesByIdErrorAction,
+  unsetHeroesStateAction
 });
 
 export type HeroesActionsUnion = typeof all;

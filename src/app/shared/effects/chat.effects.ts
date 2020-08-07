@@ -20,9 +20,12 @@ export class ChatEffects {
     this.actions$.pipe(
       ofType(ChatActions.GetChatChannelsAction),
       switchMap(() =>
-        this.chatService
-          .getChatChannels()
-          .pipe(map(() => getChatChannelsSuccessAction({ payload: '121' })))
+        this.chatService.getChatChannels().pipe(
+          map(() => getChatChannelsSuccessAction({ payload: '121' })),
+          catchError((e) =>
+            of(getChatChannelsErrorAction({ message: e.message }))
+          )
+        )
       )
     )
   );
@@ -33,18 +36,26 @@ export class ChatEffects {
       switchMap(() =>
         this.chatService
           .unsubcribeFromDB()
-          .pipe(map(() => unsubFromChatChannelsSuccessAction({message: 'unsub'})))
+          .pipe(
+            map(() => unsubFromChatChannelsSuccessAction({ message: 'unsub' }))
+          )
       )
     )
   );
 
-  public sendMessage$: Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(ChatActions.SendMessageAction),
-    switchMap(({message, idChannel}) => this.chatService.sendMessage(message, idChannel).pipe(
-      map(() => sendMessageSuccessAction({payload: 'success'})),
-      catchError((error) => of(sendMessageErrorAction({message: error.message})))
-    ))
-  ))
+  public sendMessage$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ChatActions.SendMessageAction),
+      switchMap(({ message, idChannel }) =>
+        this.chatService.sendMessage(message, idChannel).pipe(
+          map(() => sendMessageSuccessAction({ payload: 'success' })),
+          catchError((error) =>
+            of(sendMessageErrorAction({ message: error.message }))
+          )
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions<ChatActionsUnion>,

@@ -1,5 +1,5 @@
 import { ProfileState } from './profile.reducers';
-import { getVisibleUsersSuccessAction, getVisibleUsersErrorAction } from './../actions/community.actions';
+import { getVisibleUsersSuccessAction, getVisibleUsersErrorAction, unsetCommunityStateAction } from './../actions/community.actions';
 import { createReducer, on } from '@ngrx/store';
 import { CommunityActionsUnion } from '../actions/community.actions';
 
@@ -13,7 +13,7 @@ export interface CommunityState {
   },
 }
 
-const reducer = createReducer(
+const reducer = createReducer<CommunityState>(
   initialState,
   on(getVisibleUsersSuccessAction, (state, action) => ({
     ...state,
@@ -23,15 +23,16 @@ const reducer = createReducer(
         }, {})
     },
   })),
-  on(getVisibleUsersErrorAction, (state, action) => ({
+  on(getVisibleUsersErrorAction, (state) => ({
       ...state,
       visibleUsers: {}
-  }))
+  })),
+  on(unsetCommunityStateAction, () => initialState)
 );
 
 export function communityReducer(
   state: CommunityState,
   action: CommunityActionsUnion
-) {
+): CommunityState {
   return reducer(state, action);
 }

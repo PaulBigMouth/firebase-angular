@@ -63,7 +63,11 @@ export class ChatService {
         tap((userId) =>
           this.db.database
             .ref(`chatChannels/${idChannel}/messages`)
-            .push({ uid: userId, createdAt: new Date().toLocaleDateString(), text: message })
+            .push({
+              uid: userId,
+              createdAt: new Date().toLocaleDateString(),
+              text: message,
+            })
         )
       );
   }
@@ -71,7 +75,7 @@ export class ChatService {
   public getChatChannels(): Observable<any> {
     return this.store.select(selectIdOfChatChannels).pipe(
       switchMap((idOfChatChannels) => {
-        if (Object.keys(idOfChatChannels).length) {
+        if (idOfChatChannels) {
           return Object.keys(idOfChatChannels).map((id) =>
             this.db.database
               .ref(`chatChannels/${idOfChatChannels[id]}`)
@@ -86,20 +90,22 @@ export class ChatService {
               })
           );
         }
+        return of({});
       })
     );
   }
 
-  public unsubcribeFromDB(): Observable<void> {
+  public unsubcribeFromDB(): Observable<void | Object> {
     return this.store.select(selectIdOfChatChannels).pipe(
       switchMap((idOfChatChannels) => {
-        if (Object.keys(idOfChatChannels).length) {
+        if (idOfChatChannels) {
           return from(
             Object.keys(idOfChatChannels).map((id) =>
               this.db.database.ref(`chatChannels/${idOfChatChannels[id]}`).off()
             )
           );
         }
+        return of({});
       })
     );
   }

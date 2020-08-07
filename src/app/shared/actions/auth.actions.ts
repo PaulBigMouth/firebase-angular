@@ -4,63 +4,70 @@ import { User } from "../interfaces/users.interface";
 
 
 export enum AuthActions {
-  SignIn = '[AUTH] SIGN_IN',
-  SignUp = '[AUTH] SIGN_UP',
-  SignOut = '[AUTH] SIGN_OUT',
-  SignUpSuccess = '[AUTH] SIGN_UP_SUCCESS',
-  SignOutSuccess = '[AUTH] SIGN_OUT_SUCCESS',
-  SignInSuccess = '[AUTH] SIGN_IN_SUCCESS',
-  SignError = '[AUTH] SIGN_ERROR',
-  Init = '[AUTH] INIT',
-  InitSuccess = '[AUTH] INIT_SUCCESS',
-  InitError = '[AUTH] INIT_ERROR',
+  SignInAction = '[AUTH] SIGN_IN',
+  SignUpAction = '[AUTH] SIGN_UP',
+  SignOutAction = '[AUTH] SIGN_OUT',
+
+  SignUpSuccessAction = '[AUTH] SIGN_UP_SUCCESS',
+  SignOutSuccessAction = '[AUTH] SIGN_OUT_SUCCESS',
+  SignInSuccessAction = '[AUTH] SIGN_IN_SUCCESS',
+
+  SignErrorAction = '[AUTH] SIGN_ERROR',
+
+  AuthStateInitAction = '[AUTH] AUTH_STATE_INIT',
+  AuthStateInitSuccessAction = '[AUTH] AUTH_STATE_INIT_SUCCESS',
+  AuthStateInitErrorAction = '[AUTH] AUTH_STATE_INIT_ERROR',
+
+  UnsetAuthStateAction = '[AUTH] UNSET_AUTH_STATE'
 }
 
 export const signInAction = createAction(
-  AuthActions.SignIn,
+  AuthActions.SignInAction,
   props<{ payload: User }>()
 );
 
 export const signInSuccessAction = createAction(
-  AuthActions.SignInSuccess,
+  AuthActions.SignInSuccessAction,
   props<{ payload: AuthState }>()
 );
 
 export const signUpAction = createAction(
-  AuthActions.SignUp,
+  AuthActions.SignUpAction,
   props<{ payload: User }>()
 );
 
 export const signUpSuccessAction = createAction(
-  AuthActions.SignUpSuccess,
+  AuthActions.SignUpSuccessAction,
   props<{ payload: AuthState }>()
 );
 
-export const signOutAction = createAction(AuthActions.SignOut);
+export const signOutAction = createAction(AuthActions.SignOutAction);
 
 export const signOutSuccessAction = createAction(
-  AuthActions.SignOutSuccess,
+  AuthActions.SignOutSuccessAction,
   props<{ payload: string }>()
 );
 
-export const authStateInitAction = createAction(AuthActions.Init, props<{user: AuthState}>());
+export const authStateInitAction = createAction(AuthActions.AuthStateInitAction, props<{user: AuthState}>());
 
 export const authStateInitSuccessAction = createAction(
-  AuthActions.InitSuccess,
+  AuthActions.AuthStateInitSuccessAction,
   props<{ payload: AuthState }>()
 );
 
 export const authStateInitErrorAction = createAction(
-  AuthActions.InitError,
-  props<{ payload: string }>()
+  AuthActions.AuthStateInitErrorAction,
+  props<{ message: string }>()
 );
 
 export const signErrorAction = createAction(
-  AuthActions.SignError,
-  props<{ payload: string }>()
+  AuthActions.SignErrorAction,
+  props<{ message: string }>()
 );
 
-
+export const unsetAuthStateAction = createAction(
+  AuthActions.UnsetAuthStateAction
+)
 
 const all = union({
   signInAction,
@@ -71,6 +78,8 @@ const all = union({
   authStateInitAction,
   authStateInitSuccessAction,
   authStateInitErrorAction,
+  unsetAuthStateAction
 });
 
 export type AuthActionsUnion = typeof all
+

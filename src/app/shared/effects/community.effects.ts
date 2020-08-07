@@ -25,7 +25,6 @@ export class CommunityEffects {
               const newData = data.filter((user) => user.uid !== idUser);
               return getVisibleUsersSuccessAction({ payload: newData });
             }
-            // return getVisibleUsersSuccessAction({ payload: [] });
             return getVisibleUsersErrorAction({message: 'error_load_visible_users'})
           })
         )

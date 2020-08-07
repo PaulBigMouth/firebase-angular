@@ -5,24 +5,32 @@ export enum ProfileActions {
   InitProfileStateAction = '[PROFILE] INIT_PROFILE_STATE',
   InitProfileStateSuccessAction = '[PROFILE] INIT_PROFILE_STATE_SUCCESS',
   InitProfileStateErrorAction = '[PROFILE] INIT_PROFILE_STATE_ERROR',
+
   GetFavoritesHeroesAction = '[PROFILE] GET_FAVORITES_HEROES',
   GetFavoritesHeroesSuccessAction = '[PROFILE] GET_FAVORITES_HEROES_SUCCESS',
   GetFavoritesHeroesErrorAction = '[PROFILE] GET_FAVORITES_HEROES_ERROR',
+
   PostHeroToFavoriteAction = '[PROFILE] POST_HERO_TO_FAVORITE',
   PostHeroToFavoriteSuccessAction = '[PROFILE] POST_HERO_TO_FAVORITE_SUCCESS',
   PostHeroToFavoriteErrorAction = '[PROFILE] POST_HERO_TO_FAVORITE_PROFILE',
+
   RemoveHeroFromFavoriteAction = '[PROFILE] REMOVE_HERO_FROM_FAVORITE',
   RemoveHeroFromFavoriteSuccessAction = '[PROFILE] REMOVE_HERO_FROM_FAVORITE_SUCCESS',
   RemoveHeroFromFavoriteErrorAction = '[PROFILE] REMOVE_HERO_FROM_FAVORITE_ERROR',
+  
   UploadUserImageAction = '[PROFILE] UPLOAD_USER_IMAGE',
   UploadUserImageSuccessAction = '[PROFILE] UPLOAD_USER_IMAGE_SUCCESS',
   UploadUserImageErrorAction = '[PROFILE] UPLOAD_USER_IMAGE_ERROR',
+
   UpdateUserNameAction = '[PROFILE] UPDATE_USER_NAME',
   UpdateUserNameSuccessAction = '[PROFILE] UPDATE_USER_NAME_SUCCESS',
   UpdateUserNameErrorAction = '[PROFILE] UPDATE_USER_NAME_ERROR',
-  CreateChatChannelAction = '[CHAT] CREATE_CHAT_CHANNEL',
-  CreateChatChannelSuccessAction = '[CHAT] CREATE_CHAT_CHANNEL_SUCCESS',
-  CreateChatChannelErrorAction = '[CHAT] CREATE_CHAT_CHANNEL_ERROR',
+  
+  CreateChatChannelAction = '[PROFILE] CREATE_CHAT_CHANNEL',
+  CreateChatChannelSuccessAction = '[PROFILE] CREATE_CHAT_CHANNEL_SUCCESS',
+  CreateChatChannelErrorAction = '[PROFILE] CREATE_CHAT_CHANNEL_ERROR',
+
+  UnsetProfileStateAction = '[PROFILE] UNSET_PROFILE_STATE'
 }
 
 export const initProfileStateAction = createAction(
@@ -130,6 +138,10 @@ export const createChatChannelErrorAction = createAction(
   props<{ message: string }>()
 );
 
+export const unsetProfileStateAction = createAction(
+  ProfileActions.UnsetProfileStateAction
+)
+
 const all = union({
   initProfileStateAction,
   initProfileStateSuccessAction,
@@ -152,6 +164,7 @@ const all = union({
   createChatChannelAction,
   createChatChannelSuccessAction,
   createChatChannelErrorAction,
+  unsetProfileStateAction
 });
 
 export type ProfileActionsUnion = typeof all;

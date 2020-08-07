@@ -24,7 +24,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   public loader$: Observable<boolean> = this.store.pipe(
     select(selectChatLoader)
   );
-  public chatChannels$: Observable<any>;
+  public chatChannels$: Observable<string[]>;
   constructor(private store: Store) {}
 
   ngOnInit(): void {

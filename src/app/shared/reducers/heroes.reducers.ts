@@ -1,6 +1,7 @@
 import {
   getHeroDetailsAction,
   getFavoritesHeroesByIdAction,
+  unsetHeroesStateAction,
 } from './../actions/heroes.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 import { HeroResponseResult } from '../interfaces/heroes.interface';
@@ -23,7 +24,7 @@ export interface HeroesState {
   loader: boolean;
 }
 
-const reducer = createReducer(
+const reducer = createReducer<HeroesState>(
   initialState,
   on(getHeroesAction, (state) => ({
     ...state,
@@ -64,7 +65,8 @@ const reducer = createReducer(
       }, {}),
     },
     loader: false,
-  }))
+  })),
+  on(unsetHeroesStateAction, () => initialState)
 );
 
 export function heroesReducer(state: HeroesState, action: Action): HeroesState {

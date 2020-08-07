@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthorizationLayoutComponent implements OnInit, OnDestroy {
-  sub: Subscription
+  public sub: Subscription
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {

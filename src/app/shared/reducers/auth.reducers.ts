@@ -1,3 +1,4 @@
+import { unsetAuthStateAction } from './../actions/auth.actions';
 import { AuthActionsUnion, AuthActions, signInAction, signInSuccessAction, signUpAction, signUpSuccessAction, signOutAction, signOutSuccessAction, authStateInitSuccessAction, signErrorAction } from '../actions/auth.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 
@@ -13,7 +14,7 @@ export interface AuthState {
 	isSignProgress: boolean;
 }
 
-const reducer = createReducer(
+const reducer = createReducer<AuthState>(
 	initialState,
 	on(signInAction, (state) => ({
 		...state,
@@ -43,7 +44,8 @@ const reducer = createReducer(
 	on(signErrorAction, (state) => ({
 		...state,
 		isSignProgress: false
-	}))
+	})),
+	on(unsetAuthStateAction, () => initialState)
 )
 
 export function authReducer(state: AuthState, action: Action): AuthState {

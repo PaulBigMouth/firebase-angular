@@ -1,6 +1,6 @@
 import { ProfileState } from './../../../../shared/reducers/profile.reducers';
 import { selectVisibleUsers } from './../../../../shared/selectors/community.selectors';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { getVisibleUsersAction } from './../../../../shared/actions/community.actions';
 import { Store, select } from '@ngrx/store';
 import {
@@ -27,9 +27,10 @@ export class CommunityLayoutComponent implements OnInit, OnDestroy {
     this.sub = this.store
       .select(selectUserId)
       .pipe(
-        map((idUser) => this.store.dispatch(getVisibleUsersAction({ idUser })))
+        map((idUser) => this.store.dispatch(getVisibleUsersAction({ idUser }))),
+        take(1)
       )
-      .subscribe((v) => {
+      .subscribe(() => {
         this.users$ = this.store.pipe(select(selectVisibleUsers));
       });
   }
@@ -38,6 +39,5 @@ export class CommunityLayoutComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
-    console.log('12121')
   }
 }

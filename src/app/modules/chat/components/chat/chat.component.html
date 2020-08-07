@@ -3,10 +3,15 @@
         <router-outlet></router-outlet>
     </div>
     <div class="chat__right">
-        <div class="chat__right__channels" *ngIf="chatChannels$ | async as chatChannels; else loader">
-            <a *ngFor="let channel of chatChannels" [routerLink]="channel.url" routerLinkActive="active">{{channel.url}}</a>
-        </div>
-        <ng-template #loader>
+       <div class="chat__right__asyncContainer" *ngIf="chatChannels$ | async as chatChannels; else spinner">
+            <div class="chat__right__channels" *ngIf="chatChannels.length; else empty">
+                <a *ngFor="let channel of chatChannels" [routerLink]="channel" routerLinkActive="active">{{channel}}</a>
+            </div>
+            <ng-template #empty>
+                <p>You don't have any active chats</p>
+            </ng-template>
+       </div>
+        <ng-template #spinner>
             <app-preloader></app-preloader>
         </ng-template>
     </div>

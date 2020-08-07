@@ -1,3 +1,4 @@
+import { authStateInitErrorAction } from './../actions/auth.actions';
 import { Action } from '@ngrx/store';
 import { AuthService } from '../services/auth.service';
 import {
@@ -19,7 +20,7 @@ import { of, Observable } from 'rxjs';
 export class AuthEffects {
   public createUser$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.SignUp),
+      ofType(AuthActions.SignUpAction),
       mergeMap(({ payload }) =>
         of(payload).pipe(
           map((payload) => {
@@ -44,7 +45,7 @@ export class AuthEffects {
               },
             });
           }),
-          catchError((error) => of(signErrorAction({ payload: 'error' })))
+          catchError((error) => of(signErrorAction({ message: error.message })))
         )
       )
     )
@@ -52,7 +53,7 @@ export class AuthEffects {
 
   public signIn$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.SignIn),
+      ofType(AuthActions.SignInAction),
       mergeMap(({ payload }) =>
         this.authService.signIn(payload).pipe(
           map(({ user }) => {
@@ -68,7 +69,7 @@ export class AuthEffects {
               },
             });
           }),
-          catchError((error) => of(signErrorAction({ payload: 'error' })))
+          catchError((error) => of(signErrorAction({ message: error.message })))
         )
       )
     )
@@ -76,7 +77,7 @@ export class AuthEffects {
 
   public signOut$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.SignOut),
+      ofType(AuthActions.SignOutAction),
       switchMap(() =>
         this.authService.signOut().pipe(
           map(() => {
@@ -90,14 +91,15 @@ export class AuthEffects {
 
   public authStateInit$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.Init),
+      ofType(AuthActions.AuthStateInitAction),
       map(({ user }) => {
         if (user) {
           return authStateInitSuccessAction({
             payload: user
           })
         }
-      })
+      }),
+      catchError(e => of(authStateInitErrorAction({message: e.message})))
     )
   );
   constructor(

@@ -8,7 +8,8 @@ import {
   updateUserNameSuccessAction,
   removeHeroFromFavoriteSuccessAction,
   createChatChannelSuccessAction,
-  createChatChannelErrorAction
+  createChatChannelErrorAction,
+  getFavoritesHeroesErrorAction
 } from './../actions/profile.actions';
 import { ProfileService } from './../services/profile.service';
 import {
@@ -47,7 +48,7 @@ export class ProfileEffects {
             if (data) {
               return getFavoritesHeroesSuccessAction({ payload: data });
             }
-            // return getFavoritesHeroesSuccessAction()
+            return getFavoritesHeroesErrorAction({message: 'error_get_favorites_heroes'})
           })
         )
       )

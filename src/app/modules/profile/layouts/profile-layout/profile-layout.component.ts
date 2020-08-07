@@ -1,8 +1,12 @@
+import { unsetChatStateAction } from './../../../../shared/actions/chat.actions';
+import { unsetCommunityStateAction } from './../../../../shared/actions/community.actions';
+import { unsetHeroesStateAction } from './../../../../shared/actions/heroes.actions';
+import { unsetAuthStateAction } from './../../../../shared/actions/auth.actions';
 import {
   selectAvatarUrl,
   selectProfileLoader,
 } from './../../../../shared/selectors/profile.selectors';
-import { uploadUserImageAction } from './../../../../shared/actions/profile.actions';
+import { uploadUserImageAction, unsetProfileStateAction } from './../../../../shared/actions/profile.actions';
 import { Store, select } from '@ngrx/store';
 import {
   Component,
@@ -38,6 +42,11 @@ export class ProfileLayoutComponent implements OnInit {
 
   public signOut(): void {
     this.store.dispatch(signOutAction());
+    this.store.dispatch(unsetAuthStateAction())
+    this.store.dispatch(unsetHeroesStateAction())
+    this.store.dispatch(unsetProfileStateAction())
+    this.store.dispatch(unsetCommunityStateAction())
+    this.store.dispatch(unsetChatStateAction())
   }
   public onFileUpload($event: any): void {
     const file = $event.target.files[0];

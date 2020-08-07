@@ -6,13 +6,18 @@ export enum ChatActions {
     GetChatChannelsAction = '[CHAT] GET_CHAT_CHANNELS',
     GetChatChannelsSuccessAction = '[CHAT] GET_CHAT_CHANNELS_SUCCESS',
     GetChatChannelsErrorAction = '[CHAT] GET_CHAT_CHANNELS_ERROR',
+
     UnsubFromChatChannelssAction = '[CHAT] UNSUB_FROM_CHAT_CHANNEL',
     UnsubFromChatChannelsSuccessAction = '[CHAT] UNSUB_FROM_CHAT_SUCCESS',
     UnsubFromChatChannelsErrorAction = '[CHAT] UNSUB_FROM_CHAT_ERROR',
+
     PushChatChannelAction = '[CHAT] PUSH_CHAT_CHANNEL',
+
     SendMessageAction = '[CHAT] SEND_MESSAGE',
     SendMessageSuccessAction = '[CHAT] SEND_MESSAGE_SUCCESS',
-    SendMessageErrorAction = '[CHAT] SEND_MESSAGE_ERROR'
+    SendMessageErrorAction = '[CHAT] SEND_MESSAGE_ERROR',
+
+    UnsetChatStateAction = '[CHAT] UNSET_CHAT_STATE'
 }
 
 export const getChatChannelsAction = createAction(
@@ -63,6 +68,10 @@ export const sendMessageErrorAction = createAction(
     props<{ message: string }>()
 )
 
+export const unsetChatStateAction = createAction(
+    ChatActions.UnsetChatStateAction
+)
+
 const all = union({
     getChatChannelsAction,
     getChatChannelsSuccessAction,
@@ -73,7 +82,8 @@ const all = union({
     pushChatChannelAction,
     sendMessageAction,
     sendMessageSuccessAction,
-    sendMessageErrorAction
+    sendMessageErrorAction,
+    unsetChatStateAction
 })
 
 export type ChatActionsUnion = typeof all

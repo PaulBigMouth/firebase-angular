@@ -1,31 +1,39 @@
 <div class="chat__left" *ngIf="messages$ | async as messages; else loader">
-    <div class="chat__left__lengthContainer" *ngIf="messages.length; else empty">
-        <div class="chat__messages">
-            <div class="chat__message" *ngFor="let message of messages" [ngClass]="{'right': (userId$ | async) === message.uid, 'left': (userId$ | async) !== message.uid}">
-                <div>{{message.text}}</div>
-                <span class="chat__message__time">{{message.createdAt}}</span>
-            </div>
-            <!-- <div class="chat__message left">
-               <div>
-                    Hello World
-               </div>
-            </div>
-            <div class="chat__message right">
-               <div>
-                    Hello
-               </div>
-            </div> -->
-        </div>
+  <div class="chat__left__lengthContainer" *ngIf="messages.length; else empty">
+    <div class="chat__messages">
+      <div
+        class="chat__message"
+        *ngFor="let message of messages"
+        [ngClass]="{
+          right: (userId$ | async) === message.uid,
+          left: (userId$ | async) !== message.uid
+        }"
+      >
+        <div>{{ message.text }}</div>
+        <span class="chat__message__time">{{ message.createdAt }}</span>
+      </div>
     </div>
-    <ng-template #empty>
-        <p class="empty__text">No messages yet</p>
-    </ng-template>
-    <form class="chat__form" [formGroup]="form">
-        <input type="text" class="chat__form__input" placeholder="Write a message" formControlName="message">
-        <button class="chat__form__btn fw-600" [disabled]="formDisabled$ | async" (click)="sendMessage()">Send</button>
-    </form>
+  </div>
+  <ng-template #empty>
+    <p class="empty__text">No messages yet</p>
+  </ng-template>
+  <form class="chat__form" [formGroup]="form">
+    <input
+      type="text"
+      class="chat__form__input"
+      placeholder="Write a message"
+      formControlName="message"
+    />
+    <button
+      class="chat__form__btn fw-600"
+      [disabled]="formDisabled$ | async"
+      (click)="sendMessage()"
+    >
+      Send
+    </button>
+  </form>
 </div>
 
 <ng-template #loader>
-    <app-preloader></app-preloader>
+  <app-preloader></app-preloader>
 </ng-template>

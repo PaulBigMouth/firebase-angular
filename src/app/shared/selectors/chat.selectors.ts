@@ -12,24 +12,15 @@ export const selectChatLoader = createSelector(
 export const selectChatChannels = createSelector(
   selectChatState,
   (chatState: ChatState) => {
-    return chatState.chatChannels
-      ? Object.keys(chatState.chatChannels).reduce(
-          (prev, curr) => [
-            ...prev,
-            { url: curr, ...chatState.chatChannels[curr] },
-          ],
-          []
-        )
-      : [];
+    return chatState.chatChannels ? Object.keys(chatState.chatChannels) : []
   }
-);
+)
 
 export const selectChatMessages = (id: string) =>
   createSelector(selectChatState, (chatState: ChatState) =>
-    chatState?.chatChannels[id]?.messages
-      ? Object.values(chatState.chatChannels[id].messages)
-      : []
+    chatState.chatChannels ? Object.values(chatState.chatChannels[id].messages) : []
   );
+
 
 export const selectFormDisabled = createSelector(
   selectChatState,

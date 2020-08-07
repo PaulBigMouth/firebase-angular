@@ -12,7 +12,8 @@ import {
   removeHeroFromFavoriteAction,
   updateUserNameAction,
   uploadUserImageAction,
-  createChatChannelSuccessAction
+  createChatChannelSuccessAction,
+  unsetProfileStateAction,
 } from './../actions/profile.actions';
 import { createReducer, on } from '@ngrx/store';
 
@@ -24,7 +25,7 @@ const initialState: ProfileState = {
   heroes: [],
   loader: false,
   channels: null,
-  pushToFavoritesBtnDisabled: false
+  pushToFavoritesBtnDisabled: false,
 };
 
 export interface ProfileState {
@@ -33,81 +34,82 @@ export interface ProfileState {
   email: string;
   uid: string;
   heroes: number[];
-  loader: boolean,
+  loader: boolean;
   channels: {
-    [id: string]: string
-  },
-  pushToFavoritesBtnDisabled: boolean
+    [id: string]: string;
+  };
+  pushToFavoritesBtnDisabled: boolean;
 }
 
-const reducer = createReducer(
+const reducer = createReducer<ProfileState>(
   initialState,
   on(getFavoritesHeroesAction, (state) => ({
     ...state,
-    loader: true
+    loader: true,
   })),
   on(getFavoritesHeroesSuccessAction, (state, action) => ({
     ...state,
-    heroes: [...state.heroes, action.payload],
-    loader: false
+    heroes: [...state.heroes, ...action.payload],
+    loader: false,
   })),
   on(initProfileStateAction, (state) => ({
     ...state,
-    loader: true
+    loader: true,
   })),
   on(initProfileStateSuccessAction, (state, action) => ({
     ...state,
     ...action.state,
-    loader: false
+    loader: false,
   })),
   on(postHeroToFavoriteAction, (state) => ({
     ...state,
-    pushToFavoritesBtnDisabled: true
+    pushToFavoritesBtnDisabled: true,
   })),
   on(postHeroToFavoriteSuccessAction, (state, action) => ({
     ...state,
     heroes: [...state.heroes, action.payload],
-    pushToFavoritesBtnDisabled: false
+    pushToFavoritesBtnDisabled: false,
   })),
   on(removeHeroFromFavoriteAction, (state) => ({
     ...state,
-    pushToFavoritesBtnDisabled: true
+    pushToFavoritesBtnDisabled: true,
   })),
   on(removeHeroFromFavoriteSuccessAction, (state, action) => ({
     ...state,
     heroes: [...action.payload],
-    pushToFavoritesBtnDisabled: false
+    pushToFavoritesBtnDisabled: false,
   })),
   on(updateUserNameAction, (state) => ({
     ...state,
-    loader: true
+    loader: true,
   })),
   on(updateUserNameSuccessAction, (state, action) => ({
     ...state,
     name: action.payload,
-    loader: false
+    loader: false,
   })),
   on(uploadUserImageAction, (state) => ({
     ...state,
-    loader: true
+    loader: true,
   })),
   on(uploadUserImageSuccessAction, (state, action) => ({
     ...state,
     avatarImageUrl: action.payload,
-    loader: false
+    loader: false,
   })),
   on(createChatChannelSuccessAction, (state, action) => ({
     ...state,
     channels: {
       ...state.channels,
-      ...action.channel
-    }
-  }))
+      ...action.channel,
+    },
+  })),
+  on(unsetProfileStateAction, () => initialState)
 );
 
 export function profileReducer(
-  state: ProfileState,
+  state: ProfileState = initialState,
   action: ProfileActionsUnion
-) {
+): ProfileState {
   return reducer(state, action);
 }
