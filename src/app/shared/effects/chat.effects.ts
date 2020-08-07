@@ -1,11 +1,13 @@
 import { switchMap, catchError, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {
   ChatActionsUnion,
   ChatActions,
   getChatChannelsSuccessAction,
   getChatChannelsErrorAction,
   unsubFromChatChannelsSuccessAction,
+  sendMessageErrorAction,
+  sendMessageSuccessAction,
 } from './../actions/chat.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ChatService } from './../services/chat.service';
@@ -35,6 +37,14 @@ export class ChatEffects {
       )
     )
   );
+
+  public sendMessage$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(ChatActions.SendMessageAction),
+    switchMap(({message, idChannel}) => this.chatService.sendMessage(message, idChannel).pipe(
+      map(() => sendMessageSuccessAction({payload: 'success'})),
+      catchError((error) => of(sendMessageErrorAction({message: error.message})))
+    ))
+  ))
 
   constructor(
     private actions$: Actions<ChatActionsUnion>,

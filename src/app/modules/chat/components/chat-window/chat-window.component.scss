@@ -6,32 +6,49 @@
 		display: flex;
 		flex-direction: column;
 		padding: 20px 0;
+		max-height: 350px;
+		overflow-y: auto;
+
 	}
 	&__message {
 		display: flex;
 		margin: 10px 0;
 		color: #000;
+		align-items: center;
 		& > div {
 			width: 30%;
 			border-radius: 7px;
 			padding: 5px 10px;
+			display: flex;
 		}
 		&.right {
-			justify-content: flex-end;
+			flex-direction: row-reverse;
 			& > div {
 				background-color: #6aaa98;
+				justify-content: flex-end;
+			}
+			.chat__message__time {
+				margin-right: 7px;
 			}
 		}
 		&.left {
-			justify-content: flex-start;
+			flex-direction: row;
 			& > div {
 				background-color: $heroes-banner-bg-color;
 			}
+			.chat__message__time {
+				margin-left: 7px;
+			}
+		}
+		&__time {
+			color: #fff;
+			font-size: rem(13)
 		}
 	}
 	&__form {
 		display: grid;
 		grid-template-columns: 80% 20%;
+		margin-top: 30px;
 		&__input {
             border: none;
             background-color:transparent;
@@ -42,7 +59,8 @@
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
             color: #fff;
-            padding: 7px 10px;
+			padding: 7px 10px;
+			
             font-size: rem(17);
         }
         &__btn {
@@ -54,4 +72,8 @@
             }
         }
 	}
+}
+
+.empty__text {
+	min-height: 350px;
 }

@@ -5,5 +5,21 @@
 	grid-template-columns: 70% 30%;
 	&__right {
 		padding: 10px 40px;
+		&__channels {
+			& > a {
+				color: #fff;
+				padding: 7px 10px;
+				transition: color .2s ease-in-out, background-color .2s ease-in-out;
+				margin: 10px 0;
+				display: block;
+				&:hover {
+					color: $transition-color;
+					background-color: #171a1f;
+				}
+				&.active {
+					background-color: #171a1f;
+				}
+			}
+		}
 	}
 }

@@ -100,7 +100,9 @@ export class ProfileEffects {
       map((channelId) => {
         console.log(channelId)
         this.router.navigate([`/profile/messages/${channelId}`])
-        return createChatChannelSuccessAction({channelId: 'hello'})
+        return createChatChannelSuccessAction({channel: {
+          [penFriendId]: channelId
+        }})
       }),
       // catchError((error) => of(createChatChannelErrorAction({message: error.message})))
     ))

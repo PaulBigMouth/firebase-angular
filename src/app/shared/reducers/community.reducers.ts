@@ -10,7 +10,7 @@ const initialState: CommunityState = {
 export interface CommunityState {
   visibleUsers: {
       [uid: string]: ProfileState
-  }
+  },
 }
 
 const reducer = createReducer(

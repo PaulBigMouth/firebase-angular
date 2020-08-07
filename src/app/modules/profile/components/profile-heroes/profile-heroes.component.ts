@@ -60,7 +60,5 @@ export class ProfileHeroesComponent implements OnInit, OnDestroy {
     }
   }
 
-  log() {
-    console.log(this.favoritesHeroes$);
-  }
+
 }

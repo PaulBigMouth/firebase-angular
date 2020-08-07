@@ -3,6 +3,7 @@
 	margin-top: 50px;
 	display: grid;
 	grid-template-columns: 30% 70%;
+	min-height: 80vh;
 	&__left {
 		display: flex;
 		justify-content: flex-end;
@@ -57,4 +58,8 @@
 			}
 		}
 	}
+}
+
+.loader__heightContainer {
+	min-height: 90vh;
 }

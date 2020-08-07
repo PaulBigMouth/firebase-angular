@@ -28,3 +28,8 @@ export const selectIdOfChatChannels = createSelector(
   selectProfileState,
   (profileState: ProfileState) => profileState.channels
 )
+
+export const selectPushToFavoritesBtnDisabled = createSelector(
+  selectProfileState,
+  (profileState: ProfileState) => profileState.pushToFavoritesBtnDisabled
+)

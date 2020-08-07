@@ -1,4 +1,5 @@
-import { map } from 'rxjs/operators';
+import { selectChatMessages } from './../selectors/chat.selectors';
+import { map, tap, take } from 'rxjs/operators';
 import { pushChatChannelAction } from './../actions/chat.actions';
 import { switchMap, withLatestFrom } from 'rxjs/operators';
 import { selectUserId } from './../selectors/auth.selectors';
@@ -22,16 +23,11 @@ export class ChatService {
       withLatestFrom(this.store.select(selectIdOfChatChannels)),
       switchMap(([userId, userChannels]) => {
         if (userChannels && penFriendChannels) {
-          console.log(
-            Object.keys(userChannels).find((key) => key === penFriendId),
-            Object.keys(penFriendChannels).find((key) => key === userId)
-          );
           if (
             Object.keys(userChannels).find((key) => key === penFriendId) ||
             Object.keys(penFriendChannels).find((key) => key === userId)
           ) {
-            console.log('12341231');
-            return of(null);
+            return of(userChannels[penFriendId]);
           }
         }
 
@@ -58,6 +54,18 @@ export class ChatService {
           });
       })
     );
+  }
+
+  public sendMessage(message: string, idChannel: string): Observable<any> {
+    return this.store
+      .select(selectUserId)
+      .pipe(
+        tap((userId) =>
+          this.db.database
+            .ref(`chatChannels/${idChannel}/messages`)
+            .push({ uid: userId, createdAt: new Date().toLocaleDateString(), text: message })
+        )
+      );
   }
 
   public getChatChannels(): Observable<any> {

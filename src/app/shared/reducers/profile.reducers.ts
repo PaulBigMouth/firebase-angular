@@ -11,7 +11,8 @@ import {
   postHeroToFavoriteAction,
   removeHeroFromFavoriteAction,
   updateUserNameAction,
-  uploadUserImageAction
+  uploadUserImageAction,
+  createChatChannelSuccessAction
 } from './../actions/profile.actions';
 import { createReducer, on } from '@ngrx/store';
 
@@ -22,7 +23,8 @@ const initialState: ProfileState = {
   uid: '',
   heroes: [],
   loader: false,
-  channels: null
+  channels: null,
+  pushToFavoritesBtnDisabled: false
 };
 
 export interface ProfileState {
@@ -34,7 +36,8 @@ export interface ProfileState {
   loader: boolean,
   channels: {
     [id: string]: string
-  }
+  },
+  pushToFavoritesBtnDisabled: boolean
 }
 
 const reducer = createReducer(
@@ -59,21 +62,21 @@ const reducer = createReducer(
   })),
   on(postHeroToFavoriteAction, (state) => ({
     ...state,
-    loader: true
+    pushToFavoritesBtnDisabled: true
   })),
   on(postHeroToFavoriteSuccessAction, (state, action) => ({
     ...state,
     heroes: [...state.heroes, action.payload],
-    loader: false
+    pushToFavoritesBtnDisabled: false
   })),
   on(removeHeroFromFavoriteAction, (state) => ({
     ...state,
-    loader: true
+    pushToFavoritesBtnDisabled: true
   })),
   on(removeHeroFromFavoriteSuccessAction, (state, action) => ({
     ...state,
     heroes: [...action.payload],
-    loader: false
+    pushToFavoritesBtnDisabled: false
   })),
   on(updateUserNameAction, (state) => ({
     ...state,
@@ -92,6 +95,13 @@ const reducer = createReducer(
     ...state,
     avatarImageUrl: action.payload,
     loader: false
+  })),
+  on(createChatChannelSuccessAction, (state, action) => ({
+    ...state,
+    channels: {
+      ...state.channels,
+      ...action.channel
+    }
   }))
 );
 

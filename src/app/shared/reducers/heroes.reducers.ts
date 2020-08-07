@@ -1,30 +1,33 @@
-import { getHeroDetailsAction, getFavoritesHeroesByIdAction } from './../actions/heroes.actions';
+import {
+  getHeroDetailsAction,
+  getFavoritesHeroesByIdAction,
+} from './../actions/heroes.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 import { HeroResponseResult } from '../interfaces/heroes.interface';
 import {
   getHeroesSuccessAction,
   getHeroDetailsSuccessAction,
   getFavoritesHeroesByIdSuccessAction,
-  getHeroesAction
+  getHeroesAction,
 } from '../actions/heroes.actions';
 
 const initialState = {
   heroes: {},
-  loader: false
+  loader: false,
 };
 
 export interface HeroesState {
   heroes: {
     [id: string]: HeroResponseResult;
   };
-  loader: boolean
+  loader: boolean;
 }
 
 const reducer = createReducer(
   initialState,
   on(getHeroesAction, (state) => ({
     ...state,
-    loader: true
+    loader: true,
   })),
   on(getHeroesSuccessAction, (state, action) => ({
     ...state,
@@ -34,11 +37,11 @@ const reducer = createReducer(
         return { ...prev, [curr.id]: curr };
       }, {}),
     },
-    loader: false
+    loader: false,
   })),
   on(getHeroDetailsAction, (state) => ({
     ...state,
-    loader: true
+    loader: true,
   })),
   on(getHeroDetailsSuccessAction, (state, action) => ({
     ...state,
@@ -46,21 +49,21 @@ const reducer = createReducer(
       ...state.heroes,
       [action.payload.id]: { ...action.payload },
     },
-    loader: false
+    loader: false,
   })),
   on(getFavoritesHeroesByIdAction, (state) => ({
     ...state,
-    loader: true
+    loader: true,
   })),
   on(getFavoritesHeroesByIdSuccessAction, (state, action) => ({
     ...state,
     heroes: {
       ...state.heroes,
       ...action.payload.reduce((prev, curr) => {
-        return {...prev, [curr.id]: curr}
-      }, {})
+        return { ...prev, [curr.id]: curr };
+      }, {}),
     },
-    loader: false
+    loader: false,
   }))
 );
 

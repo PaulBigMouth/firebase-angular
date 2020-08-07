@@ -122,7 +122,7 @@ export const createChatChannelAction = createAction(
 
 export const createChatChannelSuccessAction = createAction(
   ProfileActions.CreateChatChannelSuccessAction,
-  props<{ channelId: string }>()
+  props<{ channel: {[userId: string]: string} }>()
 );
 
 export const createChatChannelErrorAction = createAction(

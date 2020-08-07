@@ -4,7 +4,7 @@ import { ProfileEffects } from './shared/effects/profile.effects';
 import { AuthEffects } from './shared/effects/auth.effects';
 import { HeroesEffects } from './shared/effects/heroes.effects';
 import { SharedModule } from './shared/shared.module';
-import { TokenInterceptor } from './classes/token.interceptor';
+import { TokenInterceptor } from './shared/classes/token.interceptor';
 import { AuthService } from './shared/services/auth.service';
 import { EffectsModule } from '@ngrx/effects';
 

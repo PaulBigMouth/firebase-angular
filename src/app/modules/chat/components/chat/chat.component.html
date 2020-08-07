@@ -3,9 +3,12 @@
         <router-outlet></router-outlet>
     </div>
     <div class="chat__right">
-        <div class="chat__right__user">
-            <span>Pavel</span>
+        <div class="chat__right__channels" *ngIf="chatChannels$ | async as chatChannels; else loader">
+            <a *ngFor="let channel of chatChannels" [routerLink]="channel.url" routerLinkActive="active">{{channel.url}}</a>
         </div>
+        <ng-template #loader>
+            <app-preloader></app-preloader>
+        </ng-template>
     </div>
 </section>
 <ng-template #loader>

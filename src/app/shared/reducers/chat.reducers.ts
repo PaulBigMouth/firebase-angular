@@ -1,10 +1,11 @@
-import { getChatChannelsAction, ChatActionsUnion, getChatChannelsSuccessAction, pushChatChannelAction } from './../actions/chat.actions';
+import { getChatChannelsAction, ChatActionsUnion, getChatChannelsSuccessAction, pushChatChannelAction, sendMessageAction, sendMessageSuccessAction, sendMessageErrorAction } from './../actions/chat.actions';
 import { createReducer, on } from '@ngrx/store';
 import { Chat } from './../interfaces/chat.interface';
 
 const initialState: ChatState = {
   chatChannels: null,
   chatLoader: false,
+  formDisabled: false
 };
 
 export interface ChatState {
@@ -12,6 +13,7 @@ export interface ChatState {
     [id: string]: Chat;
   };
   chatLoader: boolean;
+  formDisabled: boolean
 }
 
 const reducer = createReducer(
@@ -30,6 +32,18 @@ const reducer = createReducer(
           ...state.chatChannels,
           ...action.channel
       }
+  })),
+  on(sendMessageAction, (state) => ({
+    ...state,
+    formDisabled: true
+  })),
+  on(sendMessageSuccessAction, (state) => ({
+    ...state,
+    formDisabled: false
+  })),
+  on(sendMessageErrorAction, (state) => ({
+    ...state,
+    formDisabled: false
   }))
 );
 

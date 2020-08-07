@@ -1,3 +1,4 @@
+import { selectPushToFavoritesBtnDisabled } from './../../../../shared/selectors/profile.selectors';
 import {
   postHeroToFavoriteAction,
   removeHeroFromFavoriteAction,
@@ -28,6 +29,7 @@ export class HeroLayoutComponent implements OnInit, OnDestroy {
   public sub: Subscription;
   public isFavoriteSub: Subscription;
   public isFavorite: boolean;
+  public btnDisabled$: Observable<boolean> = this.store.select(selectPushToFavoritesBtnDisabled)
   constructor(
     private store: Store,
     private route: ActivatedRoute,
@@ -64,5 +66,6 @@ export class HeroLayoutComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(removeHeroFromFavoriteAction({ idHero }));
     }
+    this.cd.detectChanges()
   }
 }
