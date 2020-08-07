@@ -103,32 +103,32 @@ export const uploadUserImageErrorAction = createAction(
 export const updateUserNameAction = createAction(
   ProfileActions.UpdateUserNameAction,
   props<{ name: string }>()
-)
+);
 
 export const updateUserNameSuccessAction = createAction(
   ProfileActions.UpdateUserNameSuccessAction,
   props<{ payload: string }>()
-)
+);
 
 export const updateUserNameErrorAction = createAction(
   ProfileActions.UpdateUserNameErrorAction,
   props<{ message: string }>()
-)
+);
 
 export const createChatChannelAction = createAction(
   ProfileActions.CreateChatChannelAction,
-  props<{ penFriendId: string, channels: string[] }>()
-)
+  props<{ penFriendId: string; channels: { [id: string]: string } }>()
+);
 
 export const createChatChannelSuccessAction = createAction(
   ProfileActions.CreateChatChannelSuccessAction,
   props<{ channelId: string }>()
-)
+);
 
 export const createChatChannelErrorAction = createAction(
   ProfileActions.CreateChatChannelErrorAction,
   props<{ message: string }>()
-)
+);
 
 const all = union({
   initProfileStateAction,
@@ -151,7 +151,7 @@ const all = union({
   updateUserNameErrorAction,
   createChatChannelAction,
   createChatChannelSuccessAction,
-  createChatChannelErrorAction
+  createChatChannelErrorAction,
 });
 
 export type ProfileActionsUnion = typeof all;

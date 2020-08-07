@@ -16,16 +16,21 @@ export class ChatService {
 
   public createChatChannel(
     penFriendId: string,
-    penFriendChannels: string[]
+    penFriendChannels: { [id: string]: string }
   ): Observable<string> {
     return this.store.select(selectUserId).pipe(
       withLatestFrom(this.store.select(selectIdOfChatChannels)),
       switchMap(([userId, userChannels]) => {
         if (userChannels && penFriendChannels) {
+          console.log(
+            Object.keys(userChannels).find((key) => key === penFriendId),
+            Object.keys(penFriendChannels).find((key) => key === userId)
+          );
           if (
             Object.keys(userChannels).find((key) => key === penFriendId) ||
             Object.keys(penFriendChannels).find((key) => key === userId)
           ) {
+            console.log('12341231');
             return of(null);
           }
         }
@@ -34,7 +39,6 @@ export class ChatService {
           .ref('chatChannels')
           .push({
             users: [userId, penFriendId],
-            
           })
           .then((ref) => {
             return this.db.database
@@ -56,40 +60,39 @@ export class ChatService {
     );
   }
 
-  //   public getChatChannels(): Observable<firebase.database.DataSnapshot> {
-  //     return this.store.select(selectIdOfChatChannels).pipe(
-  //       switchMap((idOfChatChannels) => {
-  //         if (idOfChatChannels.length) {
-  //           return idOfChatChannels.map((id) =>
-  //             this.db.database
-  //               .ref(`chatChannels/${id}`)
-  //               .on('value', (snapshot) => {
-  //                 this.store.dispatch(
-  //                   pushChatChannelAction({
-  //                     channel: {
-  //                       [id]: snapshot.val(),
-  //                     },
-  //                   })
-  //                 );
-  //               })
-  //           );
-  //         }
-  //         return of(null);
-  //       })
-  //     );
-  //   }
+  public getChatChannels(): Observable<any> {
+    return this.store.select(selectIdOfChatChannels).pipe(
+      switchMap((idOfChatChannels) => {
+        if (Object.keys(idOfChatChannels).length) {
+          return Object.keys(idOfChatChannels).map((id) =>
+            this.db.database
+              .ref(`chatChannels/${idOfChatChannels[id]}`)
+              .on('value', (snapshot) => {
+                this.store.dispatch(
+                  pushChatChannelAction({
+                    channel: {
+                      [idOfChatChannels[id]]: snapshot.val(),
+                    },
+                  })
+                );
+              })
+          );
+        }
+      })
+    );
+  }
 
-  //   public unsubcribeFromDB(): Observable<void> {
-  //     return this.store.select(selectIdOfChatChannels).pipe(
-  //       switchMap((idOfChatChannels) => {
-  //         if (idOfChatChannels.length) {
-  //           return from(
-  //             idOfChatChannels.map((id) =>
-  //               this.db.database.ref(`chatChannels/${id}`).off()
-  //             )
-  //           );
-  //         }
-  //       })
-  //     );
-  //   }
+  public unsubcribeFromDB(): Observable<void> {
+    return this.store.select(selectIdOfChatChannels).pipe(
+      switchMap((idOfChatChannels) => {
+        if (Object.keys(idOfChatChannels).length) {
+          return from(
+            Object.keys(idOfChatChannels).map((id) =>
+              this.db.database.ref(`chatChannels/${idOfChatChannels[id]}`).off()
+            )
+          );
+        }
+      })
+    );
+  }
 }
