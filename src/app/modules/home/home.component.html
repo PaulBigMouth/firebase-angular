@@ -2,23 +2,38 @@
   <div class="container">
     <header class="main__header">
       <div class="main__header__logo">
-        <img src="../../../../../assets/images/logo.png" alt="" />
+        <div class="main__header__logo__img">
+          <img src="../../../../../assets/images/logo.png" alt="" />
+        </div>
+        <div class="main__header__burgerBtn">
+          <i class="fas fa-bars" (click)="toggleBurgerMenu()"></i>
+        </div>
       </div>
       <nav class="main__header__nav">
-        <a class="main__header__nav__item" *ngFor="let link of links" [routerLink]="link.url"
-          routerLinkActive="active">{{ link.name }}</a>
+        <a
+          class="main__header__nav__item"
+          *ngFor="let link of links"
+          [routerLink]="link.url"
+          routerLinkActive="active"
+          (click)="toggleBurgerMenu()"
+          >{{ link.name }}</a
+        >
       </nav>
     </header>
   </div>
-    <router-outlet></router-outlet>
-  <!-- <button (click)="logOut()">logout</button> -->
+  <router-outlet></router-outlet>
   <footer class="footer">
     <nav class="footer__links">
-        <a class="footer__links__item" *ngFor="let link of links" [routerLink]="link.url" routerLinkActive="active">{{ link.name }}</a>
+      <a
+        class="footer__links__item"
+        *ngFor="let link of links"
+        [routerLink]="link.url"
+        routerLinkActive="active"
+        >{{ link.name }}</a
+      >
     </nav>
     <div class="footer__year">
       <span class="c-grey">2020</span>
     </div>
   </footer>
 </div>
-

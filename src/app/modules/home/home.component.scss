@@ -9,10 +9,15 @@
 		align-items: center;
 		padding: 30px 20px;
 		&__logo {
-			width: 20%;
-			& img {
-				width: 100%;
-				display: block;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			&__img {
+				width: 20%;
+				& img {
+					width: 100%;
+					display: block;
+				}
 			}
 		}
 		&__nav {
@@ -30,6 +35,11 @@
 					color: $transition-color;
 				}
 			}
+		}
+		&__burgerBtn {
+			cursor: pointer;
+			color: #fff;
+			display: none;
 		}
 	}
 }
@@ -60,7 +70,36 @@
 	}
 }
 
-@media screen and (min-width: 0) {
+@media screen and (max-width: 900px) {
+	.main {
+		&__header {
+			flex-direction: column;
+			position: relative;
+			&__nav {
+				width: 100%;
+				flex-direction: column;
+				position: absolute;
+				background-color: $hero-card-bg-color;
+				right: 2000px;
+				top: 100px;
+				opacity: 0;
+				z-index: 1000;
+				transition: all .5s linear;
+				&__item {
+					padding: 10px;
+					width: 100%;
+					text-align: center;
+				}
+				&.open {
+					right: 0;
+					opacity: 1;
+				}
+			}
+			&__burgerBtn {
+				display: block;
+			}
+		}
+	}
 	.footer {
 		&__links {
 			flex-direction: column;

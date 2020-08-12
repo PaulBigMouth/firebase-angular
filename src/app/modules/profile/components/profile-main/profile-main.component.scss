@@ -20,11 +20,39 @@
 	}
 	&__inner {
 		margin: 30px 0;
-		width: 50%;
 	}
 	&__save {
-		width: 90%;
 		display: flex;
-		justify-content: flex-end;
+	}
+}
+
+@media screen and (min-width: 0) {
+	.profileMain {
+		&__inner {
+			width: 100%;
+		}
+		&__save {
+			justify-content: center;
+		}
+	}
+}
+
+@media screen and (min-width: 500px) {
+	.profileMain {
+		padding: 30 20px;
+	}
+}
+
+@media screen and (min-width: 950px) {
+	.profileMain {
+		padding-left: 0;
+		padding-right: 50px;
+
+		&__inner {
+			width: 50%;
+		}
+		&__save {
+			width: 90%;
+		}
 	}
 }

@@ -23,3 +23,9 @@
 		}
 	}
 }
+
+@media screen and (min-width: 0) {
+	.chat {
+		grid-template-columns: 100%;
+	}
+}

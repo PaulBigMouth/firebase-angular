@@ -3,26 +3,30 @@
     class="profileHeroes__asyncContainer"
     *ngIf="favoritesHeroes$ | async as heroes; else preloader"
   >
-    <div class="profileHeroes__lengthContainer" *ngIf="heroes.length; else empty">
+    <div
+      class="profileHeroes__lengthContainer"
+      *ngIf="heroes.length; else empty"
+    >
       <div class="profileHeroes__inner">
-        <article
-          class="profileHeroes__inner__hero"
-          *ngFor="let hero of heroes"
-          [routerLink]="'/heroes/' + hero.id"
-        >
-          <div class="profileHeroes__inner__hero__img">
-            <img [src]="hero.image" />
-          </div>
-          <div class="profileHeroes__inner__hero__text">
-            <h2 class="profileHeroes__inner__hero__text__name">
-              {{ hero.name }}
-            </h2>
-          </div>
-        </article>
+        <div *ngFor="let hero of heroes">
+          <article
+            class="profileHeroes__inner__hero"
+            [routerLink]="'/heroes/' + hero.id"
+          >
+            <div class="profileHeroes__inner__hero__img">
+              <img [src]="hero.image" />
+            </div>
+            <div class="profileHeroes__inner__hero__text">
+              <h2 class="profileHeroes__inner__hero__text__name">
+                {{ hero.name }}
+              </h2>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
     <ng-template #empty>
-        <p>You don't have any favorite characters </p>
+      <p>You don't have any favorite characters</p>
     </ng-template>
   </div>
   <ng-template #preloader>
@@ -30,5 +34,5 @@
   </ng-template>
 </section>
 <ng-template #loader>
-    <app-preloader></app-preloader>
+  <app-preloader></app-preloader>
 </ng-template>

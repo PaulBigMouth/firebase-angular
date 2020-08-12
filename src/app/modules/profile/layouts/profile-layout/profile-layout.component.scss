@@ -28,6 +28,7 @@
 					padding: 10px 20px;
 					position: relative;
 					transition: background-color .2s ease-in;
+					font-size: rem(14);
 					&:hover {
 						background-color: #171a1f;
 						&::after {
@@ -62,4 +63,57 @@
 
 .loader__heightContainer {
 	min-height: 90vh;
+}
+
+@media screen and (min-width: 0) {
+	.profile {
+		grid-template-columns: 100%;
+		&__left {
+			justify-content: center;
+		}
+		&__right {
+			padding: 0;
+			margin: 0 30px;
+			// &__main {
+			// 	padding: 0 20px;
+			// }
+			&__header {
+				margin-top: 30px;
+				&__nav {
+					display: flex;
+					flex-direction: column;
+					&__item {
+						text-align: center;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 480px) {
+	.profile {
+		&__right {
+			&__header {
+				&__nav {
+					flex-direction: row;
+					justify-content: center;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 950px) {
+	.profile {
+		grid-template-columns: 30% 70%;
+		&__right {
+			&__header {
+				margin-top: 0;
+				&__nav {
+					justify-content: flex-start;
+				}
+			}
+		}
+	}
 }

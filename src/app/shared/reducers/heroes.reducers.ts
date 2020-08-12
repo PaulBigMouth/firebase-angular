@@ -2,6 +2,9 @@ import {
   getHeroDetailsAction,
   getFavoritesHeroesByIdAction,
   unsetHeroesStateAction,
+  getHeroesWithFiltersAction,
+  getHeroesWithFiltersSuccessAction,
+  getHeroesWithFiltersErrorAction,
 } from './../actions/heroes.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 import { HeroResponseResult } from '../interfaces/heroes.interface';
@@ -15,6 +18,7 @@ import {
 const initialState = {
   heroes: {},
   loader: false,
+  pages: 1,
 };
 
 export interface HeroesState {
@@ -22,6 +26,7 @@ export interface HeroesState {
     [id: string]: HeroResponseResult;
   };
   loader: boolean;
+  pages: number;
 }
 
 const reducer = createReducer<HeroesState>(
@@ -30,16 +35,20 @@ const reducer = createReducer<HeroesState>(
     ...state,
     loader: true,
   })),
-  on(getHeroesSuccessAction, (state, action) => ({
-    ...state,
-    heroes: {
-      ...state.heroes,
-      ...action.payload.reduce((prev, curr) => {
-        return { ...prev, [curr.id]: curr };
-      }, {}),
-    },
-    loader: false,
-  })),
+  on(getHeroesSuccessAction, (state, action) => {
+    console.log(action.payload.results);
+    return {
+      ...state,
+      heroes: {
+        ...state.heroes,
+        ...action.payload.results.reduce((prev, curr) => {
+          return { ...prev, [curr.id]: curr };
+        }, {}),
+      },
+      pages: action.payload.info.pages,
+      loader: false,
+    };
+  }),
   on(getHeroDetailsAction, (state) => ({
     ...state,
     loader: true,
@@ -64,6 +73,22 @@ const reducer = createReducer<HeroesState>(
         return { ...prev, [curr.id]: curr };
       }, {}),
     },
+    loader: false,
+  })),
+  on(getHeroesWithFiltersAction, (state) => ({
+    ...state,
+    loader: true,
+  })),
+  on(getHeroesWithFiltersSuccessAction, (state, action) => ({
+    ...state,
+    heroes: action.payload.results.reduce((prev, curr) => {
+      return { ...prev, [curr.id]: curr };
+    }, {}),
+    loader: false,
+    pages: action.payload.info.pages,
+  })),
+  on(getHeroesWithFiltersErrorAction, (state) => ({
+    ...state,
     loader: false,
   })),
   on(unsetHeroesStateAction, () => initialState)

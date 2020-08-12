@@ -14,12 +14,13 @@ import { AppComponent } from './app.component';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
 import { HomeModule } from './modules/home/home.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AuthorizationModule,
     AngularFireModule.initializeApp(environment.firebase),

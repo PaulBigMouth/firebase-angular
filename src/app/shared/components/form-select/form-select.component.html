@@ -1,0 +1,24 @@
+<div class="formSelect" [ngClass]="{ open: open, valid: value || isDisabled }">
+  <div class="formSelect__input" (click)="toggle()">
+    <span class="formSelect__input__value"> {{ value ? value : "" }}</span>
+    <label class="formSelect__input__label">{{ placeholder }}</label>
+    <span class="formSelect__input__icon">
+      <i class="fas fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="formSelect__list" *ngIf="open">
+    <div>
+      <ul>
+        <li
+          class="formSelect__list__item"
+          *ngFor="let option of options"
+          (click)="select(option)"
+        >
+          {{ option.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="formSelect__overlay" *ngIf="open" (click)="toggle()"></div>

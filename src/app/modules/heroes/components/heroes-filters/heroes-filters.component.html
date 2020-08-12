@@ -1,0 +1,58 @@
+<div class="filter">
+  <button class="filter__btn" (click)="toggleFilters()">
+    <span>
+      <i class="fas fa-filter"></i>
+    </span>
+  </button>
+  <div class="filter__tooltip">Filter</div>
+</div>
+
+<form *ngIf="visibleFilters" class="heroes__filters" [formGroup]="form">
+  <div class="heroes__filters__inner">
+    <div class="heroes__filters__name">
+      <app-input
+        type="text"
+        placeholder="Hero's name"
+        styleType="profile"
+        formControlName="name"
+        [value]="form.value.name"
+        [valid]="form.get('name').valid"
+        [errors]="form.get('name').errors"
+      ></app-input>
+    </div>
+    <div class="heroes__filters__status">
+      <app-form-select
+        placeholder="Status"
+        formControlName="status"
+        [options]="statusOptions"
+        [value]="form.value.status"
+      >
+      </app-form-select>
+    </div>
+    <div class="heroes__filters__gender">
+      <app-form-select
+        placeholder="Gender"
+        formControlName="gender"
+        [options]="genderOptions"
+        [value]="form.value.gender"
+      >
+      </app-form-select>
+    </div>
+  </div>
+  <div class="heroes__filters__btns">
+    <button
+      class="btn__light"
+      [disabled]="!(form.value.name || form.value.status || form.value.gender)"
+      (click)="clearFilters()"
+    >
+      Clear
+    </button>
+    <button
+      class="btn__light"
+      [disabled]="!form.value.name && !form.value.status && !form.value.gender"
+      (click)="submitFilters()"
+    >
+      Search
+    </button>
+  </div>
+</form>

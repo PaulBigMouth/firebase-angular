@@ -11,7 +11,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -26,7 +26,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() public valid: string;
   @Input() public errors?: Object | null | undefined;
   @Input() public maxLength: string;
-  @Input() public value: string | number
+  @Input() public value: string | number;
   @Input() public styleType: string;
 
   isTouched: boolean = false;

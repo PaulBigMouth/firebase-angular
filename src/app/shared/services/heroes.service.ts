@@ -24,9 +24,8 @@ export class HeroesService {
     private db: AngularFireDatabase
   ) {}
 
-  public getHeroes(
-    params: any = {}
-  ): Observable<HeroesResponse | HttpErrorResponse> {
+  public getHeroes(params: any = {}): Observable<HeroesResponse> {
+    console.log(params);
     return this.http.get<HeroesResponse>(`${this.apiUrl}/${this.character}`, {
       params: new HttpParams({
         fromObject: params,
@@ -35,12 +34,16 @@ export class HeroesService {
   }
 
   public getHeroById(id: number): Observable<HeroResponseResult> {
-    return this.http.get<HeroResponseResult>(`${this.apiUrl}/${this.character}/${id}`);
+    return this.http.get<HeroResponseResult>(
+      `${this.apiUrl}/${this.character}/${id}`
+    );
   }
 
   public getHeroesById(id: number[]): Observable<HeroResponseResult[]> {
-    console.log(id)
-    return this.http.get<HeroResponseResult[]>(`${this.apiUrl}/${this.character}/${id}`)
+    console.log(id);
+    return this.http.get<HeroResponseResult[]>(
+      `${this.apiUrl}/${this.character}/${id}`
+    );
   }
 
   public getFavoritesHeroes(userId: string): Observable<Array<number>> {
@@ -86,13 +89,17 @@ export class HeroesService {
         );
         this.db.database
           .ref(`users/${userId}/heroes`)
-          .set(newFavoritesHeroes).then(() => {
-            this.db.database.ref(`heroes/${idHero}/users`).once('value').then((snapshot) => {
-              const newData = snapshot.val().filter(uid => uid !== userId)
-              this.db.database.ref(`heroes/${idHero}/users`).set(newData)
-            })
-          })
-        return newFavoritesHeroes
+          .set(newFavoritesHeroes)
+          .then(() => {
+            this.db.database
+              .ref(`heroes/${idHero}/users`)
+              .once('value')
+              .then((snapshot) => {
+                const newData = snapshot.val().filter((uid) => uid !== userId);
+                this.db.database.ref(`heroes/${idHero}/users`).set(newData);
+              });
+          });
+        return newFavoritesHeroes;
       })
     );
   }

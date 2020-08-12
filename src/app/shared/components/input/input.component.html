@@ -1,10 +1,21 @@
-<div class="input" [ngClass]="{'profile': styleType === 'profile'}">
-    <input [disabled]="isDisabled" [value]="value ? value : ''" [maxLength]="maxLength ? maxLength : 100" [type]="type" (blur)="setTouched()" (input)="changeValue($event)" [ngClass]="{'invalid': !valid && isTouched && !isDisabled, 'valid': valid || isDisabled}">
-    <label class="input__label">{{placeholder}}</label>
-    <span class="input__bar"></span>
+<div class="input" [ngClass]="{ profile: styleType === 'profile' }">
+  <input
+    [disabled]="isDisabled"
+    [value]="value ? value : ''"
+    [maxLength]="maxLength ? maxLength : 100"
+    [type]="type"
+    (blur)="setTouched()"
+    (input)="changeValue($event)"
+    [ngClass]="{
+      invalid: !valid && isTouched && !isDisabled,
+      valid: (valid && value) || isDisabled
+    }"
+  />
+  <label class="input__label">{{ placeholder }}</label>
+  <span class="input__bar"></span>
 </div>
 <span class="helper-text" *ngIf="!valid && isTouched">
-    <span *ngIf="errors['required']">This field must not be empty</span>
-    <span *ngIf="errors['email']">Enter a valid email</span>
-    <span *ngIf="errors['minlength']">Password is too short</span>
+  <span *ngIf="errors['required']">This field must not be empty</span>
+  <span *ngIf="errors['email']">Enter a valid email</span>
+  <span *ngIf="errors['minlength']">Password is too short</span>
 </span>

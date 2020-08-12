@@ -1,3 +1,4 @@
+import { Filter, HeroesResponse } from './../interfaces/heroes.interface';
 import {
   ParamsForLoadHeroes,
   HeroResponseResult,
@@ -17,7 +18,11 @@ export enum HeroesActions {
   GetFavoritesHeroesByIdSuccessAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID_SUCCESS',
   GetFavoritesHeroesByIdErrorAction = '[HEROES] FAVORITES_HEROES_LOAD_BY_ID_ERROR',
 
-  UnsetHeroesStateAction = '[HEROES] UNSET_HEROES_STATE'
+  GetHeroesWithFiltersAction = '[HEROES] GET_HEROES_WITH_FILTERS',
+  GetHeroesWithFiltersSuccessAction = '[HEROES] GET_HEROES_WITH_FILTERS_SUCCESS',
+  GetHeroesWithFiltersErrorAction = '[HEROES] GET_HEROES_WITH_FILTERS_ERROR',
+
+  UnsetHeroesStateAction = '[HEROES] UNSET_HEROES_STATE',
 }
 
 export const getHeroesAction = createAction(
@@ -27,7 +32,7 @@ export const getHeroesAction = createAction(
 
 export const getHeroesSuccessAction = createAction(
   HeroesActions.GetHeroesSuccessAction,
-  props<{ payload: HeroResponseResult[] }>()
+  props<{ payload: HeroesResponse }>()
 );
 
 export const getHeroesErrorAction = createAction(
@@ -47,27 +52,42 @@ export const getHeroDetailsSuccessAction = createAction(
 
 export const getHeroDetailsErrorAction = createAction(
   HeroesActions.GetHeroDetailsErrorAction,
-  props<{message: string}>()
-)
+  props<{ message: string }>()
+);
 
 export const getFavoritesHeroesByIdAction = createAction(
   HeroesActions.GetFavoritesHeroesByIdAction,
-  props<{id: number[]}>()
-)
+  props<{ id: number[] }>()
+);
 
 export const getFavoritesHeroesByIdSuccessAction = createAction(
   HeroesActions.GetFavoritesHeroesByIdSuccessAction,
   props<{ payload: HeroResponseResult[] }>()
-)
+);
 
 export const getFavoritesHeroesByIdErrorAction = createAction(
   HeroesActions.GetFavoritesHeroesByIdErrorAction,
   props<{ message: string }>()
-)
+);
 
 export const unsetHeroesStateAction = createAction(
   HeroesActions.UnsetHeroesStateAction
-)
+);
+
+export const getHeroesWithFiltersAction = createAction(
+  HeroesActions.GetHeroesWithFiltersAction,
+  props<{ params: ParamsForLoadHeroes }>()
+);
+
+export const getHeroesWithFiltersSuccessAction = createAction(
+  HeroesActions.GetHeroesWithFiltersSuccessAction,
+  props<{ payload: HeroesResponse }>()
+);
+
+export const getHeroesWithFiltersErrorAction = createAction(
+  HeroesActions.GetHeroesWithFiltersErrorAction,
+  props<{ message: string }>()
+);
 
 const all = union({
   getHeroesAction,
@@ -79,7 +99,10 @@ const all = union({
   getFavoritesHeroesByIdAction,
   getFavoritesHeroesByIdSuccessAction,
   getFavoritesHeroesByIdErrorAction,
-  unsetHeroesStateAction
+  getHeroesWithFiltersAction,
+  getHeroesWithFiltersSuccessAction,
+  getHeroesWithFiltersErrorAction,
+  unsetHeroesStateAction,
 });
 
 export type HeroesActionsUnion = typeof all;
