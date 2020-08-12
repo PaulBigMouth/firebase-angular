@@ -1,14 +1,22 @@
 <form class="profileMain" [formGroup]="form">
-   <div class="profileMain__edit">
-        <button [ngClass]="{'open' : form.enabled}" (click)="changeEditFlag()">
-            <i class="fas fa-user-edit"></i>
-        </button>
-   </div>
-    <div class="profileMain__inner">
-        <app-input styleType="profile" [value]="form.get('name').value" formControlName="name" placeholder="Name" type="text" [valid]="form.get('name').valid" [errors]="form.get('name').errors">
-        </app-input>
-    </div>
-    <div class="profileMain__save" *ngIf="form.enabled">
-        <button class="btn__light" (click)="onSave()">Save</button>
-    </div>
+  <div class="profileMain__edit">
+    <button [ngClass]="{ open: form.enabled }" (click)="changeEditFlag()">
+      <i class="fas fa-user-edit"></i>
+    </button>
+  </div>
+  <div class="profileMain__inner">
+    <app-input
+      styleType="profile"
+      [value]="form.get('name').value"
+      formControlName="name"
+      placeholder="Name"
+      type="text"
+      [valid]="form.get('name').valid"
+      [errors]="form.get('name').errors"
+    >
+    </app-input>
+  </div>
+  <div class="profileMain__save" *ngIf="form.enabled">
+    <button class="btn__light" (click)="onSave()">Save</button>
+  </div>
 </form>

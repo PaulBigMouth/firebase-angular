@@ -6,10 +6,10 @@ import { CommunityLayoutComponent } from './layouts/community-layout/community-l
 import { UserCardComponent } from './components/user-card/user-card.component';
 
 @NgModule({
-	imports: [ CommunityRoutingModule, CommonModule, SharedModule ],
-	exports: [],
-	declarations: [ CommunityLayoutComponent, UserCardComponent ],
-	providers: [],
-	bootstrap: [ CommunityLayoutComponent ],
+  imports: [CommunityRoutingModule, CommonModule, SharedModule],
+  exports: [],
+  declarations: [CommunityLayoutComponent, UserCardComponent],
+  providers: [],
+  bootstrap: [CommunityLayoutComponent],
 })
 export class CommunityModule {}

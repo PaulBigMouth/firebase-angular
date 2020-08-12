@@ -1,52 +1,52 @@
 .profileHeroes {
-	padding: 50px 0;
-	&__inner {
-		display: grid;
-		& > div {
-			display: flex;
-			justify-content: center;
-		}
-		&__hero {
-			cursor: pointer;
-			max-width: 300px;
-			margin: 10px 55px;
-			border-radius: 7px;
-			display: flex;
-			flex-direction: column;
-			transition: box-shadow .2s ease-in-out;
-			&__img {
-				max-height: 300px;
-				width: 100%;
-				& img {
-					border-top-left-radius: 7px;
-					border-top-right-radius: 7px;
-					display: block;
-					width: 100%;
-					height: auto;
-				}
-			}
-			&__text {
-				text-align: center;
-			}
-			&:hover {
-				box-shadow: 0px 0px 21px -1px rgba(252, 252, 252, 0.75);
-			}
-		}
-	}
+  padding: 50px 0;
+  &__inner {
+    display: grid;
+    & > div {
+      display: flex;
+      justify-content: center;
+    }
+    &__hero {
+      cursor: pointer;
+      max-width: 300px;
+      margin: 10px 55px;
+      border-radius: 7px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s ease-in-out;
+      &__img {
+        max-height: 300px;
+        width: 100%;
+        & img {
+          border-top-left-radius: 7px;
+          border-top-right-radius: 7px;
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+      }
+      &__text {
+        text-align: center;
+      }
+      &:hover {
+        box-shadow: 0px 0px 21px -1px rgba(252, 252, 252, 0.75);
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 0) {
-	.profileHeroes {
-		&__inner {
-			grid-template-columns: 100%;
-		}
-	}
+  .profileHeroes {
+    &__inner {
+      grid-template-columns: 100%;
+    }
+  }
 }
 
 @media screen and (min-width: 750px) {
-	.profileHeroes {
-		&__inner {
-			grid-template-columns: 50% 50%;
-		}
-	}
+  .profileHeroes {
+    &__inner {
+      grid-template-columns: 50% 50%;
+    }
+  }
 }

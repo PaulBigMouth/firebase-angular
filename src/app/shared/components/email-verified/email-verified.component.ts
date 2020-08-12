@@ -4,13 +4,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-email-verified',
   templateUrl: './email-verified.component.html',
   styleUrls: ['./email-verified.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmailVerifiedComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class EmailVerifiedComponent {}

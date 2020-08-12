@@ -1,58 +1,58 @@
 @import "~src/assets/scss/_variables.scss";
 .profileMain {
-	padding: 30px 0;
-	&__edit {
-		width: 90%;
-		display: flex;
-		justify-content: flex-end;
-		& > button {
-			padding: 7px 10px;
-			background-color: $hero-card-bg-color;
-			color: #fff;
-			transition: background-color .2s ease-in-out;
-			&:hover {
-				background-color: $transition-color;
-			}
-			&.open {
-				background-color: $red-color;
-			}
-		}
-	}
-	&__inner {
-		margin: 30px 0;
-	}
-	&__save {
-		display: flex;
-	}
+  padding: 30px 0;
+  &__edit {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    & > button {
+      padding: 7px 10px;
+      background-color: $hero-card-bg-color;
+      color: #fff;
+      transition: background-color 0.2s ease-in-out;
+      &:hover {
+        background-color: $transition-color;
+      }
+      &.open {
+        background-color: $red-color;
+      }
+    }
+  }
+  &__inner {
+    margin: 30px 0;
+  }
+  &__save {
+    display: flex;
+  }
 }
 
 @media screen and (min-width: 0) {
-	.profileMain {
-		&__inner {
-			width: 100%;
-		}
-		&__save {
-			justify-content: center;
-		}
-	}
+  .profileMain {
+    &__inner {
+      width: 100%;
+    }
+    &__save {
+      justify-content: center;
+    }
+  }
 }
 
 @media screen and (min-width: 500px) {
-	.profileMain {
-		padding: 30 20px;
-	}
+  .profileMain {
+    padding: 30 20px;
+  }
 }
 
 @media screen and (min-width: 950px) {
-	.profileMain {
-		padding-left: 0;
-		padding-right: 50px;
+  .profileMain {
+    padding-left: 0;
+    padding-right: 50px;
 
-		&__inner {
-			width: 50%;
-		}
-		&__save {
-			width: 90%;
-		}
-	}
+    &__inner {
+      width: 50%;
+    }
+    &__save {
+      width: 90%;
+    }
+  }
 }

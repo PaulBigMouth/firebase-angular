@@ -6,11 +6,27 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 
 const routes: Routes = [
-    {path: '', component: AuthorizationLayoutComponent, children: [
-      {path: '', component: SignInComponent},
-      {path: 'signUp', component: SignUpComponent},
-      {path: 'emailVerified', component: EmailVerifiedComponent}
-    ]}
+  {
+    path: '',
+    component: AuthorizationLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: SignInComponent,
+        data: { animation: 'authAnimation' },
+      },
+      {
+        path: 'signUp',
+        component: SignUpComponent,
+        data: { animation: 'authAnimation' },
+      },
+      {
+        path: 'emailVerified',
+        component: EmailVerifiedComponent,
+        data: { animation: 'authAnimation' },
+      },
+    ],
+  },
 ];
 
 @NgModule({

@@ -1,26 +1,26 @@
 .userCard {
-    min-height: 300px;
-    max-height: 300px;
-    &__avatar {
-        width: 100%;
-        & img {
-            width: 100%;
-            display: block;
-            min-height: 150px;
-            max-height: 150px;
-        }
-        max-height: 150px;
-        overflow: hidden;
+  min-height: 300px;
+  max-height: 300px;
+  &__avatar {
+    width: 100%;
+    & img {
+      width: 100%;
+      display: block;
+      min-height: 150px;
+      max-height: 150px;
     }
-    &__text {
-        padding: 20px 0;
-        &__name {
-            text-align: center;
-        }
+    max-height: 150px;
+    overflow: hidden;
+  }
+  &__text {
+    padding: 20px 0;
+    &__name {
+      text-align: center;
     }
-    &__btnContainer {
-        height: 100%;
-        display: flex;
-        justify-content: flex-end;
-    }
+  }
+  &__btnContainer {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 }

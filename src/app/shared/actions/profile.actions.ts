@@ -17,7 +17,7 @@ export enum ProfileActions {
   RemoveHeroFromFavoriteAction = '[PROFILE] REMOVE_HERO_FROM_FAVORITE',
   RemoveHeroFromFavoriteSuccessAction = '[PROFILE] REMOVE_HERO_FROM_FAVORITE_SUCCESS',
   RemoveHeroFromFavoriteErrorAction = '[PROFILE] REMOVE_HERO_FROM_FAVORITE_ERROR',
-  
+
   UploadUserImageAction = '[PROFILE] UPLOAD_USER_IMAGE',
   UploadUserImageSuccessAction = '[PROFILE] UPLOAD_USER_IMAGE_SUCCESS',
   UploadUserImageErrorAction = '[PROFILE] UPLOAD_USER_IMAGE_ERROR',
@@ -25,12 +25,12 @@ export enum ProfileActions {
   UpdateUserNameAction = '[PROFILE] UPDATE_USER_NAME',
   UpdateUserNameSuccessAction = '[PROFILE] UPDATE_USER_NAME_SUCCESS',
   UpdateUserNameErrorAction = '[PROFILE] UPDATE_USER_NAME_ERROR',
-  
+
   CreateChatChannelAction = '[PROFILE] CREATE_CHAT_CHANNEL',
   CreateChatChannelSuccessAction = '[PROFILE] CREATE_CHAT_CHANNEL_SUCCESS',
   CreateChatChannelErrorAction = '[PROFILE] CREATE_CHAT_CHANNEL_ERROR',
 
-  UnsetProfileStateAction = '[PROFILE] UNSET_PROFILE_STATE'
+  UnsetProfileStateAction = '[PROFILE] UNSET_PROFILE_STATE',
 }
 
 export const initProfileStateAction = createAction(
@@ -130,7 +130,7 @@ export const createChatChannelAction = createAction(
 
 export const createChatChannelSuccessAction = createAction(
   ProfileActions.CreateChatChannelSuccessAction,
-  props<{ channel: {[userId: string]: string} }>()
+  props<{ channel: { [userId: string]: string } }>()
 );
 
 export const createChatChannelErrorAction = createAction(
@@ -140,7 +140,7 @@ export const createChatChannelErrorAction = createAction(
 
 export const unsetProfileStateAction = createAction(
   ProfileActions.UnsetProfileStateAction
-)
+);
 
 const all = union({
   initProfileStateAction,
@@ -164,7 +164,7 @@ const all = union({
   createChatChannelAction,
   createChatChannelSuccessAction,
   createChatChannelErrorAction,
-  unsetProfileStateAction
+  unsetProfileStateAction,
 });
 
 export type ProfileActionsUnion = typeof all;

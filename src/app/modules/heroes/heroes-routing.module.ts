@@ -5,15 +5,18 @@ import { NgModule } from '@angular/core';
 import { HeroesLayoutComponent } from './layouts/heroes-layout/heroes-layout.component';
 
 export const heroesRoutes: Routes = [
-	{
-		path: '',
-		component: HeroesComponent,
-		children: [ { path: '', component: HeroesLayoutComponent }, { path: ':id', component: HeroLayoutComponent } ],
-	},
+  {
+    path: '',
+    component: HeroesComponent,
+    children: [
+      { path: '', component: HeroesLayoutComponent },
+      { path: ':id', component: HeroLayoutComponent },
+    ],
+  },
 ];
 
 @NgModule({
-	imports: [ RouterModule.forChild(heroesRoutes) ],
-	exports: [ RouterModule ],
+  imports: [RouterModule.forChild(heroesRoutes)],
+  exports: [RouterModule],
 })
 export class HeroesRoutingModule {}

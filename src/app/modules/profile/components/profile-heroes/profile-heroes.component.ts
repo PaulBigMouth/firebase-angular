@@ -26,9 +26,11 @@ export class ProfileHeroesComponent implements OnInit, OnDestroy {
   public sub: Subscription;
   public subIdOfHeroes: Subscription;
   public favoritesHeroes$: Observable<HeroResponseResult[]> = this.store.pipe(
-    select(selectFavoritesHeroes),
+    select(selectFavoritesHeroes)
   );
-  public loader$: Observable<boolean> = this.store.pipe(select(selectHeroesLoader))
+  public loader$: Observable<boolean> = this.store.pipe(
+    select(selectHeroesLoader)
+  );
 
   constructor(private store: Store) {}
 
@@ -36,7 +38,7 @@ export class ProfileHeroesComponent implements OnInit, OnDestroy {
     this.sub = this.store
       .select(selectProfileState)
       .pipe(
-        filter((data) =>  !!data.heroes.length),
+        filter((data) => !!data.heroes.length),
         take(1)
       )
       .subscribe(() => {
@@ -59,6 +61,4 @@ export class ProfileHeroesComponent implements OnInit, OnDestroy {
       this.subIdOfHeroes.unsubscribe();
     }
   }
-
-
 }

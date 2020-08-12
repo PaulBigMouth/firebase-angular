@@ -3,19 +3,19 @@
 $auth-bg-color: #e5dfd3;
 
 .auth {
-	width: 100vw;
-	height: 100vh;
-	overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 1300px) {
-	.auth {
-		background-color: $auth-bg-color;
-		padding: 30px 45px;
-	}
+  .auth {
+    background-color: $auth-bg-color;
+    padding: 30px 45px;
+  }
 }
 @media screen and (min-width: 1500px) {
-	.auth {
-		padding: 45px 75px;
-	}
+  .auth {
+    padding: 45px 75px;
+  }
 }

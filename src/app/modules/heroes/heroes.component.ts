@@ -1,10 +1,10 @@
 import { OnInit, Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-	selector: 'app-heroes-component',
-	template: `<router-outlet></router-outlet>`,
-	changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-heroes-component',
+  template: `<router-outlet></router-outlet>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroesComponent implements OnInit {
-	ngOnInit(): void {}
+  ngOnInit(): void {}
 }

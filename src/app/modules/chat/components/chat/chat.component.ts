@@ -34,6 +34,5 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.store.dispatch(unsubFromChatChannelsAction());
-
   }
 }

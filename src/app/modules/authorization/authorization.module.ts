@@ -14,7 +14,7 @@ import { SignUpFormComponent } from './components/sign-up/sign-up-form/sign-up-f
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [],
   declarations: [

@@ -15,7 +15,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserCardComponent implements OnInit {
-  @Input() user: ProfileState;
+  @Input()
+  user: ProfileState;
   constructor(private store: Store) {}
 
   ngOnInit(): void {}

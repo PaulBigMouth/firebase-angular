@@ -24,8 +24,8 @@ export class HeroesFiltersComponent implements OnInit {
   public statusOptions: SelectOption[] = [{ name: 'Alive' }, { name: 'Dead' }];
   public genderOptions: SelectOption[] = [{ name: 'Male' }, { name: 'Female' }];
 
-  @Output() public onFilter = new EventEmitter<Filter>();
-  constructor() {}
+  @Output()
+  public onFilter = new EventEmitter<Filter>();
 
   ngOnInit(): void {
     this.form = new FormGroup({

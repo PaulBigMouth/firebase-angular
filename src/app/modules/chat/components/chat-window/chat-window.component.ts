@@ -1,10 +1,8 @@
-import { filter, take } from 'rxjs/operators';
 import { sendMessageAction } from './../../../../shared/actions/chat.actions';
 import { FormGroup, FormControl } from '@angular/forms';
 import {
   selectChatMessages,
   selectFormDisabled,
-  selectChatState,
 } from './../../../../shared/selectors/chat.selectors';
 import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -15,6 +13,9 @@ import {
   ChangeDetectionStrategy,
   OnDestroy,
   ChangeDetectorRef,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
 } from '@angular/core';
 import { ChatMessage } from 'src/app/shared/interfaces/chat.interface';
 import { selectUserId } from 'src/app/shared/selectors/auth.selectors';
@@ -25,7 +26,7 @@ import { selectUserId } from 'src/app/shared/selectors/auth.selectors';
   styleUrls: ['./chat-window.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChatWindowComponent implements OnInit, OnDestroy {
+export class ChatWindowComponent implements OnInit, OnDestroy, AfterViewInit {
   public sub: Subscription;
   public userId$: Observable<string> = this.store.select(selectUserId);
   public form: FormGroup;
@@ -34,6 +35,9 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
     selectFormDisabled
   );
   public idChannel: string;
+  @ViewChild('chatWindow')
+  public chatWindowRef: ElementRef;
+
   constructor(
     private route: ActivatedRoute,
     private store: Store,
@@ -60,12 +64,23 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => this.scrollToBottom());
+  }
+
   public sendMessage(): void {
-    if (this.form.value.message) {
-      this.store.dispatch(
-        sendMessageAction({ ...this.form.value, idChannel: this.idChannel })
-      );
-    }
+    this.store.dispatch(
+      sendMessageAction({ ...this.form.value, idChannel: this.idChannel })
+    );
     this.form.reset();
+    setTimeout(() => this.scrollToBottom('smooth'), 300);
+  }
+
+  public scrollToBottom(behavior?: string): void {
+    if (this.chatWindowRef) {
+      this.chatWindowRef.nativeElement.parentNode.scroll({
+        top: this.chatWindowRef.nativeElement.clientHeight,
+      });
+    }
   }
 }

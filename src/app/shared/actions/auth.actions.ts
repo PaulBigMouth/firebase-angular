@@ -1,7 +1,6 @@
-import { props, createAction, union } from "@ngrx/store";
-import { AuthState } from "../reducers/auth.reducers";
-import { User } from "../interfaces/users.interface";
-
+import { props, createAction, union } from '@ngrx/store';
+import { AuthState } from '../reducers/auth.reducers';
+import { User } from '../interfaces/users.interface';
 
 export enum AuthActions {
   SignInAction = '[AUTH] SIGN_IN',
@@ -18,7 +17,7 @@ export enum AuthActions {
   AuthStateInitSuccessAction = '[AUTH] AUTH_STATE_INIT_SUCCESS',
   AuthStateInitErrorAction = '[AUTH] AUTH_STATE_INIT_ERROR',
 
-  UnsetAuthStateAction = '[AUTH] UNSET_AUTH_STATE'
+  UnsetAuthStateAction = '[AUTH] UNSET_AUTH_STATE',
 }
 
 export const signInAction = createAction(
@@ -48,7 +47,10 @@ export const signOutSuccessAction = createAction(
   props<{ payload: string }>()
 );
 
-export const authStateInitAction = createAction(AuthActions.AuthStateInitAction, props<{user: AuthState}>());
+export const authStateInitAction = createAction(
+  AuthActions.AuthStateInitAction,
+  props<{ user: AuthState }>()
+);
 
 export const authStateInitSuccessAction = createAction(
   AuthActions.AuthStateInitSuccessAction,
@@ -67,7 +69,7 @@ export const signErrorAction = createAction(
 
 export const unsetAuthStateAction = createAction(
   AuthActions.UnsetAuthStateAction
-)
+);
 
 const all = union({
   signInAction,
@@ -78,8 +80,7 @@ const all = union({
   authStateInitAction,
   authStateInitSuccessAction,
   authStateInitErrorAction,
-  unsetAuthStateAction
+  unsetAuthStateAction,
 });
 
-export type AuthActionsUnion = typeof all
-
+export type AuthActionsUnion = typeof all;

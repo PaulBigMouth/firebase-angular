@@ -4,12 +4,17 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   selector: '[chat-window]',
 })
 export class ChatWindowDirective {
-  constructor(private ref: ElementRef) {}
+  private oldScroll: number = 0;
+  constructor(private ref: ElementRef<HTMLDivElement>) {}
 
-  @HostListener('window:resize') public resize() {
-    this.ref.nativeElement.parentNode.scroll({
-      top: this.ref.nativeElement.clientHeight,
-      behavior: 'smooth',
-    });
+  @HostListener('scroll', ['$event'])
+  public scroll(event) {
+    const element = this.ref.nativeElement.querySelector(
+      '.chat__messages'
+    ) as HTMLDivElement;
+    console.log(this.ref.nativeElement.scrollTop);
+    element.style.transform = `rotateX(180deg) translateY(${
+      this.ref.nativeElement.scrollTop * 2
+    }px)`
   }
 }

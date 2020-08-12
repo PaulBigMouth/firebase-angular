@@ -48,7 +48,7 @@ export class ProfileMainComponent implements OnInit, OnDestroy {
     }
   }
   public onSave(): void {
-    this.store.dispatch(updateUserNameAction(this.form.value))
-    this.form.disable()
+    this.store.dispatch(updateUserNameAction(this.form.value));
+    this.form.disable();
   }
 }

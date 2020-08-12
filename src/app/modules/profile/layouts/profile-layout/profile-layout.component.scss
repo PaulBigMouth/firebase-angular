@@ -1,119 +1,116 @@
 @import "~src/assets/scss/_variables.scss";
 .profile {
-	margin-top: 50px;
-	display: grid;
-	grid-template-columns: 30% 70%;
-	min-height: 80vh;
-	&__left {
-		display: flex;
-		justify-content: flex-end;
-		&__img {
-			max-width: 300px;
-			& img {
-				display: block;
-				width: 100%;
-			}
-			&__input {
-				display: none;
-			}
-		}
-	}
-	&__right {
-		padding: 0 60px;
-		&__header {
-			padding: 5px 0;
-			&__nav {
-				&__item {
-					color: #fff;
-					padding: 10px 20px;
-					position: relative;
-					transition: background-color .2s ease-in;
-					font-size: rem(14);
-					&:hover {
-						background-color: #171a1f;
-						&::after {
-							opacity: 1;
-						}
-					}
-					&::after {
-						display: block;
-						content: '';
-						position: absolute;
-						bottom: 0;
-						background-color: $heroes-banner-bg-color;
-						box-shadow: 0px 0px 10px 1px rgba(186, 236, 221, 0.75);
-						height: 2px;
-						border-radius: 7px;
-						width: 100%;
-						left: 0;
-						opacity: 0;
-						transition: opacity .2s ease-in;
-					}
-					&.active {
-						&::after {
-							opacity: 1;
-						}
-						background-color: #171a1f;
-					}
-				}
-			}
-		}
-	}
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  min-height: 80vh;
+  &__left {
+    display: flex;
+    justify-content: flex-end;
+    &__img {
+      max-width: 300px;
+      & img {
+        display: block;
+        width: 100%;
+      }
+      &__input {
+        display: none;
+      }
+    }
+  }
+  &__right {
+    padding: 0 60px;
+    &__header {
+      padding: 5px 0;
+      &__nav {
+        &__item {
+          color: #fff;
+          padding: 10px 20px;
+          position: relative;
+          transition: background-color 0.2s ease-in;
+          font-size: rem(14);
+          &:hover {
+            background-color: #171a1f;
+            &::after {
+              opacity: 1;
+            }
+          }
+          &::after {
+            display: block;
+            content: "";
+            position: absolute;
+            bottom: 0;
+            background-color: $heroes-banner-bg-color;
+            box-shadow: 0px 0px 10px 1px rgba(186, 236, 221, 0.75);
+            height: 2px;
+            border-radius: 7px;
+            width: 100%;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.2s ease-in;
+          }
+          &.active {
+            &::after {
+              opacity: 1;
+            }
+            background-color: #171a1f;
+          }
+        }
+      }
+    }
+  }
 }
 
 .loader__heightContainer {
-	min-height: 90vh;
+  min-height: 90vh;
 }
 
 @media screen and (min-width: 0) {
-	.profile {
-		grid-template-columns: 100%;
-		&__left {
-			justify-content: center;
-		}
-		&__right {
-			padding: 0;
-			margin: 0 30px;
-			// &__main {
-			// 	padding: 0 20px;
-			// }
-			&__header {
-				margin-top: 30px;
-				&__nav {
-					display: flex;
-					flex-direction: column;
-					&__item {
-						text-align: center;
-					}
-				}
-			}
-		}
-	}
+  .profile {
+    grid-template-columns: 100%;
+    &__left {
+      justify-content: center;
+    }
+    &__right {
+      padding: 0;
+      margin: 0 30px;
+      &__header {
+        margin-top: 30px;
+        &__nav {
+          display: flex;
+          flex-direction: column;
+          &__item {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 480px) {
-	.profile {
-		&__right {
-			&__header {
-				&__nav {
-					flex-direction: row;
-					justify-content: center;
-				}
-			}
-		}
-	}
+  .profile {
+    &__right {
+      &__header {
+        &__nav {
+          flex-direction: row;
+          justify-content: center;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 950px) {
-	.profile {
-		grid-template-columns: 30% 70%;
-		&__right {
-			&__header {
-				margin-top: 0;
-				&__nav {
-					justify-content: flex-start;
-				}
-			}
-		}
-	}
+  .profile {
+    grid-template-columns: 30% 70%;
+    &__right {
+      &__header {
+        margin-top: 0;
+        &__nav {
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
 }

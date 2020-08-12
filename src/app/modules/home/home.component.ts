@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
     { name: 'Community', url: '/community' },
     { name: 'Profile', url: '/profile' },
   ];
-  constructor() {}
 
   ngOnInit(): void {}
 

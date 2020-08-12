@@ -1,6 +1,6 @@
 <div class="chat__left" *ngIf="messages$ | async as messages; else loader">
   <div class="chat__left__lengthContainer" *ngIf="messages.length; else empty">
-    <div class="chat__messages" chat-window>
+    <div class="chat__messages" #chatWindow>
       <div
         class="chat__message"
         *ngFor="let message of messages"
@@ -30,7 +30,7 @@
     />
     <button
       class="chat__form__btn fw-600"
-      [disabled]="formDisabled$ | async"
+      [disabled]="(formDisabled$ | async) || !form.value.message"
       (click)="sendMessage()"
     >
       Send

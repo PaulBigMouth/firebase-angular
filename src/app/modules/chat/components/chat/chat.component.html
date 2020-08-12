@@ -1,21 +1,32 @@
 <section class="chat" *ngIf="!(loader$ | async); else loader">
-    <div>
-        <router-outlet></router-outlet>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="chat__right">
+    <div
+      class="chat__right__asyncContainer"
+      *ngIf="chatChannels$ | async as chatChannels; else spinner"
+    >
+      <div
+        class="chat__right__channels"
+        *ngIf="chatChannels.length; else empty"
+      >
+        <a
+          *ngFor="let channel of chatChannels"
+          [routerLink]="channel"
+          routerLinkActive="active"
+          >{{ channel }}</a
+        >
+      </div>
+      <ng-template #empty>
+        <p>You don't have any active chats</p>
+      </ng-template>
     </div>
-    <div class="chat__right">
-       <div class="chat__right__asyncContainer" *ngIf="chatChannels$ | async as chatChannels; else spinner">
-            <div class="chat__right__channels" *ngIf="chatChannels.length; else empty">
-                <a *ngFor="let channel of chatChannels" [routerLink]="channel" routerLinkActive="active">{{channel}}</a>
-            </div>
-            <ng-template #empty>
-                <p>You don't have any active chats</p>
-            </ng-template>
-       </div>
-        <ng-template #spinner>
-            <app-preloader></app-preloader>
-        </ng-template>
-    </div>
+    <ng-template #spinner>
+      <app-preloader></app-preloader>
+    </ng-template>
+  </div>
 </section>
 <ng-template #loader>
-    <app-preloader></app-preloader>
+  <app-preloader></app-preloader>
 </ng-template>

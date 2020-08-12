@@ -1,10 +1,5 @@
 import { HeroResponseResult } from '../../../../shared/interfaces/heroes.interface';
-import {
-  Component,
-  OnInit,
-  Input,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-hero-card',
@@ -12,9 +7,7 @@ import {
   styleUrls: ['./hero-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroCardComponent implements OnInit {
-  @Input() hero: HeroResponseResult;
-  constructor() {}
-
-  ngOnInit(): void {}
+export class HeroCardComponent {
+  @Input()
+  hero: HeroResponseResult;
 }

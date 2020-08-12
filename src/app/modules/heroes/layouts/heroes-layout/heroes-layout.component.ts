@@ -1,4 +1,4 @@
-import { selectPages } from './../../../../shared/selectors/heroes.selectors';
+import { selectPages, selectHeroesLoader } from './../../../../shared/selectors/heroes.selectors';
 import { Filter } from './../../../../shared/interfaces/heroes.interface';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -25,24 +25,36 @@ import { selectHeroes } from 'src/app/shared/selectors/heroes.selectors';
 })
 export class HeroesLayoutComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private cd: ChangeDetectorRef) {}
+
   public page: number = 1;
   public maxPage: number;
+  public pagesSub: Subscription;
+
   public heroes$: Observable<HeroResponseResult[]>;
-  public sub: Subscription;
+
+  
+  public loaderSub: Subscription
+  public loader: boolean
 
   ngOnInit(): void {
     this.store.dispatch(
       getHeroesAction({ payload: { page: this.page.toString() } })
     );
     this.heroes$ = this.store.pipe(select(selectHeroes));
-    this.sub = this.store.select(selectPages).subscribe((pages) => {
+    this.pagesSub = this.store.select(selectPages).subscribe((pages) => {
       this.maxPage = pages;
     });
+    this.loaderSub = this.store.select(selectHeroesLoader).subscribe(loader => {
+      this.loader = loader
+    })
   }
 
   ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
+    if (this.pagesSub) {
+      this.pagesSub.unsubscribe();
+    }
+    if(this.loaderSub) {
+      this.loaderSub.unsubscribe()
     }
   }
 
@@ -50,7 +62,8 @@ export class HeroesLayoutComponent implements OnInit, OnDestroy {
   public onScroll(): void {
     if (
       window.innerHeight + window.scrollY >= document.body.offsetHeight - 6 &&
-      this.page < this.maxPage
+      this.page < this.maxPage &&
+      !this.loader
     ) {
       this.page++;
       this.store.dispatch(

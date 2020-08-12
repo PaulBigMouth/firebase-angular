@@ -1,26 +1,50 @@
 <section class="profile" *ngIf="!(loader$ | async); else loader">
-    <div class="profile__left">
-        <div class="profile__left__img">
-            <img [src]="(avatarUrl$ | async) || 'https://im0-tub-by.yandex.net/i?id=427256461c987dbaa1b899a06afc4806&n=13'" alt="">
-            <input type="file" #fileInput class="profile__left__img__input" (change)="onFileUpload($event)">
-            <button (click)="triggerClick()" class="profile__left__img__btn btn__light fw-600">Change photo</button>
-        </div>
+  <div class="profile__left">
+    <div class="profile__left__img">
+      <img
+        [src]="
+          (avatarUrl$ | async) ||
+          'https://im0-tub-by.yandex.net/i?id=427256461c987dbaa1b899a06afc4806&n=13'
+        "
+        alt=""
+      />
+      <input
+        type="file"
+        #fileInput
+        class="profile__left__img__input"
+        (change)="onFileUpload($event)"
+      />
+      <button
+        (click)="triggerClick()"
+        class="profile__left__img__btn btn__light fw-600"
+      >
+        Change photo
+      </button>
     </div>
-    <div class="profile__right">
-        <header class="profile__right__header">
-            <nav class="profile__right__header__nav">
-                <a class="profile__right__header__nav__item" *ngFor="let link of links" [routerLink]="link.url" routerLinkActive="active">{{ link.name }}</a>
-                <a class="profile__right__header__nav__item" (click)="signOut()">Sign Out</a>
-            </nav>
-        </header>
-        <main class="profile__right__main">
-            <router-outlet></router-outlet>
-        </main>
-    </div>
+  </div>
+  <div class="profile__right">
+    <header class="profile__right__header">
+      <nav class="profile__right__header__nav">
+        <a
+          class="profile__right__header__nav__item"
+          *ngFor="let link of links"
+          [routerLink]="link.url"
+          routerLinkActive="active"
+          >{{ link.name }}</a
+        >
+        <a class="profile__right__header__nav__item" (click)="signOut()"
+          >Sign Out</a
+        >
+      </nav>
+    </header>
+    <main class="profile__right__main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </section>
 
 <ng-template #loader>
-    <div class="loader__heightContainer">
-        <app-preloader></app-preloader>
-    </div>
+  <div class="loader__heightContainer">
+    <app-preloader></app-preloader>
+  </div>
 </ng-template>

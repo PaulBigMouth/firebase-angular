@@ -1,5 +1,9 @@
 <div class="filter">
-  <button class="filter__btn" (click)="toggleFilters()">
+  <button
+    class="filter__btn"
+    (click)="toggleFilters()"
+    [ngClass]="{ open: visibleFilters }"
+  >
     <span>
       <i class="fas fa-filter"></i>
     </span>

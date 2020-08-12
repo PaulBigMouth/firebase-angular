@@ -6,6 +6,7 @@
       formControlName="email"
       [valid]="form.get('email').valid"
       [errors]="form.get('email').errors"
+      [value]="form.get('email').value"
     ></app-input>
   </div>
   <div>
@@ -15,6 +16,7 @@
       formControlName="password"
       [valid]="form.get('password').valid"
       [errors]="form.get('password').errors"
+      [value]="form.get('password').value"
     ></app-input>
   </div>
   <button

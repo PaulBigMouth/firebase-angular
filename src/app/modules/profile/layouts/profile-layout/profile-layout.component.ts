@@ -6,7 +6,10 @@ import {
   selectAvatarUrl,
   selectProfileLoader,
 } from './../../../../shared/selectors/profile.selectors';
-import { uploadUserImageAction, unsetProfileStateAction } from './../../../../shared/actions/profile.actions';
+import {
+  uploadUserImageAction,
+  unsetProfileStateAction,
+} from './../../../../shared/actions/profile.actions';
 import { Store, select } from '@ngrx/store';
 import {
   Component,
@@ -25,7 +28,8 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileLayoutComponent implements OnInit {
-  @ViewChild('fileInput') public inputRef: ElementRef;
+  @ViewChild('fileInput')
+  public inputRef: ElementRef;
   public avatarUrl$: Observable<string>;
   public loader$: Observable<boolean>;
   public links = [
@@ -42,12 +46,13 @@ export class ProfileLayoutComponent implements OnInit {
 
   public signOut(): void {
     this.store.dispatch(signOutAction());
-    this.store.dispatch(unsetAuthStateAction())
-    this.store.dispatch(unsetHeroesStateAction())
-    this.store.dispatch(unsetProfileStateAction())
-    this.store.dispatch(unsetCommunityStateAction())
-    this.store.dispatch(unsetChatStateAction())
+    this.store.dispatch(unsetAuthStateAction());
+    this.store.dispatch(unsetHeroesStateAction());
+    this.store.dispatch(unsetProfileStateAction());
+    this.store.dispatch(unsetCommunityStateAction());
+    this.store.dispatch(unsetChatStateAction());
   }
+
   public onFileUpload($event: any): void {
     const file = $event.target.files[0];
 
@@ -58,6 +63,7 @@ export class ProfileLayoutComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+
   public triggerClick(): void {
     this.inputRef.nativeElement.click();
   }
