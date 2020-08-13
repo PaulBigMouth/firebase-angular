@@ -70,14 +70,15 @@ export class HeroesEffects {
     this.actions$.pipe(
       ofType(HeroesActions.GetFavoritesHeroesByIdAction),
       switchMap(({ id }) =>
-        this.heroesService.getHeroesById(id).pipe(
-          map((heroes) => {
-            if (Array.isArray(heroes)) {
-              return getFavoritesHeroesByIdSuccessAction({ payload: heroes });
-            }
-            return getFavoritesHeroesByIdSuccessAction({ payload: [heroes] });
-          })
-        )
+        this.heroesService
+          .getHeroesById(id)
+          .pipe(
+            map((heroes) =>
+              Array.isArray(heroes)
+                ? getFavoritesHeroesByIdSuccessAction({ payload: heroes })
+                : getFavoritesHeroesByIdSuccessAction({ payload: [heroes] })
+            )
+          )
       )
     )
   );

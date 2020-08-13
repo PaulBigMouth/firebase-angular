@@ -1,13 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-	selector: 'app-toast',
-	templateUrl: './toast.component.html',
-	styleUrls: [ './toast.component.scss' ],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-toast',
+  templateUrl: './toast.component.html',
+  styleUrls: ['./toast.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToastComponent implements OnInit {
-	constructor() {}
-
-	ngOnInit(): void {}
-}
+export class ToastComponent {}

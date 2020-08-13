@@ -4,49 +4,52 @@
 @import "~src/assets/scss/_utils.scss";
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	color: $main-color;
-	font-family: $montserrat;
-	font-size: $main-font-size;
-	min-height: 100vh;
-	width: 100vw;
-	overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  color: $main-color;
+  font-family: $montserrat;
+  font-size: $main-font-size;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .container {
-	width: 90%;
-	margin: 0 auto;
+  width: 90%;
+  margin: 0 auto;
 }
+
 ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
+
 li {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
+
 a {
-	cursor: pointer;
-	text-decoration: none;
-	color: $main-color;
+  cursor: pointer;
+  text-decoration: none;
+  color: $main-color;
 }
 
 button {
-	cursor: pointer;
-	border-radius: 0;
-	border: none;
-	font-family: $montserrat;
+  cursor: pointer;
+  border-radius: 0;
+  border: none;
+  font-family: $montserrat;
 }
 
 h1,
@@ -55,47 +58,50 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
+
 .text-underline {
-	text-decoration: underline;
-	color: $main-color;
+  text-decoration: underline;
+  color: $main-color;
 }
+
 .helper-text {
-	display: block;
-	margin-top: 4px;
-	color: $red-color;
-	font-size: rem(13);
+  display: block;
+  margin-top: 4px;
+  color: $red-color;
+  font-size: rem(13);
 }
+
 button:disabled {
-	opacity: 0.6;
+  opacity: 0.6;
 }
 
 .circle {
-	margin-right: 5px;
-	display: block;
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	background-color: $grey-color;
-	&.alive {
-		background-color: #54cd44;
-	}
-	&.dead {
-		background-color: $red-color;
-	}
+  margin-right: 5px;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $grey-color;
+  &.alive {
+    background-color: #54cd44;
+  }
+  &.dead {
+    background-color: $red-color;
+  }
 }
 
 .btn__light {
-	width: 100%;
-	margin-top: 20px;
-	background-color: $heroes-banner-bg-color;
-	padding: 7px 0;
-	color: $main-bg-color;
-	transition: background-color 0.2s ease-in, box-shadow 0.2s ease-in;
-	&:hover {
-		background-color: #a1dbca;
-		box-shadow: 0px 0px 10px 1px rgba(186, 236, 221, 0.75);
-	}
+  width: 100%;
+  margin-top: 20px;
+  background-color: $heroes-banner-bg-color;
+  padding: 7px 0;
+  color: $main-bg-color;
+  transition: background-color 0.2s ease-in, box-shadow 0.2s ease-in;
+  &:hover {
+    background-color: #a1dbca;
+    box-shadow: 0px 0px 10px 1px rgba(186, 236, 221, 0.75);
+  }
 }

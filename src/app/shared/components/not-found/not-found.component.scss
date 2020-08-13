@@ -1,16 +1,16 @@
 @import "~src/assets/scss/_utils.scss";
 
 .notFound {
-	background-color: rgb(221, 219, 219);
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	&__inner {
-		text-align: center;
-	}
+  background-color: rgb(221, 219, 219);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__inner {
+    text-align: center;
+  }
 }
 h1 {
-	font-size: rem(54);
+  font-size: rem(54);
 }

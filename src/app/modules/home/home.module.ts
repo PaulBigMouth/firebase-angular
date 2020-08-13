@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HomeRoutingModule } from './home-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home.component';
+import { HomeComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   imports: [

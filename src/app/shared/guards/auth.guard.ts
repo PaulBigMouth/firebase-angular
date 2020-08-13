@@ -31,7 +31,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       map((user) => {
         if (user) {
           if (user.emailVerified) {
-            
             this.store.dispatch(
               authStateInitAction({
                 user: {
@@ -41,7 +40,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 },
               })
             );
-            this.store.dispatch(initProfileStateAction({userId: user.uid}))
+            this.store.dispatch(initProfileStateAction({ userId: user.uid }));
             return true;
           }
 

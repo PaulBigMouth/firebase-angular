@@ -17,19 +17,19 @@ export const selectUserName = createSelector(
 export const selectAvatarUrl = createSelector(
   selectProfileState,
   (profileState: ProfileState) => profileState.avatarImageUrl
-)
+);
 
 export const selectProfileLoader = createSelector(
   selectProfileState,
   (profileState: ProfileState) => profileState.loader
-)
+);
 
 export const selectIdOfChatChannels = createSelector(
   selectProfileState,
   (profileState: ProfileState) => profileState.channels
-)
+);
 
 export const selectPushToFavoritesBtnDisabled = createSelector(
   selectProfileState,
   (profileState: ProfileState) => profileState.pushToFavoritesBtnDisabled
-)
+);

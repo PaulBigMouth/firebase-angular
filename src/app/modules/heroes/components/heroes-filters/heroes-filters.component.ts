@@ -19,11 +19,10 @@ import {
 })
 export class HeroesFiltersComponent implements OnInit {
   public form: FormGroup;
-  public visibleFilters: boolean = false;
-
+  public visibleFilters = false;
   public statusOptions: SelectOption[] = [{ name: 'Alive' }, { name: 'Dead' }];
   public genderOptions: SelectOption[] = [{ name: 'Male' }, { name: 'Female' }];
-
+  // tslint:disable-next-line:no-output-on-prefix
   @Output()
   public onFilter = new EventEmitter<Filter>();
 
@@ -51,6 +50,7 @@ export class HeroesFiltersComponent implements OnInit {
       filter.status = this.form.value.status.toLowerCase();
     }
     this.onFilter.emit(filter);
+    this.toggleFilters();
   }
 
   public clearFilters(): void {

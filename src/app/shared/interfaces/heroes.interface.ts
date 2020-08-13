@@ -16,7 +16,7 @@ export interface HeroResponseResult {
   gender: string;
   id: number;
   image: string;
-  location: Object;
+  location: any; // OBject
   name: string;
   origin: any;
   species: string;

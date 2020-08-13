@@ -1,6 +1,6 @@
 import { selectHeroesLoader } from './../../../../shared/selectors/heroes.selectors';
 import { HeroResponseResult } from './../../../../shared/interfaces/heroes.interface';
-import { map, take, filter } from 'rxjs/operators';
+import { take, filter } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import {

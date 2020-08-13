@@ -5,14 +5,15 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyCMYt4Md7kX69OuS7lBC9qtajvCx2FUAsY",
-    authDomain: "fir-auth-70ef2.firebaseapp.com",
-    databaseURL: "https://fir-auth-70ef2.firebaseio.com",
-    projectId: "fir-auth-70ef2",
-    storageBucket: "fir-auth-70ef2.appspot.com",
-    messagingSenderId: "708531310095",
-    appId: "1:708531310095:web:6496b533f35363ba63dd7a"
-  }
+    apiKey: 'AIzaSyCMYt4Md7kX69OuS7lBC9qtajvCx2FUAsY',
+    authDomain: 'fir-auth-70ef2.firebaseapp.com',
+    databaseURL: 'https://fir-auth-70ef2.firebaseio.com',
+    projectId: 'fir-auth-70ef2',
+    storageBucket: 'fir-auth-70ef2.appspot.com',
+    messagingSenderId: '708531310095',
+    appId: '1:708531310095:web:6496b533f35363ba63dd7a',
+  },
+  apiUrlHero: 'https://rickandmortyapi.com/api/character',
 };
 
 /*

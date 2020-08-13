@@ -24,15 +24,15 @@ export class InputComponent implements ControlValueAccessor {
   @Input() public placeholder: string;
   @Input() public type: string;
   @Input() public valid: string;
-  @Input() public errors?: Object | null | undefined;
+  @Input() public errors?;
   @Input() public maxLength: string;
   @Input() public value: string | number;
   @Input() public styleType: string;
 
-  isTouched: boolean = false;
+  isTouched = false;
+  isDisabled = false;
   onChange: (_: any) => void = () => {};
   onTouched: () => void = () => {};
-  isDisabled: boolean = false;
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -48,12 +48,15 @@ export class InputComponent implements ControlValueAccessor {
   writeValue(value: any): void {
     this.onChange(value);
   }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
+
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
     this.errors = {};

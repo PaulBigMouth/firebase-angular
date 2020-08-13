@@ -21,17 +21,17 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormSelectComponent implements ControlValueAccessor {
-  public open: boolean = false;
-
-  @Input() public options: SelectOption[];
-  @Input() public placeholder: string;
-  @Input() public value: string;
-  constructor() {}
-
+  @Input()
+  public options: SelectOption[];
+  @Input()
+  public placeholder: string;
+  @Input()
+  public value: string;
+  public open = false;
+  public isDisabled = false;
+  public isTouched = false;
   public onChanged: (_: any) => void = () => {};
   public onTouched: () => void = () => {};
-  public isDisabled: boolean = false;
-  public isTouched: boolean = false;
 
   public select(option: SelectOption): void {
     this.writeValue(option);

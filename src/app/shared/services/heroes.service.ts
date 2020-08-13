@@ -1,7 +1,7 @@
+import { environment } from './../../../environments/environment';
 import { HeroResponseResult } from './../interfaces/heroes.interface';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -15,18 +15,14 @@ import { AngularFireDatabase } from '@angular/fire/database';
   providedIn: 'root',
 })
 export class HeroesService {
-  private apiUrl: string = 'https://rickandmortyapi.com/api';
-  private character: string = 'character';
-
   constructor(
     private http: HttpClient,
     private store: Store,
     private db: AngularFireDatabase
   ) {}
 
-  public getHeroes(params: any = {}): Observable<HeroesResponse> {
-    console.log(params);
-    return this.http.get<HeroesResponse>(`${this.apiUrl}/${this.character}`, {
+  public getHeroes(params = {}): Observable<HeroesResponse> {
+    return this.http.get<HeroesResponse>(environment.apiUrlHero, {
       params: new HttpParams({
         fromObject: params,
       }),
@@ -34,15 +30,12 @@ export class HeroesService {
   }
 
   public getHeroById(id: number): Observable<HeroResponseResult> {
-    return this.http.get<HeroResponseResult>(
-      `${this.apiUrl}/${this.character}/${id}`
-    );
+    return this.http.get<HeroResponseResult>(`${environment.apiUrlHero}/${id}`);
   }
 
   public getHeroesById(id: number[]): Observable<HeroResponseResult[]> {
-    console.log(id);
     return this.http.get<HeroResponseResult[]>(
-      `${this.apiUrl}/${this.character}/${id}`
+      `${environment.apiUrlHero}/${id}`
     );
   }
 

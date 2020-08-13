@@ -29,25 +29,10 @@ export class ProfileService {
   }
 
   public uploadUserImage(image: File): Observable<string> {
-    const ref = this.storage.ref(
-      `userImages/${new Date().toLocaleTimeString().toString()}${image.name}`
-    );
-
-    return from(
-      this.storage
-        .ref(
-          `userImages/${new Date().toLocaleTimeString().toString()}${
-            image.name
-          }`
-        )
-        .put(image)
-    ).pipe(
-      switchMap(() => {
-        return ref.getDownloadURL().pipe(
-          map((url) => {
-            return url;
-          })
-        );
+    return this.store.select(selectUserId).pipe(
+      switchMap((userId) => {
+        const ref = this.storage.ref(`userImages/${userId}`);
+        return from(ref.put(image)).pipe(switchMap(() => ref.getDownloadURL()));
       })
     );
   }

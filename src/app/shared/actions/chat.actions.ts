@@ -6,9 +6,9 @@ export enum ChatActions {
   GetChatChannelsSuccessAction = '[CHAT] GET_CHAT_CHANNELS_SUCCESS',
   GetChatChannelsErrorAction = '[CHAT] GET_CHAT_CHANNELS_ERROR',
 
-  UnsubFromChatChannelssAction = '[CHAT] UNSUB_FROM_CHAT_CHANNEL',
-  UnsubFromChatChannelsSuccessAction = '[CHAT] UNSUB_FROM_CHAT_SUCCESS',
-  UnsubFromChatChannelsErrorAction = '[CHAT] UNSUB_FROM_CHAT_ERROR',
+  UnsubscribeFromChatChannelsAction = '[CHAT] UNSUBSCRIBE_FROM_CHAT',
+  UnsubscribeFromChatChannelsSuccessAction = '[CHAT] UNSUBSCRIBE_FROM_CHAT_SUCCESS',
+  UnsubscribeFromChatChannelsErrorAction = '[CHAT] UNSUBSCRIBE_FROM_CHAT_ERROR',
 
   PushChatChannelAction = '[CHAT] PUSH_CHAT_CHANNEL',
 
@@ -24,8 +24,7 @@ export const getChatChannelsAction = createAction(
 );
 
 export const getChatChannelsSuccessAction = createAction(
-  ChatActions.GetChatChannelsSuccessAction,
-  props<{ payload: any }>()
+  ChatActions.GetChatChannelsSuccessAction
 );
 
 export const getChatChannelsErrorAction = createAction(
@@ -33,17 +32,16 @@ export const getChatChannelsErrorAction = createAction(
   props<{ message: string }>()
 );
 
-export const unsubFromChatChannelsAction = createAction(
-  ChatActions.UnsubFromChatChannelssAction
+export const unsubscribeFromChatChannelsAction = createAction(
+  ChatActions.UnsubscribeFromChatChannelsAction
 );
 
-export const unsubFromChatChannelsSuccessAction = createAction(
-  ChatActions.UnsubFromChatChannelsSuccessAction,
-  props<{ message: string }>()
+export const unsubscribeFromChatChannelsSuccessAction = createAction(
+  ChatActions.UnsubscribeFromChatChannelsSuccessAction
 );
 
-export const unsubFromChatChannelsErrorAction = createAction(
-  ChatActions.UnsubFromChatChannelsErrorAction,
+export const unsubscribeFromChatChannelsErrorAction = createAction(
+  ChatActions.UnsubscribeFromChatChannelsErrorAction,
   props<{ message: string }>()
 );
 
@@ -75,9 +73,9 @@ const all = union({
   getChatChannelsAction,
   getChatChannelsSuccessAction,
   getChatChannelsErrorAction,
-  unsubFromChatChannelsAction,
-  unsubFromChatChannelsSuccessAction,
-  unsubFromChatChannelsErrorAction,
+  unsubscribeFromChatChannelsAction,
+  unsubscribeFromChatChannelsSuccessAction,
+  unsubscribeFromChatChannelsErrorAction,
   pushChatChannelAction,
   sendMessageAction,
   sendMessageSuccessAction,

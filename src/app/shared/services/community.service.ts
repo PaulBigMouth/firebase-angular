@@ -12,7 +12,7 @@ import { selectIdOfFavoritesHeroes } from '../selectors/profile.selectors';
 export class CommunityService {
   constructor(private store: Store, private db: AngularFireDatabase) {}
 
-  public getVisibleUsers(idUser: string): Observable<any> {
+  public getVisibleUsers(): Observable<any> {
     return this.store.select(selectIdOfFavoritesHeroes).pipe(
       switchMap((favoritesHeroes) => {
         if (favoritesHeroes.length) {
@@ -24,25 +24,25 @@ export class CommunityService {
                 return snapshot.val();
               })
           );
-        } else return of(null);
+        } else {
+          return of(null);
+        }
       }),
       switchMap((data) => {
         if (data) {
-          return data.then((usersId) => {
+          return data.then((usersId: string[]) => {
             return Promise.all(
               usersId.map(
-                async (userId) =>
+                async (userId: string) =>
                   await this.db.database
                     .ref(`users/${userId}`)
                     .once('value')
                     .then((snapshot) => {
-                      return snapshot.val();
+                      return snapshot.val() as ProfileState;
                     })
               )
-            )
-          }
-            
-          );
+            );
+          });
         }
         return of(null);
       })

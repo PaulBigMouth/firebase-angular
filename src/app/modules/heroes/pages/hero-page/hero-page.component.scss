@@ -1,0 +1,61 @@
+@import "~src/assets/scss/_variables.scss";
+.heroLayout {
+  width: 100%;
+  padding: 150px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__article {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    &__img {
+      width: 100%;
+      & img {
+        display: block;
+        width: 100%;
+      }
+    }
+    &__info {
+      padding: 10px 20px;
+      &__name {
+        margin-bottom: 20px;
+      }
+      &__statusAndSpecies {
+        display: flex;
+        align-items: center;
+        &__status__text {
+          margin-right: 5px;
+        }
+        &__species {
+          margin-left: 5px;
+        }
+        margin-bottom: 10px;
+      }
+      &__location {
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 0) {
+  .heroLayout {
+    &__article {
+      grid-template-columns: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .heroLayout {
+    &__article {
+      grid-template-columns: 35% 65%;
+    }
+  }
+}

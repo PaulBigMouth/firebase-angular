@@ -56,27 +56,23 @@ export class ChatService {
     );
   }
 
-  public sendMessage(message: string, idChannel: string): Observable<any> {
-    return this.store
-      .select(selectUserId)
-      .pipe(
-        tap((userId) =>
-          this.db.database
-            .ref(`chatChannels/${idChannel}/messages`)
-            .push({
-              uid: userId,
-              createdAt: new Date().toLocaleDateString(),
-              text: message,
-            })
-        )
-      );
+  public sendMessage(message: string, idChannel: string): Observable<void> {
+    return this.store.select(selectUserId).pipe(
+      map((userId) => {
+        this.db.database.ref(`chatChannels/${idChannel}/messages`).push({
+          uid: userId,
+          createdAt: new Date().toLocaleDateString(),
+          text: message,
+        });
+      })
+    );
   }
 
-  public getChatChannels(): Observable<any> {
+  public getChatChannels(): Observable<void> {
     return this.store.select(selectIdOfChatChannels).pipe(
-      switchMap((idOfChatChannels) => {
+      map((idOfChatChannels) => {
         if (idOfChatChannels) {
-          return Object.keys(idOfChatChannels).map((id) =>
+          Object.keys(idOfChatChannels).map((id) =>
             this.db.database
               .ref(`chatChannels/${idOfChatChannels[id]}`)
               .on('value', (snapshot) => {
@@ -90,22 +86,18 @@ export class ChatService {
               })
           );
         }
-        return of({});
       })
     );
   }
 
-  public unsubcribeFromDB(): Observable<void | Object> {
+  public unsubscribeFromDB(): Observable<void> {
     return this.store.select(selectIdOfChatChannels).pipe(
-      switchMap((idOfChatChannels) => {
+      map((idOfChatChannels) => {
         if (idOfChatChannels) {
-          return from(
-            Object.keys(idOfChatChannels).map((id) =>
-              this.db.database.ref(`chatChannels/${idOfChatChannels[id]}`).off()
-            )
+          Object.keys(idOfChatChannels).map((id) =>
+            this.db.database.ref(`chatChannels/${idOfChatChannels[id]}`).off()
           );
         }
-        return of({});
       })
     );
   }

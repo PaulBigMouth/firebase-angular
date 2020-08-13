@@ -19,13 +19,13 @@ export class CommunityEffects {
     this.actions$.pipe(
       ofType(CommunityActions.GetVisibleUsersAction),
       switchMap(({ idUser }) =>
-        this.communityService.getVisibleUsers(idUser).pipe(
-          map((data: ProfileState[] | null) => {
+        this.communityService.getVisibleUsers().pipe(
+          map((data: ProfileState[]) => {
             const newData = data.filter((user) => user.uid !== idUser);
             return getVisibleUsersSuccessAction({ payload: newData });
           }),
-          catchError((e) =>
-            of(getVisibleUsersErrorAction({ message: e.message }))
+          catchError((error) =>
+            of(getVisibleUsersErrorAction({ message: error.message }))
           )
         )
       )

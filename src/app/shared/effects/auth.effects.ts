@@ -22,11 +22,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.SignUpAction),
       mergeMap(({ payload }) =>
-        of(payload).pipe(
-          map((payload) => {
-            return payload;
-          }),
-          switchMap((payload) => this.authService.createUser(payload)),
+        of().pipe(
+          switchMap(() => this.authService.createUser(payload)),
           switchMap(({ user }) =>
             this.authService.createDBOfUser(payload, user.uid).pipe(
               map(() => {
@@ -36,7 +33,7 @@ export class AuthEffects {
           ),
           map((user) => {
             this.router.navigate(['/']);
-            this.authService.verifyUserEmail()
+            this.authService.verifyUserEmail();
             return signUpSuccessAction({
               payload: {
                 idUser: user.uid,
@@ -60,7 +57,7 @@ export class AuthEffects {
             this.router.navigate(['/']);
             if (!user.emailVerified) {
               this.authService.verifyUserEmail();
-            } 
+            }
             return signInSuccessAction({
               payload: {
                 idUser: user.uid,
@@ -95,11 +92,13 @@ export class AuthEffects {
       map(({ user }) => {
         if (user) {
           return authStateInitSuccessAction({
-            payload: user
-          })
+            payload: user,
+          });
         }
       }),
-      catchError(e => of(authStateInitErrorAction({message: e.message})))
+      catchError((error) =>
+        of(authStateInitErrorAction({ message: error.message }))
+      )
     )
   );
   constructor(

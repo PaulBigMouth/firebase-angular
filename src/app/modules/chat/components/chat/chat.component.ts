@@ -1,5 +1,4 @@
-import { Chat } from './../../../../shared/interfaces/chat.interface';
-import { unsubFromChatChannelsAction } from './../../../../shared/actions/chat.actions';
+import { unsubscribeFromChatChannelsAction } from './../../../../shared/actions/chat.actions';
 import {
   selectChatLoader,
   selectChatChannels,
@@ -33,6 +32,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.store.dispatch(unsubFromChatChannelsAction());
+    this.store.dispatch(unsubscribeFromChatChannelsAction());
   }
 }

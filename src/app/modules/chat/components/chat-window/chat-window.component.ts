@@ -49,10 +49,8 @@ export class ChatWindowComponent implements OnInit, OnDestroy, AfterViewInit {
       message: new FormControl(null),
     });
     this.sub = this.route.params.subscribe((params: Params) => {
-      this.messages$ = this.store.pipe(
-        select(selectChatMessages(params['id']))
-      );
-      this.idChannel = params['id'];
+      this.messages$ = this.store.pipe(select(selectChatMessages(params.id)));
+      this.idChannel = params.id;
 
       this.cd.detectChanges();
     });

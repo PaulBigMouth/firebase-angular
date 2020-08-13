@@ -1,0 +1,34 @@
+<section class="heroes__banner">
+  <div class="heroes__banner__left">
+    <img src="./assets/images/heroesBanner_left.png" alt="rick_and_morty" />
+  </div>
+  <div class="heroes__banner__center">
+    <h1>FAN HUB</h1>
+    <div class="heroes__banner__center__logo">
+      <img src="./assets/images/logo.png" alt="logo" />
+    </div>
+    <p class="heroes__banner__center__info">
+      Add characters and chat with people
+    </p>
+  </div>
+  <div class="heroes__banner__right">
+    <img src="./assets/images/image 5.png" alt="portal" />
+  </div>
+</section>
+<section class="heroesSection container">
+  <div class="heroesSection__content__filters">
+    <app-heroes-filters (onFilter)="applyFilters($event)"></app-heroes-filters>
+  </div>
+  <div
+    class="heroesSection__content"
+    *ngIf="heroes$ | async as heroes; else preloader"
+  >
+    <div *ngFor="let hero of heroes">
+      <app-hero-card [hero]="hero"></app-hero-card>
+    </div>
+  </div>
+
+  <ng-template #preloader>
+    <app-preloader></app-preloader>
+  </ng-template>
+</section>

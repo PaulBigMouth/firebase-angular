@@ -4,7 +4,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { NgModule } from '@angular/core';
-import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ProfileMainComponent } from './components/profile-main/profile-main.component';
 import { ProfileHeroesComponent } from './components/profile-heroes/profile-heroes.component';
 
@@ -19,11 +19,11 @@ import { ProfileHeroesComponent } from './components/profile-heroes/profile-hero
   ],
   exports: [],
   declarations: [
-    ProfileLayoutComponent,
+    ProfilePageComponent,
     ProfileMainComponent,
     ProfileHeroesComponent,
   ],
   providers: [],
-  bootstrap: [ProfileLayoutComponent],
+  bootstrap: [ProfilePageComponent],
 })
 export class ProfileModule {}

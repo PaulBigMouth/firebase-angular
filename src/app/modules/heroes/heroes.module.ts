@@ -1,12 +1,14 @@
+import { HeroesPageComponent } from './pages/heroes-page/heroes-page.component';
+import { HeroPageComponent } from './pages/hero-page/hero-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './../../shared/shared.module';
 import { HeroesComponent } from './heroes.component';
 import { CommonModule } from '@angular/common';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { NgModule } from '@angular/core';
-import { HeroesLayoutComponent } from './layouts/heroes-layout/heroes-layout.component';
+
 import { HeroCardComponent } from './components/hero-card/hero-card.component';
-import { HeroLayoutComponent } from './layouts/hero-layout/hero-layout.component';
+
 import { HeroesFiltersComponent } from './components/heroes-filters/heroes-filters.component';
 
 @NgModule({
@@ -19,9 +21,9 @@ import { HeroesFiltersComponent } from './components/heroes-filters/heroes-filte
   ],
   exports: [HeroesRoutingModule],
   declarations: [
-    HeroesLayoutComponent,
+    HeroesPageComponent,
     HeroCardComponent,
-    HeroLayoutComponent,
+    HeroPageComponent,
     HeroesComponent,
     HeroesFiltersComponent,
   ],

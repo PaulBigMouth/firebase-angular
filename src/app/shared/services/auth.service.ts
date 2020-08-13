@@ -1,21 +1,15 @@
-import { map, switchMap, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subscription, from } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { User } from '../interfaces/users.interface';
-import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  // private user: firebase.User;
-  constructor(
-    private auth: AngularFireAuth,
-    private db: AngularFireDatabase,
-    private storage: AngularFireStorage
-  ) {}
+  constructor(private auth: AngularFireAuth, private db: AngularFireDatabase) {}
 
   public createUser({
     email,
@@ -50,12 +44,11 @@ export class AuthService {
 
   public createDBOfUser(user: User, idUser: string): Observable<any> {
     const { email, name } = user;
-    console.log(email, name);
     return from(
       this.db.object(`/users/${idUser}`).set({
         email,
         name,
-        uid: idUser
+        uid: idUser,
       })
     );
   }

@@ -1,7 +1,7 @@
 import { appReducers } from './store/reducers';
 import { appEffects } from './store/effects';
 import { SharedModule } from './shared/shared.module';
-import { TokenInterceptor } from './shared/classes/token.interceptor';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AngularFireModule } from '@angular/fire';

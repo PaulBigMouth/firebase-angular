@@ -5,7 +5,7 @@ import {
   ChatActions,
   getChatChannelsSuccessAction,
   getChatChannelsErrorAction,
-  unsubFromChatChannelsSuccessAction,
+  unsubscribeFromChatChannelsSuccessAction,
   sendMessageErrorAction,
   sendMessageSuccessAction,
 } from './../actions/chat.actions';
@@ -21,7 +21,7 @@ export class ChatEffects {
       ofType(ChatActions.GetChatChannelsAction),
       switchMap(() =>
         this.chatService.getChatChannels().pipe(
-          map(() => getChatChannelsSuccessAction({ payload: '121' })),
+          map(() => getChatChannelsSuccessAction()),
           catchError((e) =>
             of(getChatChannelsErrorAction({ message: e.message }))
           )
@@ -32,13 +32,11 @@ export class ChatEffects {
 
   public unsubFromChatChannels$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(ChatActions.UnsubFromChatChannelssAction),
+      ofType(ChatActions.UnsubscribeFromChatChannelsAction),
       switchMap(() =>
         this.chatService
-          .unsubcribeFromDB()
-          .pipe(
-            map(() => unsubFromChatChannelsSuccessAction({ message: 'unsub' }))
-          )
+          .unsubscribeFromDB()
+          .pipe(map(() => unsubscribeFromChatChannelsSuccessAction()))
       )
     )
   );

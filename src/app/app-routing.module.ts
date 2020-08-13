@@ -1,5 +1,4 @@
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
-import { EmailVerifiedComponent } from './shared/components/email-verified/email-verified.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -16,7 +15,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomeModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   { path: '**', component: NotFoundComponent },
 ];

@@ -1,13 +1,13 @@
 import { ProfileHeroesComponent } from './components/profile-heroes/profile-heroes.component';
 import { ProfileMainComponent } from './components/profile-main/profile-main.component';
-import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfileLayoutComponent,
+    component: ProfilePageComponent,
     children: [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       { path: 'main', component: ProfileMainComponent },

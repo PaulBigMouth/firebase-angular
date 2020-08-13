@@ -1,11 +1,21 @@
-import { getChatChannelsAction, ChatActionsUnion, getChatChannelsSuccessAction, pushChatChannelAction, sendMessageAction, sendMessageSuccessAction, sendMessageErrorAction, unsetChatStateAction, unsubFromChatChannelsAction } from './../actions/chat.actions';
+import {
+  getChatChannelsAction,
+  ChatActionsUnion,
+  getChatChannelsSuccessAction,
+  pushChatChannelAction,
+  sendMessageAction,
+  sendMessageSuccessAction,
+  sendMessageErrorAction,
+  unsetChatStateAction,
+  unsubscribeFromChatChannelsAction,
+} from './../actions/chat.actions';
 import { createReducer, on } from '@ngrx/store';
 import { Chat } from './../interfaces/chat.interface';
 
 const initialState: ChatState = {
   chatChannels: null,
   chatLoader: false,
-  formDisabled: false
+  formDisabled: false,
 };
 
 export interface ChatState {
@@ -13,7 +23,7 @@ export interface ChatState {
     [id: string]: Chat;
   };
   chatLoader: boolean;
-  formDisabled: boolean
+  formDisabled: boolean;
 }
 
 const reducer = createReducer<ChatState>(
@@ -23,36 +33,38 @@ const reducer = createReducer<ChatState>(
     chatLoader: true,
   })),
   on(getChatChannelsSuccessAction, (state, action) => ({
-      ...state,
-      chatLoader: false,
+    ...state,
+    chatLoader: false,
   })),
   on(pushChatChannelAction, (state, action) => ({
-      ...state,
-      chatChannels: {
-          ...state.chatChannels,
-          ...action.channel
-      }
-  })),
-  on(unsubFromChatChannelsAction, (state) => ({
     ...state,
-    chatChannels: null
+    chatChannels: {
+      ...state.chatChannels,
+      ...action.channel,
+    },
+  })),
+  on(unsubscribeFromChatChannelsAction, (state) => ({
+    ...state,
+    chatChannels: null,
   })),
   on(sendMessageAction, (state) => ({
     ...state,
-    formDisabled: true
+    formDisabled: true,
   })),
   on(sendMessageSuccessAction, (state) => ({
     ...state,
-    formDisabled: false
+    formDisabled: false,
   })),
   on(sendMessageErrorAction, (state) => ({
     ...state,
-    formDisabled: false
+    formDisabled: false,
   })),
   on(unsetChatStateAction, () => initialState)
 );
 
-
-export function chatReducer(state: ChatState, action: ChatActionsUnion): ChatState {
-    return reducer(state, action)
+export function chatReducer(
+  state: ChatState,
+  action: ChatActionsUnion
+): ChatState {
+  return reducer(state, action);
 }
