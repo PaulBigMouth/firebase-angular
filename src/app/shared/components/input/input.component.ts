@@ -29,35 +29,35 @@ export class InputComponent implements ControlValueAccessor {
   @Input() public value: string | number;
   @Input() public styleType: string;
 
-  isTouched = false;
-  isDisabled = false;
-  onChange: (_: any) => void = () => {};
-  onTouched: () => void = () => {};
+  public isTouched = false;
+  public isDisabled = false;
+  public onChange: (_: any) => void = () => {};
+  public onTouched: () => void = () => {};
 
   constructor(private cd: ChangeDetectorRef) {}
 
-  changeValue($event: any): void {
+  public changeValue($event: any): void {
     this.writeValue($event.target.value);
   }
 
-  setTouched(): void {
+  public setTouched(): void {
     this.onTouched();
     this.isTouched = true;
   }
 
-  writeValue(value: any): void {
+  public writeValue(value: any): void {
     this.onChange(value);
   }
 
-  registerOnChange(fn: any): void {
+  public registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  public setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
     this.errors = {};
     this.cd.detectChanges();

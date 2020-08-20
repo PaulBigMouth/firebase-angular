@@ -23,7 +23,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     private ngZone: NgZone,
     private store: Store
   ) {}
-  canActivate(
+
+  public canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> {
@@ -58,7 +59,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       })
     );
   }
-  canActivateChild(
+
+  public canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> {

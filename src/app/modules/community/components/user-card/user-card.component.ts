@@ -1,12 +1,7 @@
 import { createChatChannelAction } from './../../../../shared/actions/profile.actions';
 import { Store } from '@ngrx/store';
 import { ProfileState } from './../../../../shared/reducers/profile.reducers';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-user-card',
@@ -14,14 +9,13 @@ import {
   styleUrls: ['./user-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserCardComponent implements OnInit {
+export class UserCardComponent {
   @Input()
-  user: ProfileState;
+  public user: ProfileState;
+
   constructor(private store: Store) {}
 
-  ngOnInit(): void {}
-
-  sendMessage(): void {
+  public sendMessage(): void {
     this.store.dispatch(
       createChatChannelAction({
         penFriendId: this.user.uid,

@@ -12,7 +12,7 @@
         *ngIf="chatChannels.length; else empty"
       >
         <a
-          *ngFor="let channel of chatChannels"
+          *ngFor="let channel of chatChannels; trackBy: trackByChannelId"
           [routerLink]="channel"
           routerLinkActive="active"
           >{{ channel }}</a

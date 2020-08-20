@@ -25,11 +25,11 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-page',
-  templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.scss'],
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePage implements OnInit {
   @ViewChild('fileInput')
   public inputRef: ElementRef;
   public avatarUrl$: Observable<string>;
@@ -39,9 +39,10 @@ export class ProfilePageComponent implements OnInit {
     { name: 'Characters ', url: '/profile/characters' },
     { name: 'Messages', url: '/profile/messages' },
   ];
+
   constructor(private store: Store) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.avatarUrl$ = this.store.pipe(select(selectAvatarUrl));
     this.loader$ = this.store.pipe(select(selectProfileLoader));
   }

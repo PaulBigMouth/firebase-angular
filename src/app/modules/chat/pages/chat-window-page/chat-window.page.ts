@@ -1,3 +1,4 @@
+import { selectUserId } from './../../../../shared/selectors/auth.selectors';
 import { sendMessageAction } from './../../../../shared/actions/chat.actions';
 import { FormGroup, FormControl } from '@angular/forms';
 import {
@@ -17,16 +18,15 @@ import {
   ElementRef,
   AfterViewInit,
 } from '@angular/core';
-import { ChatMessage } from 'src/app/shared/interfaces/chat.interface';
-import { selectUserId } from 'src/app/shared/selectors/auth.selectors';
+import { ChatMessage } from '../../../../shared/interfaces/chat.interface';
 
 @Component({
-  selector: 'app-chat-window',
-  templateUrl: './chat-window.component.html',
-  styleUrls: ['./chat-window.component.scss'],
+  selector: 'app-chat-window-page',
+  templateUrl: './chat-window.page.html',
+  styleUrls: ['./chat-window.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChatWindowComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ChatWindowPage implements OnInit, OnDestroy, AfterViewInit {
   public sub: Subscription;
   public userId$: Observable<string> = this.store.select(selectUserId);
   public form: FormGroup;
@@ -44,7 +44,7 @@ export class ChatWindowComponent implements OnInit, OnDestroy, AfterViewInit {
     private cd: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       message: new FormControl(null),
     });
@@ -56,13 +56,13 @@ export class ChatWindowComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     setTimeout(() => this.scrollToBottom());
   }
 
@@ -80,5 +80,9 @@ export class ChatWindowComponent implements OnInit, OnDestroy, AfterViewInit {
         top: this.chatWindowRef.nativeElement.clientHeight,
       });
     }
+  }
+
+  public trackByMessage(index: number, item: ChatMessage): string {
+    return `${index} ${item.uid} ${item.text} ${item.createdAt}`;
   }
 }

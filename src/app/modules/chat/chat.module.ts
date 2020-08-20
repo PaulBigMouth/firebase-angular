@@ -1,10 +1,10 @@
+import { ChatWindowPage } from './pages/chat-window-page/chat-window.page';
+import { ChatPage } from './pages/chat-page/chat.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChatComponent } from './components/chat/chat.component';
 import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ChatRoutingModule } from './chat-routing.module';
 import { NgModule } from '@angular/core';
-import { ChatWindowComponent } from './components/chat-window/chat-window.component';
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { ChatWindowComponent } from './components/chat-window/chat-window.compon
     ReactiveFormsModule,
   ],
   exports: [],
-  declarations: [ChatComponent, ChatWindowComponent],
+  declarations: [ChatPage, ChatWindowPage],
   providers: [],
-  bootstrap: [ChatComponent],
+  bootstrap: [ChatPage],
 })
 export class ChatModule {}

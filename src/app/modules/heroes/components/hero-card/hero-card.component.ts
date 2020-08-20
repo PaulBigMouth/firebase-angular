@@ -9,5 +9,5 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 })
 export class HeroCardComponent {
   @Input()
-  hero: HeroResponseResult;
+  public hero: HeroResponseResult;
 }

@@ -14,16 +14,17 @@ import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-community-page',
-  templateUrl: './community-page.component.html',
-  styleUrls: ['./community-page.component.scss'],
+  templateUrl: './community.page.html',
+  styleUrls: ['./community.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommunityPageComponent implements OnInit, OnDestroy {
+export class CommunityPage implements OnInit, OnDestroy {
   public sub: Subscription;
   public users$: Observable<ProfileState[]>;
+
   constructor(private store: Store) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.sub = this.store
       .select(selectUserId)
       .pipe(
@@ -35,9 +36,13 @@ export class CommunityPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+  }
+
+  public trackByUserId(index: number, item: ProfileState): string {
+    return `${item.uid}`;
   }
 }

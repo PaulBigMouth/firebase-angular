@@ -20,11 +20,11 @@ import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-hero-page',
-  templateUrl: './hero-page.component.html',
-  styleUrls: ['./hero-page.component.scss'],
+  templateUrl: './hero.page.html',
+  styleUrls: ['./hero.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroPageComponent implements OnInit, OnDestroy {
+export class HeroPage implements OnInit, OnDestroy {
   public hero$: Observable<HeroResponseResult>;
   public sub: Subscription;
   public isFavoriteSub: Subscription;
@@ -32,13 +32,14 @@ export class HeroPageComponent implements OnInit, OnDestroy {
   public btnDisabled$: Observable<boolean> = this.store.select(
     selectPushToFavoritesBtnDisabled
   );
+
   constructor(
     private store: Store,
     private route: ActivatedRoute,
     private cd: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.sub = this.route.params.subscribe((params: Params) => {
       this.store.dispatch(getHeroDetailsAction({ id: params.id }));
       this.isFavoriteSub = this.store
@@ -53,7 +54,8 @@ export class HeroPageComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
   }
-  ngOnDestroy(): void {
+
+  public ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }

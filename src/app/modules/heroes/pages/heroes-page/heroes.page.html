@@ -23,7 +23,7 @@
     class="heroesSection__content"
     *ngIf="heroes$ | async as heroes; else preloader"
   >
-    <div *ngFor="let hero of heroes">
+    <div *ngFor="let hero of heroes; trackBy: trackById">
       <app-hero-card [hero]="hero"></app-hero-card>
     </div>
   </div>

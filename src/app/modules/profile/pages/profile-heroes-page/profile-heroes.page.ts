@@ -1,5 +1,8 @@
-import { selectHeroesLoader } from './../../../../shared/selectors/heroes.selectors';
-import { HeroResponseResult } from './../../../../shared/interfaces/heroes.interface';
+import {
+  selectHeroesLoader,
+  selectFavoritesHeroes,
+} from '../../../../shared/selectors/heroes.selectors';
+import { HeroResponseResult } from '../../../../shared/interfaces/heroes.interface';
 import { take, filter } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -10,19 +13,18 @@ import {
   OnDestroy,
 } from '@angular/core';
 import {
-  selectIdOfFavoritesHeroes,
   selectProfileState,
-} from 'src/app/shared/selectors/profile.selectors';
+  selectIdOfFavoritesHeroes,
+} from '../../../../shared/selectors/profile.selectors';
 import { getFavoritesHeroesByIdAction } from '../../../../shared/actions/heroes.actions';
-import { selectFavoritesHeroes } from 'src/app/shared/selectors/heroes.selectors';
 
 @Component({
-  selector: 'app-profile-heroes',
-  templateUrl: './profile-heroes.component.html',
-  styleUrls: ['./profile-heroes.component.scss'],
+  selector: 'app-profile-heroes-page',
+  templateUrl: './profile-heroes.page.html',
+  styleUrls: ['./profile-heroes.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileHeroesComponent implements OnInit, OnDestroy {
+export class ProfileHeroesPage implements OnInit, OnDestroy {
   public sub: Subscription;
   public subIdOfHeroes: Subscription;
   public favoritesHeroes$: Observable<HeroResponseResult[]> = this.store.pipe(
@@ -34,7 +36,7 @@ export class ProfileHeroesComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.sub = this.store
       .select(selectProfileState)
       .pipe(
@@ -53,7 +55,7 @@ export class ProfileHeroesComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }

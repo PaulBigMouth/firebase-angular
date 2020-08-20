@@ -22,20 +22,21 @@ import {
 
 @Component({
   selector: 'app-heroes-page',
-  templateUrl: './heroes-page.component.html',
-  styleUrls: ['./heroes-page.component.scss'],
+  templateUrl: './heroes.page.html',
+  styleUrls: ['./heroes.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroesPageComponent implements OnInit, OnDestroy {
+export class HeroesPage implements OnInit, OnDestroy {
   public page = 1;
   public maxPage: number;
   public pagesSub: Subscription;
   public heroes$: Observable<HeroResponseResult[]>;
   public loaderSub: Subscription;
   public loader: boolean;
+
   constructor(private store: Store, private cd: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.store.dispatch(
       getHeroesAction({ payload: { page: this.page.toString() } })
     );
@@ -50,7 +51,7 @@ export class HeroesPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.pagesSub) {
       this.pagesSub.unsubscribe();
     }
@@ -79,5 +80,9 @@ export class HeroesPageComponent implements OnInit, OnDestroy {
       getHeroesWithFiltersAction({ params: { ...filter, page: '0' } })
     );
     this.page = 0;
+  }
+
+  public trackById(index: number, item: HeroResponseResult): string {
+    return `${item.id}`;
   }
 }

@@ -1,19 +1,11 @@
-import { HeroPageComponent } from './pages/hero-page/hero-page.component';
-import { HeroesPageComponent } from './pages/heroes-page/heroes-page.component';
+import { HeroesPage } from './pages/heroes-page/heroes.page';
+import { HeroPage } from './pages/hero-page/hero.page';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 export const heroesRoutes: Routes = [
-  // {
-  //   path: '',
-  //   component: HeroesComponent,
-  //   children: [
-  //     { path: '', component: HeroesLayoutComponent },
-  //     { path: ':id', component: HeroLayoutComponent },
-  //   ],
-  // },
-  { path: '', component: HeroesPageComponent },
-  { path: ':id', component: HeroPageComponent },
+  { path: '', component: HeroesPage },
+  { path: ':id', component: HeroPage },
 ];
 
 @NgModule({

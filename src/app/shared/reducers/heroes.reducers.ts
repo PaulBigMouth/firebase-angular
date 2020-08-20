@@ -35,20 +35,17 @@ const reducer = createReducer<HeroesState>(
     ...state,
     loader: true,
   })),
-  on(getHeroesSuccessAction, (state, action) => {
-    console.log(action.payload.results);
-    return {
-      ...state,
-      heroes: {
-        ...state.heroes,
-        ...action.payload.results.reduce((prev, curr) => {
-          return { ...prev, [curr.id]: curr };
-        }, {}),
-      },
-      pages: action.payload.info.pages,
-      loader: false,
-    };
-  }),
+  on(getHeroesSuccessAction, (state, action) => ({
+    ...state,
+    heroes: {
+      ...state.heroes,
+      ...action.payload.results.reduce((prev, curr) => {
+        return { ...prev, [curr.id]: curr };
+      }, {}),
+    },
+    pages: action.payload.info.pages,
+    loader: false,
+  })),
   on(getHeroDetailsAction, (state) => ({
     ...state,
     loader: true,

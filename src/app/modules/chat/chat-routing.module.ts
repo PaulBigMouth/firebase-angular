@@ -1,13 +1,13 @@
-import { ChatWindowComponent } from './components/chat-window/chat-window.component';
+import { ChatWindowPage } from './pages/chat-window-page/chat-window.page';
+import { ChatPage } from './pages/chat-page/chat.page';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ChatComponent,
-    children: [{ path: ':id', component: ChatWindowComponent }],
+    component: ChatPage,
+    children: [{ path: ':id', component: ChatWindowPage }],
   },
 ];
 

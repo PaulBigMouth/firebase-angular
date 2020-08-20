@@ -22,11 +22,10 @@ export class HeroesFiltersComponent implements OnInit {
   public visibleFilters = false;
   public statusOptions: SelectOption[] = [{ name: 'Alive' }, { name: 'Dead' }];
   public genderOptions: SelectOption[] = [{ name: 'Male' }, { name: 'Female' }];
-  // tslint:disable-next-line:no-output-on-prefix
   @Output()
   public onFilter = new EventEmitter<Filter>();
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.maxLength(30)),
       status: new FormControl(null),

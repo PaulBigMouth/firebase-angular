@@ -1,4 +1,7 @@
-import { unsubscribeFromChatChannelsAction } from './../../../../shared/actions/chat.actions';
+import {
+  unsubscribeFromChatChannelsAction,
+  getChatChannelsAction,
+} from './../../../../shared/actions/chat.actions';
 import {
   selectChatLoader,
   selectChatChannels,
@@ -11,27 +14,31 @@ import {
   OnDestroy,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { getChatChannelsAction } from 'src/app/shared/actions/chat.actions';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
+  selector: 'app-chat-page',
+  templateUrl: './chat.page.html',
+  styleUrls: ['./chat.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatPage implements OnInit, OnDestroy {
   public loader$: Observable<boolean> = this.store.pipe(
     select(selectChatLoader)
   );
   public chatChannels$: Observable<string[]>;
+
   constructor(private store: Store) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.store.dispatch(getChatChannelsAction());
     this.chatChannels$ = this.store.pipe(select(selectChatChannels));
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.store.dispatch(unsubscribeFromChatChannelsAction());
+  }
+
+  public trackByChannelId(index: string, item: string): string {
+    return `${item}`;
   }
 }

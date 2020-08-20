@@ -21,9 +21,10 @@ export class SignInFormComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public signProgress: boolean;
   public sub: Subscription;
+
   constructor(private store: Store, private cd: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.email, Validators.required]),
       password: new FormControl(null, [
@@ -39,7 +40,7 @@ export class SignInFormComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }

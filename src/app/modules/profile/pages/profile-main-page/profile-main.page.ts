@@ -12,17 +12,18 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-profile-main',
-  templateUrl: './profile-main.component.html',
-  styleUrls: ['./profile-main.component.scss'],
+  selector: 'app-profile-main-page',
+  templateUrl: './profile-main.page.html',
+  styleUrls: ['./profile-main.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileMainComponent implements OnInit, OnDestroy {
+export class ProfileMainPage implements OnInit, OnDestroy {
   public form: FormGroup;
   public sub: Subscription;
+
   constructor(private store: Store, private cd: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
     });
@@ -34,7 +35,8 @@ export class ProfileMainComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
   }
-  ngOnDestroy(): void {
+
+  public ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }

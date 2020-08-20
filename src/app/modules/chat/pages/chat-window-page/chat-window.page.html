@@ -3,7 +3,7 @@
     <div class="chat__messages" #chatWindow>
       <div
         class="chat__message"
-        *ngFor="let message of messages"
+        *ngFor="let message of messages; trackBy: trackByMessage"
         [ngClass]="{
           right: (userId$ | async) === message.uid,
           left: (userId$ | async) !== message.uid
@@ -11,9 +11,9 @@
       >
         <div class="chat__message__text">{{ message.text }}</div>
         <div class="chat__message__time">
-          <span class="chat__message__time__inner">{{
-            message.createdAt
-          }}</span>
+          <span class="chat__message__time__inner"
+            >{{ message.createdAt }}</span
+          >
         </div>
       </div>
     </div>

@@ -44,7 +44,7 @@ export class FormSelectComponent implements ControlValueAccessor {
     this.onTouched();
   }
 
-  writeValue(value: any): void {
+  public writeValue(value: any): void {
     if (value?.name) {
       this.onChanged(value.name);
     }
@@ -55,15 +55,15 @@ export class FormSelectComponent implements ControlValueAccessor {
       this.open = !this.open;
     }
   }
-  registerOnChange(fn: any): void {
+  public registerOnChange(fn: any): void {
     this.onChanged = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
 }

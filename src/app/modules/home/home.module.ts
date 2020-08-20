@@ -1,3 +1,4 @@
+import { HomePage } from './pages/home-page/home.page';
 import { HeroesModule } from '../heroes/heroes.module';
 import { ProfileModule } from '../profile/profile.module';
 import { CommunityModule } from '../community/community.module';
@@ -5,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HomeRoutingModule } from './home-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   imports: [
@@ -17,8 +17,8 @@ import { HomeComponent } from './pages/home-page/home-page.component';
     CommunityModule,
   ],
   exports: [],
-  declarations: [HomeComponent],
+  declarations: [HomePage],
   providers: [],
-  bootstrap: [HomeComponent],
+  bootstrap: [HomePage],
 })
 export class HomeModule {}

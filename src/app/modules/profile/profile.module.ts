@@ -1,12 +1,12 @@
+import { ProfileHeroesPage } from './pages/profile-heroes-page/profile-heroes.page';
+import { ProfileMainPage } from './pages/profile-main-page/profile-main.page';
+import { ProfilePage } from './pages/profile-page/profile.page';
 import { ChatModule } from './../chat/chat.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { NgModule } from '@angular/core';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { ProfileMainComponent } from './components/profile-main/profile-main.component';
-import { ProfileHeroesComponent } from './components/profile-heroes/profile-heroes.component';
 
 @NgModule({
   imports: [
@@ -18,12 +18,8 @@ import { ProfileHeroesComponent } from './components/profile-heroes/profile-hero
     ChatModule,
   ],
   exports: [],
-  declarations: [
-    ProfilePageComponent,
-    ProfileMainComponent,
-    ProfileHeroesComponent,
-  ],
+  declarations: [ProfilePage, ProfileMainPage, ProfileHeroesPage],
   providers: [],
-  bootstrap: [ProfilePageComponent],
+  bootstrap: [ProfilePage],
 })
 export class ProfileModule {}
