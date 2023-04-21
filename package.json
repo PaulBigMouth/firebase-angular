@@ -53,6 +53,6 @@
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",
     "open": "^7.0.3",
-    "firebase-tools": "^8.0.0"
+    "firebase-tools": "^11.28.0"
   }
 }
